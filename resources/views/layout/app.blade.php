@@ -187,6 +187,23 @@
                 border-left: none;
             }
         }
+            /* Sombra para el carrusel */
+        #uadyCarousel {
+         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Sombra para todas las tarjetas de noticias y eventos */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: none !important; /* Quitamos el borde para que la sombra luzca mejor */
+        }
+
+        /* Efecto opcional: La sombra se intensifica al pasar el mouse */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
     </style>
     @yield('styles')  
 </head>
@@ -275,7 +292,7 @@
                     </li>-->
                 </ul>
                          <!-- Buscador -->
-                    <form class="w-50 w-lg-auto">
+                    <form class="w-100 w-lg-auto">
                      <div class="search-wrapper">
                             <i class="bi bi-search"></i>
                             <input type="search" placeholder="Buscar eventos...">
