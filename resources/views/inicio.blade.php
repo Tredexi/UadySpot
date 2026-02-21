@@ -73,7 +73,7 @@
 
         <div class="events-grid">
 
-            <!-- EVENT CARD -->
+            <!-- EVENT CARD-->
             <div class="event-card" data-campus="sociales">
                 <img src="https://picsum.photos/400/250?1" alt="evento">
                 <div class="event-body">
