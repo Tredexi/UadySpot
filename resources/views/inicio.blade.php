@@ -14,7 +14,7 @@
         </div>
 
         <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="3000">
+            <div class="carousel-item active " data-bs-interval="3000">
                 <img src="{{ asset('Imagenes/slide1.jpg') }}" class="d-block w-100" style="height: 450px; object-fit: cover;">
             </div>
             <div class="carousel-item" data-bs-interval="3000">
@@ -43,7 +43,7 @@
     <div class="row mb-5">
         @foreach($noticias as $n)
         <div class="col-md-6 mb-3">
-            <div class="card h-100 border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
                 <img src="{{ asset('Imagenes/' . $n['img']) }}" class="card-img-top" style="height: 220px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="fw-bold">{{ $n['titulo'] }}</h5>
@@ -56,10 +56,10 @@
     </div>
 
     <h3 class="fw-bold mb-4">Próximos Eventos</h3>
-    <div class="row">
+    <div class="row justify-content-between ">
         @foreach($eventos_venta as $ev)
         <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card h-100 border-0 shadow text-center p-2" style="border-radius: 15px;">
+            <div class="card h-100 border-0 shadow-lg text-center p-2" style="border-radius: 15px;">
                 <img src="{{ asset('Imagenes/' . $ev['img']) }}" class="card-img-top rounded shadow-sm" style="height: 180px; object-fit: cover;">
                 <div class="card-body px-1">
                     <h6 class="fw-bold mb-1">{{ $ev['titulo'] }}</h6>

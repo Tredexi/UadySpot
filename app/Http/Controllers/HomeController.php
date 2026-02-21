@@ -23,6 +23,7 @@ class HomeController extends Controller
             ['titulo' => 'Fiesta de Bienvenida', 'precio' => '$150.00', 'img' => 'fiesta.jpg'],
             ['titulo' => 'Congreso Nacional', 'precio' => '$500.00', 'img' => 'congreso.jpg'],
             ['titulo' => 'Evento San Valentin ', 'precio' => 'Gratis', 'img' => 'Sanvalentin.jpg'],
+            
         ]
     ];
 
