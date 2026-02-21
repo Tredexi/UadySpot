@@ -1,0 +1,413 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Estilos para la sección de HERO */
+.hero-container {
+    position: relative;
+    height: 420px;
+    border-radius: 16px;
+    background-image: url('/Imagenes/concierto-candlelight.jpg'); 
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0.2));
+    padding: 60px;
+    color: white;
+}
+
+.hero-tag {
+    background: #f5b5ff;
+    color: #000;
+    padding: 6px 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.hero-title span {
+    color: #8da2ff;
+}
+
+.hero-button {
+    margin-top: 24px;
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Estilos para el carrusel de álbumes */
+.categories-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 16px;
+}
+
+.category-item {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.category-item span {
+    display: block;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+
+
+
+
+
+/* EVENTOS CAMPUS */
+.events-section {
+    margin-top: 60px;
+}
+
+.events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.events-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.campus-select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: transform .2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-6px);
+}
+
+.event-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.event-body {
+    padding: 16px;
+}
+
+.event-tag {
+    background: #e5f0ff;
+    color: #004aad;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.event-body h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.event-date {
+    font-size: 14px;
+    color: #666;
+}
+
+.event-price {
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+
+
+/* Estilos para la sección de descuentos */
+.benefits-section {
+    margin: 80px 0;
+}
+
+.benefits-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.benefits-header h2 {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.benefits-header p {
+    color: #666;
+}
+
+.benefits-slider {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.benefit-card {
+    position: relative;
+    min-width: 280px;
+    height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: transform .3s ease;
+    cursor: pointer;
+}
+
+.benefit-card:hover {
+    transform: scale(1.05);
+}
+
+.benefit-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #ff3b3b;
+    color: white;
+    font-weight: 800;
+    padding: 8px 14px;
+    border-radius: 999px;
+    z-index: 2;
+}
+
+.benefit-content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+    color: white;
+}
+
+.benefit-only {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    background: rgba(255,255,255,.2);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.benefits-cta {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.cta-button {
+    background: var(--uady-blue);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+
+/* Estilos para la sección de bolsa de trabajo */
+.jobs-section {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #0a0f1f, #050814);
+    color: white;
+    overflow: hidden;
+}
+
+.jobs-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.jobs-tag {
+    background: linear-gradient(90deg, #ff9800, #ff3b3b);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.jobs-header h2 {
+    font-size: 42px;
+    font-weight: 900;
+    margin: 20px 0;
+}
+
+.jobs-header p {
+    color: #aaa;
+}
+
+.jobs-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.job-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform .4s ease, box-shadow .4s ease;
+    position: relative;
+}
+
+.job-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(0,0,0,.6);
+}
+
+.job-card img {
+    max-height: 50px;
+    margin-bottom: 20px;
+}
+
+.job-card h3 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.job-card p {
+    font-size: 14px;
+    color: #ccc;
+}
+.job-badge {
+    display: inline-block;
+    margin-top: 15px;
+    background: #00e676;
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+.jobs-cta {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.jobs-button {
+    padding: 16px 40px;
+    background: linear-gradient(90deg, #ff3b3b, #ff9800);
+    color: white;
+    border-radius: 999px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(255,59,59,.4);
+}
+
+
+/* Estilos para la sección de llamada al usuario */
+.benefits-cta {
+    position: relative;
+    margin: 100px auto;
+    padding: 60px 40px;
+    max-width: 900px;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Efecto glow animado */
+.benefits-cta::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    filter: blur(40px);
+    opacity: .7;
+}
+
+
+
+.benefits-cta h3 {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 15px;
+
+    background: linear-gradient(90deg, #ff3b3b, #ff9800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* fallback por si acaso */
+    background-clip: text;
+    color: transparent;
+}
+
+.benefits-cta p {
+    color: black;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 16px 48px;
+    background: linear-gradient(90deg, #ff3b3b, #ff9800);
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 15px 40px rgba(255,59,59,.5);
+    transition: all .3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 25px 60px rgba(255,59,59,.7);
+}

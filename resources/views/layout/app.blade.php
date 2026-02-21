@@ -6,7 +6,9 @@
     <title>Uady Spot - @yield('titulo_pagina', 'Inicio')</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
 
     <style>
         /* VARIABLES GLOBALES */
@@ -208,6 +210,7 @@
     @yield('styles')  
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-uady sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('inicio') }}">
@@ -245,12 +248,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle px-3" 
                         href="#" 
-                        data-bs-toggle="dropdown">Comunidad
+                        data-bs-toggle="dropdown">Eventos
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Estudiantes</a></li>
-                            <li><a class="dropdown-item" href="#">Egresados</a></li>
-                            <li><a class="dropdown-item" href="#">Personal UADY</a></li>
+                            <li><a class="dropdown-item" href="#">Hoy</a></li>
+                            <li><a class="dropdown-item" href="#">Mañana</a></li>
+                            <li><a class="dropdown-item" href="#">Próximos</a></li>
                         </ul>
                     </li>
                         <!-- Ofertas Educativas -->
@@ -258,13 +261,13 @@
                         <a class="nav-link dropdown-toggle px-3" 
                         href="#" 
                         data-bs-toggle="dropdown">
-                        Ofertas Educativas
+                        Comunidad
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Bachilleratos</a></li>
-                        <li><a class="dropdown-item" href="#">Carreras Universitarias</a></li>
+                        <li><a class="dropdown-item" href="#">Universidad</a></li>
                         <li><a class="dropdown-item" href="#">Posgrado</a></li>
-                        <li><a class="dropdown-item" href="#">Idiomas</a></li>
+                        <li><a class="dropdown-item" href="#">Personal Académico</a></li>
                     </ul>
                     </li>
                     <!--Mas-->
@@ -277,8 +280,8 @@
                     <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Deportes</a></li>
                     <li><a class="dropdown-item" href="#">Cultura</a></li>
-                    <li><a class="dropdown-item" href="#">Eventos</a></li>
-                    <li><a class="dropdown-item" href="#">Noticias</a></li>
+                    <li><a class="dropdown-item" href="#">Arte</a></li>
+                    <li><a class="dropdown-item" href="#">Todo</a></li>
                     </ul>
                     </li>
                     
@@ -398,5 +401,21 @@
 </footer> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const select = document.querySelector('.campus-select');
+        const cards = document.querySelectorAll('.event-card');
+
+        select.addEventListener('change', () => {
+            const campus = select.value;
+
+            cards.forEach(card => {
+                if (campus === 'all' || card.dataset.campus === campus) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
