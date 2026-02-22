@@ -64,3 +64,49 @@
 .search-wrapper:focus-within input {
     color: var(--uady-blue);
 }
+ /* LOGIN / REGISTRO */
+.login-link {
+    transition: 0.3s;
+    white-space: nowrap;
+}
+.login-link:hover {
+    color: var(--uady-gold);
+}
+.register-link {
+    background-color: var(--uady-gold);
+    color: var(--uady-blue);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.register-link:hover {
+    background-color: #e0a800;
+    color: var(--uady-blue);
+}
+.dropdown-menu {
+    border-radius: 12px;
+    border: none;
+    padding: 12px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    animation: fadeIn 0.2s ease-in-out;
+}
+.dropdown-item {
+    padding: 10px 20px;
+    transition: 0.2s ease;
+}
+.dropdown-item:hover {
+    background-color: rgba(203,150,5,0.1);
+    color: var(--uady-blue);
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
