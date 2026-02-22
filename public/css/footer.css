@@ -1,0 +1,28 @@
+/* FOOTER */
+footer {
+    background-color: var(--uady-blue);
+    color: var(--uady-white);
+}
+.footer-link {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.footer-link:hover {
+    color: var(--uady-gold);
+}
+.footer-icon {
+    color: #adb5bd;
+    transition: 0.3s;
+}
+.footer-icon:hover {
+    color: var(--uady-gold);
+}
+.footer-divider {
+    border-left: 2px solid var(--uady-gold);
+}
+@media (max-width: 767px) {
+    .footer-divider {
+        border-left: none;
+    }
+}
