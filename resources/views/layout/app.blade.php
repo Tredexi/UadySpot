@@ -206,7 +206,17 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
+
+
+        /*ESTILOS PARA LA VISTA DE EVENTOS*/
+         .border-theme-blue { border-color: #3b82f6; } /* border-blue-500 */
+        .border-theme-pink { border-color: #ec4899; } /* border-pink-500 */
+        .border-theme-green { border-color: #10b981; } /* border-emerald-500 */
+        .bg-active-tag { background-color: #dbeafe; color: #1d4ed8; } /* bg-blue-100, text-blue-700 */
+        
     </style>
+
+
     @yield('styles')  
 </head>
 <body>
@@ -278,10 +288,10 @@
                         Más
                         </a>
                     <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Deportes</a></li>
-                    <li><a class="dropdown-item" href="#">Cultura</a></li>
-                    <li><a class="dropdown-item" href="#">Arte</a></li>
-                    <li><a class="dropdown-item" href="#">Todo</a></li>
+                    <li><a class="dropdown-item" href="#">Beneficios</a></li>
+                    <li><a class="dropdown-item" href="#">Asociaciones</a></li>
+                    <li><a class="dropdown-item" href="#">Nuevo</a></li>
+                    <li><a class="dropdown-item" href="#">Bolsa de Trabajo</a></li>
                     </ul>
                     </li>
                     
