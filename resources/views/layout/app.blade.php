@@ -14,12 +14,326 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
+<<<<<<< HEAD
+=======
+    <style>
+        /* VARIABLES GLOBALES */
+        :root {
+            --uady-blue: #002e5f;   /* Azul UADY */
+            --uady-gold: #CB9605;   /* Dorado UADY */
+            --uady-white: #FFFFFF;   /* Blanco */
+            --uady-black: #000000;   /* Negro */
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* NAVBAR PRINCIPAL */
+        .navbar-uady {
+            background-color: var(--uady-blue);
+            border-bottom: 4px solid var(--uady-gold);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            color: var(--uady-white) !important;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--uady-white) !important;
+            margin-right: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--uady-gold) !important;
+        }
+
+        /* BRAND (Logo + Texto) */
+        .brand-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .brand-subtitle {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.65);
+            letter-spacing: 0.5px;
+        }
+
+        /* BUSCADOR */
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            padding: 5px 12px;
+            transition: 0.3s ease;
+        }
+
+        .search-wrapper i {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .search-wrapper input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color: white;
+            width: 180px;
+            font-size: 0.9rem;
+        }
+
+        .search-wrapper input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .search-wrapper:focus-within {
+            background-color: white;
+            border-color: var(--uady-gold);
+        }
+
+        .search-wrapper:focus-within input {
+            color: var(--uady-blue);
+        }
+
+        /* LOGIN / REGISTRO */
+        .login-link {
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .login-link:hover {
+            color: var(--uady-gold);
+        }
+
+        .register-link {
+            background-color: var(--uady-gold);
+            color: var(--uady-blue);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .register-link:hover {
+            background-color: #e0a800;
+            color: var(--uady-blue);
+        }
+
+        .dropdown-menu {
+            border-radius: 12px;
+            border: none;
+            padding: 12px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .dropdown-item {
+            padding: 10px 20px;
+            transition: 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(203,150,5,0.1);
+            color: var(--uady-blue);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--uady-blue);
+            color: var(--uady-white);
+        }
+
+        .footer-link {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--uady-gold);
+        }
+
+        .footer-icon {
+            color: #adb5bd;
+            transition: 0.3s;
+        }
+
+        .footer-icon:hover {
+            color: var(--uady-gold);
+        }
+
+        .footer-divider {
+            border-left: 2px solid var(--uady-gold);
+        }
+
+        @media (max-width: 767px) {
+            .footer-divider {
+                border-left: none;
+            }
+        }
+            /* Sombra para el carrusel */
+        #uadyCarousel {
+         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Sombra para todas las tarjetas de noticias y eventos */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: none !important; /* Quitamos el borde para que la sombra luzca mejor */
+        }
+
+        /* Efecto opcional: La sombra se intensifica al pasar el mouse */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /*ESTILOS PARA LA VISTA DE EVENTOS*/
+         .border-theme-blue { border-color: #3b82f6; } /* border-blue-500 */
+        .border-theme-pink { border-color: #ec4899; } /* border-pink-500 */
+        .border-theme-green { border-color: #10b981; } /* border-emerald-500 */
+        .bg-active-tag { background-color: #dbeafe; color: #1d4ed8; } /* bg-blue-100, text-blue-700 */
+        
+    </style>
+
+
+>>>>>>> devAdrian
     @yield('styles')  
 </head>
 <body>
     <!-- ESTA ETIQUETA LLAMA AL NAVBAR QUE ESTA DENTRO DE COMPONENTS>NAVBAR.BLADE.PHP-->
     @include('components.navbar')
 
+<<<<<<< HEAD
+=======
+    <nav class="navbar navbar-expand-lg navbar-uady sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('inicio') }}">
+                <img src="{{ asset('Imagenes/logo_uady.png') }}" 
+                alt="Logo" 
+                class="rounded-circle me-2" 
+                style="width: 42px; height: 42px; border: 2px solid var(--uady-gold);">
+
+                <div>
+                    <div class="brand-title text-white">UADY SPOT</div>
+                    <div class="brand-subtitle">Plataforma Universitaria</div>
+                </div>
+            </a>
+            <!-- Botón móvil -->
+            <button class="navbar-toggler border-0 shadow-none" 
+                    type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav">
+                <i class="bi bi-list text-white fs-2"></i>
+            </button>
+            <!--NAVBAR DE NAVEGACION-->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-ig-center">
+                    <li class="nav-item">
+                        <a 
+                        class="nav-link px-3 active" 
+                        href="#">Inicio
+                        </a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" 
+                        href="#">Eventos
+                        </a></li>
+                    -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle px-3" 
+                        href="#" 
+                        data-bs-toggle="dropdown">Eventos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Hoy</a></li>
+                            <li><a class="dropdown-item" href="#">Mañana</a></li>
+                            <li><a class="dropdown-item" href="#">Próximos</a></li>
+                        </ul>
+                    </li>
+                        <!-- Ofertas Educativas -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle px-3" 
+                        href="#" 
+                        data-bs-toggle="dropdown">
+                        Comunidad
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Bachilleratos</a></li>
+                        <li><a class="dropdown-item" href="#">Universidad</a></li>
+                        <li><a class="dropdown-item" href="#">Posgrado</a></li>
+                        <li><a class="dropdown-item" href="#">Personal Académico</a></li>
+                    </ul>
+                    </li>
+                    <!--Mas-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle px-3"
+                        href="#"
+                        data-bs-toggle="dropdown">
+                        Más
+                        </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Beneficios</a></li>
+                    <li><a class="dropdown-item" href="#">Asociaciones</a></li>
+                    <li><a class="dropdown-item" href="#">Nuevo</a></li>
+                    <li><a class="dropdown-item" href="#">Bolsa de Trabajo</a></li>
+                    </ul>
+                    </li>
+                    
+                    
+
+
+                    <!--    
+                    <li class="nav-item ms-lg-3 d-flex align-items-center">
+                    <span class="text-white me-2 small">USUARIO</span>
+                    <img src="{{ asset('Imagenes/perfil.jpg') }}" alt="User" class="rounded-circle shadow-sm" style="width: 40px; height: 40px; border: 2px solid var(--uady-gold);">
+                    </li>-->
+                </ul>
+                         <!-- Buscador -->
+                    <form class="w-100 w-lg-auto">
+                     <div class="search-wrapper">
+                            <i class="bi bi-search"></i>
+                            <input type="search" placeholder="Buscar eventos...">
+                        </div>
+                    </form>
+                        <!-- Acciones -->
+                    <div class="d-flex align-items-center gap-4 ms-3">
+                         <!-- Login con icono -->
+                        <a href="#" class="text-white text-decoration-none small d-flex align-items-center login-link">
+                            <i class="bi bi-person me-1"></i>
+                            Iniciar sesión
+                        </a>
+                        </div>
+            </div>
+        </div>
+    </nav>
+>>>>>>> devAdrian
     <div class="container mt-4">
         @yield('content')
     </div>

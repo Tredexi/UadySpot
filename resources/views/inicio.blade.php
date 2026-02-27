@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('titulo_pagina', 'Inicio - Uady Spot')
+@section('titulo_pagina', 'Inicio')
 
 @section('content')
 
