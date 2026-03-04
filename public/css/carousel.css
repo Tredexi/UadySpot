@@ -1,3 +1,26 @@
+/* Estilos para el carrusel de álbumes */
+.categories-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 16px;
+}
+
+.category-item {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.category-item span {
+    display: block;
+    font-size: 14px;
+    margin-top: 8px;
+}
 /* Sombra para el carrusel */
 #uadyCarousel {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;

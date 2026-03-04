@@ -75,45 +75,145 @@
         </div>
 
         <div class="events-grid">
-
             <!-- EVENT CARD-->
-            <div class="event-card" data-campus="Culturales">
-                <img src="/imagenes/ProxEventos/filey2026.png" alt="evento">
-                <div class="event-body">
-                    <span class="event-tag">Recien agregado</span>
-                    <h3>Filey 2026</h3>
-                    <p class="event-date">14-22 Marzo del 2026</p>
-                    <p class="event-price">Entrada gratuita</p>
-                </div>
-            </div>
+            <x-inicio.card-evento campus="Culturales">
+                <x-slot name="imagen">
+                    <img src="imagenes/ProxEventos/filey2026.png" alt="evento">
+                </x-slot>
+                <x-slot name="etiqueta">
+                    Recien agregado
+                </x-slot>
+                <x-slot name="titulo">
+                    Filey 2026
+                </x-slot>
+                <x-slot name="fechaI">
+                    14
+                </x-slot>
+                <x-slot name="fechaF">
+                    22
+                </x-slot>
+                <x-slot name="mes">
+                    Marzo
+                </x-slot>
+                <x-slot name="anio">
+                    2026
+                </x-slot>
+                <x-slot name="costo">
+                    Entrada gratiuta
+                </x-slot>
+            </x-inicio.card-evento>
 
-            <div class="event-card" data-campus="Academicos">
-                <img src="/imagenes/ProxEventos/FeriaProfesiones.png" alt="evento">
-                <div class="event-body">
-                    <h3>Feria Universitaria de Profesiones 2026</h3>
-                    <p class="event-date">7-12 Marzo del 2026</p>
-                    <p class="event-price">Entrada gratuita</p>
-                </div>
-            </div>
 
-            <div class="event-card" data-campus="Deportivos">
-                <img src="/imagenes/ProxEventos/CarreraUady.png" alt="evento">
-                <div class="event-body">
-                    <h3>Carrera UADY</h3>
-                    <p class="event-date">1 de Marzo del 2026</p>
-                    <p class="event-price">$50 MXN</p>
-                </div>
-            </div>
+            <x-inicio.card-evento campus="Academicos">
+                <x-slot name="imagen">
+                    <img src="/imagenes/ProxEventos/FeriaProfesiones.png" alt="evento">
+                </x-slot>
+                <x-slot name="etiqueta">
+                    
+                </x-slot>
+                <x-slot name="titulo">
+                    Feria Universitaria de Profesiones 2026
+                </x-slot>
+                <x-slot name="fechaI">
+                    7
+                </x-slot>
+                <x-slot name="fechaF">
+                    12
+                </x-slot>
+                <x-slot name="mes">
+                    Marzo
+                </x-slot>
+                <x-slot name="anio">
+                    2026
+                </x-slot>
+                <x-slot name="costo">
+                    Entrada gratiuta
+                </x-slot>
+            </x-inicio.card-evento>
 
-            <div class="event-card" data-campus="Culturales">
-                <img src="/imagenes/ProxEventos/Beatles.png" alt="evento">
-                <div class="event-body">
-                    <h3>Tributo a The Beatles</h3>
-                    <p class="event-date">6 de Abril del 2026</p>
-                    <p class="event-price">$200 MXN</p>
-                </div>
-            </div>
 
+            <x-inicio.card-evento campus="Deportivos">
+                <x-slot name="imagen">
+                    <img src="/imagenes/ProxEventos/CarreraUady.png" alt="evento">
+                </x-slot>
+                <x-slot name="etiqueta">
+                    
+                </x-slot>
+                <x-slot name="titulo">
+                    Carrera UADY
+                </x-slot>
+                <x-slot name="fechaI">
+                    1
+                </x-slot>
+                <x-slot name="fechaF">
+                    
+                </x-slot>
+                <x-slot name="mes">
+                    Marzo
+                </x-slot>
+                <x-slot name="anio">
+                    2026
+                </x-slot>
+                <x-slot name="costo">
+                    $50 MXN
+                </x-slot>
+            </x-inicio.card-evento>
+
+
+            <x-inicio.card-evento campus="Culturales">
+                <x-slot name="imagen">
+                    <img src="" alt="evento">
+                </x-slot>
+                <x-slot name="etiqueta">
+                    
+                </x-slot>
+                <x-slot name="titulo">
+                    Tributo a The Beatles
+                </x-slot>
+                <x-slot name="fechaI">
+                    6
+                </x-slot>
+                <x-slot name="fechaF">
+                    
+                </x-slot>
+                <x-slot name="mes">
+                    Abril
+                </x-slot>
+                <x-slot name="anio">
+                    2026
+                </x-slot>
+                <x-slot name="costo">
+                    $200 MXN
+                </x-slot>
+            </x-inicio.card-evento>
+            <!-- BASE
+            <x-inicio.card-evento campus="">
+                <x-slot name="imagen">
+                    <img src="" alt="evento">
+                </x-slot>
+                <x-slot name="etiqueta">
+                    
+                </x-slot>
+                <x-slot name="titulo">
+                    
+                </x-slot>
+                <x-slot name="fechaI">
+                    
+                </x-slot>
+                <x-slot name="fechaF">
+                    
+                </x-slot>
+                <x-slot name="mes">
+                    
+                </x-slot>
+                <x-slot name="anio">
+                    
+                </x-slot>
+                <x-slot name="costo">
+                    
+                </x-slot>
+            </x-inicio.card-evento>
+        -->
         </div>
     </section>
 
