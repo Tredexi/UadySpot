@@ -61,7 +61,7 @@
 }
 /* EVENTOS CAMPUS */
 .events-section {
-    margin-top: 60px;
+    margin-top: 45px;
 }
 
 .events-header {
@@ -409,3 +409,71 @@
     color: #1d4ed8 !important; 
     border: 1px solid #bfdbfe !important; 
 }     
+
+
+/* Modificaciones de Rafael */
+
+.events-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.events-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.events-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffc107;
+}
+
+.events-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.events-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.campus-select {
+    padding: 10px 18px;
+    border-radius: 50px;
+    border: 2px solid #ffc107;
+    background: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.campus-select:hover {
+    box-shadow: 0 6px 15px rgba(255, 193, 7, 0.25);
+}
+
+.campus-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3);
+}

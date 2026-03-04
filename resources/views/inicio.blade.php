@@ -5,22 +5,86 @@
 @section('content')
 
 
+    <div id="mainHeroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="10000">
 
-    <div class="hero-container">
-        <div class="hero-overlay">
-            <span class="hero-tag">OBTENLO AHORA</span>
+    <div class="carousel-inner">
 
-            <h1 class="hero-title">
-                CONCIERTO A LA LUZ DE LAS VELAS<br>
-                <span>LOVE DAY</span>
-            </h1>
-
-            <a href="/events" class="hero-button">
-                Galería
-            </a>
+        <!-- SLIDE 1 -->
+        <div class="carousel-item active">
+        <img src="/imagenes/Carrusel/Filey2026-slide.png" class="d-block w-100 hero-img" alt="Filey">
+        <div class="carousel-caption custom-caption">
+            <span class="hero-tag">Evento Destacado</span>
+            <h1 class="hero-title">FILEY 2026</h1>
+            <a href="/events" class="hero-button">Ver evento</a>
         </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="carousel-item">
+        <img src="/imagenes/Carrusel/BolsaDeTrabajo-slide.png" class="d-block w-100 hero-img" alt="Feria">
+        <div class="carousel-caption custom-caption">
+            <span class="hero-tag">Trabajo</span>
+            <h1 class="hero-title">BOLSA DE TRABAJO UADY</h1>
+            <a href="/events" class="hero-button">Explorar</a>
+        </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="carousel-item">
+        <img src="/imagenes/Carrusel/FeriaProfesiones-slide.jpg" class="d-block w-100 hero-img" alt="Feria">
+        <div class="carousel-caption custom-caption">
+            <span class="hero-tag">Académico</span>
+            <h1 class="hero-title">Feria Universitaria 2026</h1>
+            <a href="/events" class="hero-button">Ver evento</a>
+        </div>
+        </div>
+
     </div>
-    
+
+    <div class="carousel-progress">
+        <div class="carousel-progress-bar"></div>
+    </div>
+
+    <button class="custom-carousel-btn prev" type="button" data-bs-target="#mainHeroCarousel" data-bs-slide="prev">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <button class="custom-carousel-btn next" type="button" data-bs-target="#mainHeroCarousel" data-bs-slide="next">
+        <i class="bi bi-chevron-right"></i>
+    </button>
+
+    </div>
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const carousel = document.querySelector("#mainHeroCarousel");
+        const progressBar = document.querySelector(".carousel-progress-bar");
+
+        const slideInterval = 10000; // 10 segundos
+
+        function startProgressBar() {
+            progressBar.style.transition = "none";
+            progressBar.style.width = "0%";
+
+            setTimeout(() => {
+                progressBar.style.transition = `width ${slideInterval}ms linear`;
+                progressBar.style.width = "100%";
+            }, 50);
+        }
+
+        carousel.addEventListener("slide.bs.carousel", function () {
+            startProgressBar();
+        });
+
+        startProgressBar();
+    });
+    </script>
+
+
+
     <div class="categories-container">
         <div class="category-item">
             🎉
@@ -60,19 +124,23 @@
 <!-- EVENTOS -->
     <section class="events-section">
 
-        <div class="events-header">
+    <div class="events-header">
             <h2>Próximos Eventos UADY</h2>
 
-            <select class="campus-select">
-                <option value="all">Todos los eventos</option>
-                <option value="Academicos">Academicos</option>
-                <option value="Culturales">Culturales</option>
-                <option value="Deportivos">Deportivos</option>
-                <option value="Cientificos">Cientificos</option>
-                <option value="Sociales">Sociales</option>
-                <option value="Institucionales">Institucionales</option>
-            </select>
-        </div>
+            <div class="events-filter">
+                <label for="eventCategory" class="filter-label">Filtrar por:</label>
+                <select id="eventCategory" class="campus-select">
+                    <option value="all">Todos los eventos</option>
+                    <option value="Academicos">Académicos</option>
+                    <option value="Culturales">Culturales</option>
+                    <option value="Deportivos">Deportivos</option>
+                    <option value="Cientificos">Científicos</option>
+                    <option value="Sociales">Sociales</option>
+                    <option value="Institucionales">Institucionales</option>
+                </select>
+            </div>
+
+    </div>
 
         <div class="events-grid">
             <!-- EVENT CARD-->
@@ -162,7 +230,7 @@
 
             <x-inicio.card-evento campus="Culturales">
                 <x-slot name="imagen">
-                    <img src="" alt="evento">
+                    <img src="/imagenes/ProxEventos/Beatles.png" alt="evento">
                 </x-slot>
                 <x-slot name="etiqueta">
                     
