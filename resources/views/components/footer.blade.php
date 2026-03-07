@@ -20,10 +20,10 @@
             <div class="col-md-4 mb-4 footer-divider ps-md-4">
                 <h6 class="fw-bold text-white">Servicios Universitarios</h6>
                 <ul class="list-unstyled small">
-                    <li><a href="#" class="footer-link">Publicar Evento</a></li>
+                    <li><a href="{{ route('events.index') }}" class="footer-link">Publicar Evento</a></li>
                     <li><a href="#" class="footer-link">Calendario Académico</a></li>
                     <li><a href="#" class="footer-link">Convocatorias</a></li>
-                    <li><a href="#" class="footer-link">Bolsa Universitaria</a></li>
+                    <li><a href="{{ route('jobs.index') }}" class="footer-link">Bolsa Universitaria</a></li>
                     <li><a href="#" class="footer-link">Reglamento</a></li>
                 </ul>
             </div>

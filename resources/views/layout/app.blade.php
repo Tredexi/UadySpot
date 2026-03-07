@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
+    <link rel="icon" type="image/png" href="{{ asset('Imagenes/logo_uady.png') }}">
+
 
     @yield('styles')  
 </head>

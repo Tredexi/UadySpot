@@ -15,7 +15,7 @@
         <div class="carousel-caption custom-caption">
             <span class="hero-tag">Evento Destacado</span>
             <h1 class="hero-title">FILEY 2026</h1>
-            <a href="/events" class="hero-button">Ver evento</a>
+            <a href="{{ route('events.index') }}" class="hero-button">Ver evento</a>
         </div>
         </div>
 
@@ -25,7 +25,7 @@
         <div class="carousel-caption custom-caption">
             <span class="hero-tag">Trabajo</span>
             <h1 class="hero-title">BOLSA DE TRABAJO UADY</h1>
-            <a href="/events" class="hero-button">Explorar</a>
+            <a href="{{ route('jobs.index') }}" class="hero-button">Explorar</a>
         </div>
         </div>
 
@@ -35,7 +35,7 @@
         <div class="carousel-caption custom-caption">
             <span class="hero-tag">Académico</span>
             <h1 class="hero-title">Feria Universitaria 2026</h1>
-            <a href="/events" class="hero-button">Ver evento</a>
+            <a href="{{ route('events.index') }}" class="hero-button">Ver evento</a>
         </div>
         </div>
 
@@ -86,39 +86,49 @@
 
 
     <div class="categories-container">
-        <div class="category-item">
+
+        <div class="category-item" onclick="window.location='{{ route('events.index') }}'">
             🎉
             <span>Eventos</span>
         </div>
+
         <div class="category-item">
             📰
             <span>Noticias</span>
         </div>
+
         <div class="category-item">
             ✨
             <span>Beneficios</span>
         </div>
-        <div class="category-item">
+
+        <div class="category-item" onclick="window.location='{{ route('jobs.index') }}'">
             💼
             <span>Trabajo</span>
         </div>
+
         <div class="category-item">
             🤝
             <span>Comunidad</span>
         </div>
+
         <div class="category-item">
             🎓
             <span>Carreras</span>
         </div>
+
         <div class="category-item">
             🗓️
             <span>Calendario</span>
         </div>
+
         <div class="category-item">
             📣
             <span>Nosotros</span>
         </div>
+
     </div>
+
 
 
 <!-- EVENTOS -->
@@ -391,7 +401,7 @@
         </div>
 
         <div class="jobs-cta">
-            <a href="/registro" class="jobs-button">
+            <a href="{{ route('jobs.index') }}" class="jobs-button">
                 Acceder a ofertas exclusivas
             </a>
         </div>

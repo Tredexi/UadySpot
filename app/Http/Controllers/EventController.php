@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-  public function index()
+    public function index()
     {
         
         $events = [
@@ -22,7 +22,7 @@ class EventController extends Controller
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open', 
                 'action_text' => 'Registrarse',
-                'image' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/Robotica.png',
             ],
             [
                 'id' => 2,
@@ -36,7 +36,7 @@ class EventController extends Controller
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Inscribirse',
-                'image' => 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/LiderazgoEstudiantil.png',
             ],
             [
                 'id' => 3,
@@ -49,7 +49,7 @@ class EventController extends Controller
                 'time' => '8:00 PM',
                 'tag_gallery' => 'Galería',
                 'action_text' => 'Obtener boleto',
-                'image' => 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/Concierto.png',
             ],
             [
                 'id' => 4,
@@ -63,7 +63,7 @@ class EventController extends Controller
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Ver detalles',
-                'image' => 'https://images.unsplash.com/photo-1503437313881-503a91226402?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/Exposicion.png',
             ],
             [
                 'id' => 5,
@@ -77,13 +77,13 @@ class EventController extends Controller
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Ver detalles',
-                'image' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/OcelotesVsJaguares.png',
             ],
             [
                 'id' => 6,
                 'theme' => 'green',
                 'category' => 'Deportes',
-                'title' => 'OTRO EVENTO DE PRUEBA',
+                'title' => 'SEMIFINALES DE BASQUETBOL INTERFACULTADES',
                 'date_day' => '10',
                 'date_month' => 'MAR',
                 'location' => 'Estadio Central UADY',
@@ -91,7 +91,7 @@ class EventController extends Controller
                 'availability' => 'Inscripción Cerrada',
                 'availability_status' => 'closed',
                 'action_text' => 'Ver detalles',
-                'image' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/SemifinalBasquetbol.png',
             ],
         ];
 

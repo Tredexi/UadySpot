@@ -108,8 +108,9 @@
 
             @foreach($jobs as $job)
                 <div class="card job-card rounded-3 mb-3 p-4">
-                    <div class="row">
-                        <div class="col-md-9">
+                        <div class="row">
+
+                            <div class="col-md-9">
                             
                             <div class="d-flex align-items-center gap-2 mb-1">
                                 <a href="#" class="job-title fs-5 fw-bold">{{ $job['title'] }}</a>

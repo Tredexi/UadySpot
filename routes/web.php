@@ -6,12 +6,16 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 
+// Página principal
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
+
+// Eventos
 Route::get('/eventos', [EventController::class, 'index'])->name('events.index');
 
-// Rutas para el Registro
+// Bolsa de trabajo
+Route::get('/bolsa-de-trabajo', [JobController::class, 'index'])->name('jobs.index');
+
+// Registro
 Route::get('/registro', [AuthController::class, 'showRegister'])->name('registro');
 Route::post('/registro', [AuthController::class, 'register'])->name('registro.post');
 
-// Ruta para la Bolsa de Trabajo
-Route::get('/bolsa-de-trabajo', [JobController::class, 'index'])->name('jobs.index');
