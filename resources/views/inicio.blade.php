@@ -112,17 +112,17 @@
             <span>Comunidad</span>
         </div>
 
-        <div class="category-item">
+        <div class="category-item" onclick="window.location='{{ route('careers.index') }}'">
             🎓
             <span>Carreras</span>
         </div>
 
-        <div class="category-item">
+        <div class="category-item" onclick="window.location='{{ route('calendario') }}'">
             🗓️
             <span>Calendario</span>
         </div>
 
-        <div class="category-item">
+        <div class="category-item" onclick="window.location='{{ route('nosotros') }}'">
             📣
             <span>Nosotros</span>
         </div>

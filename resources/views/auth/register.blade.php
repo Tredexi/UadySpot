@@ -60,7 +60,7 @@
                         </button>
 
                         <div class="text-center text-secondary small">
-                            ¿Ya tienes una cuenta? <a href="#" class="text-decoration-none fw-bold" style="color: var(--uady-blue);">Inicia sesión aquí</a>
+                            ¿Ya tienes una cuenta? <a href="{{ route('login') }}" class="text-decoration-none fw-bold" style="color: var(--uady-blue);">Inicia sesión aquí</a>
                         </div>
                     </form>
                 </div>

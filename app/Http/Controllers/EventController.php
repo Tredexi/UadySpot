@@ -17,6 +17,7 @@ class EventController extends Controller
                 'title' => 'TALLER DE INTRODUCC... A LA ROBÓTICA',
                 'date_day' => '16',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-16',
                 'location' => 'Fac. de Ingeniería',
                 'time' => '9:00 AM',
                 'availability' => 'Inscripción Abierta',
@@ -31,6 +32,7 @@ class EventController extends Controller
                 'title' => 'LIDERAZGO ESTUDIANTIL CON GUSTAVO SOLÍS',
                 'date_day' => '20',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-20',
                 'location' => 'Fac. de Derecho',
                 'time' => '5:00 PM',
                 'availability' => 'Inscripción Abierta',
@@ -45,6 +47,7 @@ class EventController extends Controller
                 'title' => 'CONCIERTO A LA LUZ DE LAS VELAS LOVE DAY',
                 'date_day' => '20',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-20',
                 'location' => 'Auditorium Central',
                 'time' => '8:00 PM',
                 'tag_gallery' => 'Galería',
@@ -58,6 +61,7 @@ class EventController extends Controller
                 'title' => 'EXPOSICIÓN: EXPRESIONES UNIVERSITARIAS',
                 'date_day' => '22',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-22',
                 'location' => 'Galería Central UADY',
                 'time' => '10:00 AM',
                 'availability' => 'Inscripción Abierta',
@@ -72,6 +76,7 @@ class EventController extends Controller
                 'title' => 'FINALES DE FÚTBOL INTERFACULTADES',
                 'date_day' => '28',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-28',
                 'location' => 'Estadio Central UADY',
                 'time' => '3:00 PM',
                 'availability' => 'Inscripción Abierta',
@@ -86,6 +91,7 @@ class EventController extends Controller
                 'title' => 'SEMIFINALES DE BASQUETBOL INTERFACULTADES',
                 'date_day' => '10',
                 'date_month' => 'MAR',
+                'calendar_date' => '2026-03-10',
                 'location' => 'Estadio Central UADY',
                 'time' => '2:00 PM',
                 'availability' => 'Inscripción Cerrada',
@@ -97,4 +103,14 @@ class EventController extends Controller
 
         return view('events.index', compact('events'));
     }
+
+     // CALENDARIO
+    public function calendario()
+    {
+
+        $events = $this->index()->getData()['events'];
+
+        return view('calendario', compact('events'));
+    }
+
 }
