@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    //// Muestra la vista del formulario de registro
     public function showRegister()
     {
         return view('auth.register');
@@ -16,4 +15,16 @@ class AuthController extends Controller
     {
         return redirect('/eventos');
     }
+
+    public function showLogin()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        return redirect()->route('inicio');
+    }
+
+    
 }

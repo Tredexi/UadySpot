@@ -3,27 +3,7 @@
 
 @section('content')
 
-    <style>
-        /* Corta el texto largo a 2 líneas para que las tarjetas midan lo mismo */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        /* Ajuste para los bordes de la tarjeta */
-        .border-theme-blue { border-color: #3b82f6 !important; border-width: 2px !important; }
-        .border-theme-pink { border-color: #ec4899 !important; border-width: 2px !important; }
-        .border-theme-green { border-color: #10b981 !important; border-width: 2px !important; }
-        
-        /* Etiqueta activa */
-        .bg-active-tag { 
-            background-color: #dbeafe !important; 
-            color: #1d4ed8 !important; 
-            border: 1px solid #bfdbfe !important; 
-        }
-    </style>
+
 
     <div class="container bg-white rounded-4 shadow border p-4 my-5">
 

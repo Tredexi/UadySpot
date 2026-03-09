@@ -78,8 +78,9 @@
                 <!-- Acciones -->
                 <div class="d-flex align-items-center gap-4 ms-3">
                     <!-- Login con icono -->
-                    <a href="#" class="text-white text-decoration-none small d-flex align-items-center login-link">
-                        <i class="bi bi-person me-1"></i>Iniciar sesión</a>
+                    <a href="{{ route('login') }}" class="text-white text-decoration-none small d-flex align-items-center login-link">
+                        <i class="bi bi-person me-1"></i>Iniciar sesión
+                    </a>
                 </div>
         </div>
     </div>

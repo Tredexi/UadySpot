@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-  public function index()
+    public function index()
     {
         
         $events = [
@@ -17,12 +17,13 @@ class EventController extends Controller
                 'title' => 'TALLER DE INTRODUCC... A LA ROBÓTICA',
                 'date_day' => '16',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-16',
                 'location' => 'Fac. de Ingeniería',
                 'time' => '9:00 AM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open', 
                 'action_text' => 'Registrarse',
-                'image' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/Robotica.png',
             ],
             [
                 'id' => 2,
@@ -31,12 +32,13 @@ class EventController extends Controller
                 'title' => 'LIDERAZGO ESTUDIANTIL CON GUSTAVO SOLÍS',
                 'date_day' => '20',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-20',
                 'location' => 'Fac. de Derecho',
                 'time' => '5:00 PM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Inscribirse',
-                'image' => 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/LiderazgoEstudiantil.png',
             ],
             [
                 'id' => 3,
@@ -45,11 +47,12 @@ class EventController extends Controller
                 'title' => 'CONCIERTO A LA LUZ DE LAS VELAS LOVE DAY',
                 'date_day' => '20',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-20',
                 'location' => 'Auditorium Central',
                 'time' => '8:00 PM',
                 'tag_gallery' => 'Galería',
                 'action_text' => 'Obtener boleto',
-                'image' => 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/Concierto.png',
             ],
             [
                 'id' => 4,
@@ -58,12 +61,13 @@ class EventController extends Controller
                 'title' => 'EXPOSICIÓN: EXPRESIONES UNIVERSITARIAS',
                 'date_day' => '22',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-22',
                 'location' => 'Galería Central UADY',
                 'time' => '10:00 AM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Ver detalles',
-                'image' => 'https://images.unsplash.com/photo-1503437313881-503a91226402?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/Exposicion.png',
             ],
             [
                 'id' => 5,
@@ -72,29 +76,41 @@ class EventController extends Controller
                 'title' => 'FINALES DE FÚTBOL INTERFACULTADES',
                 'date_day' => '28',
                 'date_month' => 'FEB',
+                'calendar_date' => '2026-02-28',
                 'location' => 'Estadio Central UADY',
                 'time' => '3:00 PM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Ver detalles',
-                'image' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/OcelotesVsJaguares.png',
             ],
             [
                 'id' => 6,
                 'theme' => 'green',
                 'category' => 'Deportes',
-                'title' => 'OTRO EVENTO DE PRUEBA',
+                'title' => 'SEMIFINALES DE BASQUETBOL INTERFACULTADES',
                 'date_day' => '10',
                 'date_month' => 'MAR',
+                'calendar_date' => '2026-03-10',
                 'location' => 'Estadio Central UADY',
                 'time' => '2:00 PM',
                 'availability' => 'Inscripción Cerrada',
                 'availability_status' => 'closed',
                 'action_text' => 'Ver detalles',
-                'image' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop&q=80',
+                'image' => 'Imagenes/Eventos_Imagenes/SemifinalBasquetbol.png',
             ],
         ];
 
         return view('events.index', compact('events'));
     }
+
+     // CALENDARIO
+    public function calendario()
+    {
+
+        $events = $this->index()->getData()['events'];
+
+        return view('calendario', compact('events'));
+    }
+
 }
