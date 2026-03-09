@@ -7,81 +7,53 @@
             style="width: 42px; height: 42px; border: 2px solid var(--uady-gold);">
             <div>
                 <div class="brand-title text-white">UADY SPOT</div>
-                <div class="brand-subtitle">Plataforma Universitaria</div>
+                <div class="brand-subtitle border-top border-white-50 mt-1" style="font-size: 0.65rem; color: rgba(255,255,255,0.8);">Plataforma Universitaria</div>
             </div>
         </a>
-        <!-- Botón móvil -->
+
         <button class="navbar-toggler border-0 shadow-none" 
             type="button" data-bs-toggle="collapse" 
             data-bs-target="#navbarNav">
             <i class="bi bi-list text-white fs-2"></i>
         </button>
-        <!--NAVBAR DE NAVEGACION-->
+
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-ig-center">
+            <ul class="navbar-nav me-auto align-items-lg-center ms-lg-4">
                 <li class="nav-item">
-                    <a 
-                    class="nav-link px-3 active" 
-                    href="#">Inicio
-                    </a>
+                    <a class="nav-link px-3 {{ request()->routeIs('inicio') ? 'active fw-bold' : '' }}" href="{{ route('inicio') }}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 {{ request()->routeIs('events.*') ? 'active fw-bold' : '' }}" href="{{ route('events.index') }}">Eventos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="{{ route('feed.index') }}">Feed</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3" 
-                    href="#" 
-                    data-bs-toggle="dropdown">Eventos
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Hoy</a></li>
-                        <li><a class="dropdown-item" href="#">Mañana</a></li>
-                        <li><a class="dropdown-item" href="#">Próximos</a></li>
+                    <a class="nav-link dropdown-toggle px-3" href="#" data-bs-toggle="dropdown">Comunidad</a>
+                    <ul class="dropdown-menu shadow border-0 mt-2">
+                        <li><a class="dropdown-item" href="{{ route('benefits.index') }}">Beneficios</a></li>
+                        <li><a class="dropdown-item" href="{{ route('jobs.index') }}">Bolsa de Trabajo</a></li>
+                        <li><a class="dropdown-item" href="{{ route('news.index') }}">Noticias</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ route('nosotros') }}">Nosotros</a></li>
                     </ul>
                 </li>
-                <!-- Ofertas Educativas -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3" 
-                    href="#" 
-                    data-bs-toggle="dropdown">
-                    Comunidad</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Bachilleratos</a></li>
-                        <li><a class="dropdown-item" href="#">Universidad</a></li>
-                        <li><a class="dropdown-item" href="#">Posgrado</a></li>
-                        <li><a class="dropdown-item" href="#">Personal Académico</a></li>
-                    </ul>
-                </li>
-                <!--Mas-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3"
-                    href="#"
-                    data-bs-toggle="dropdown">
-                    Más</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Deportes</a></li>
-                        <li><a class="dropdown-item" href="#">Cultura</a></li>
-                        <li><a class="dropdown-item" href="#">Arte</a></li>
-                        <li><a class="dropdown-item" href="#">Todo</a></li>
-                    </ul>
-                </li>
-                <!--    
-                    <li class="nav-item ms-lg-3 d-flex align-items-center">
-                        <span class="text-white me-2 small">USUARIO</span>
-                        <img src="{{ asset('Imagenes/perfil.jpg') }}" alt="User" class="rounded-circle shadow-sm" style="width: 40px; height: 40px; border: 2px solid var(--uady-gold);">
-                    </li>-->
-                </ul>
-                <!-- Buscador -->
-                <form class="w-100 w-lg-auto">
-                    <div class="search-wrapper">
-                        <i class="bi bi-search"></i>
-                        <input type="search" placeholder="Buscar eventos...">
-                    </div>
-                </form>
-                <!-- Acciones -->
-                <div class="d-flex align-items-center gap-4 ms-3">
-                    <!-- Login con icono -->
-                    <a href="{{ route('login') }}" class="text-white text-decoration-none small d-flex align-items-center login-link">
-                        <i class="bi bi-person me-1"></i>Iniciar sesión
-                    </a>
-                </div>
+            </ul>
+                
+            <div class="d-flex align-items-center gap-4 ms-auto">
+                <a href="{{ route('cart.index') }}" class="text-white text-decoration-none position-relative px-2">
+                    <i class="bi bi-cart3 fs-5"></i>
+                    @if(session('cart') && count(session('cart')) > 0)
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+                            {{ count(session('cart')) }}
+                        </span>
+                    @endif
+                </a>
+
+                <a href="{{ route('login') }}" class="text-white text-decoration-none small d-flex align-items-center login-link border border-white border-opacity-25 rounded-pill px-3 py-1">
+                    <i class="bi bi-person me-1"></i>Iniciar sesión
+                </a>
+            </div>
         </div>
     </div>
 </nav>

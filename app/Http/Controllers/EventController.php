@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         
-        $events = [
+        $eventsData = [
             [
                 'id' => 1,
                 'theme' => 'blue', 
                 'category' => 'Talleres',
-                'title' => 'TALLER DE INTRODUCC... A LA ROBÓTICA',
+                'title' => 'TALLER DE INTRODUCCION A LA ROBÓTICA',
                 'date_day' => '16',
                 'date_month' => 'FEB',
                 'calendar_date' => '2026-02-16',
@@ -101,9 +101,41 @@ class EventController extends Controller
             ],
         ];
 
+        $events = collect($eventsData);
+
+        if ($request->filled('category')) {
+            $events = $events->where('category', $request->category);
+        }
+        if ($request->filled('location')) {
+            $events = $events->filter(function ($event) use ($request) {
+                return str_contains(strtolower($event['location']), strtolower($request->location));
+            });
+        }
+        if ($request->filled('status')) {
+            $events = $events->where('availability_status', $request->status);
+        }
+        if ($request->filled('date_range')) {
+            if ($request->date_range == 'this_month') {
+                $events = $events->filter(fn($e) => str_contains($e['calendar_date'], '2026-02'));
+            }
+        }
         return view('events.index', compact('events'));
     }
 
+
+
+    public function show($id)
+    {
+        $events = collect($this->index(request())->getData()['events']);
+        
+        $event = $events->firstWhere('id', $id);
+
+        if (!$event) {
+            abort(404, 'Evento no encontrado');
+        }
+
+        return view('events.show', compact('event'));
+    }
      // CALENDARIO
     public function calendario()
     {
