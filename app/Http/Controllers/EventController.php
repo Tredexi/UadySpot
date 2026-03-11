@@ -22,7 +22,7 @@ class EventController extends Controller
                 'time' => '9:00 AM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open', 
-                'action_text' => 'Registrarse',
+                'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/Robotica.png',
             ],
             [
@@ -37,7 +37,7 @@ class EventController extends Controller
                 'time' => '5:00 PM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
-                'action_text' => 'Inscribirse',
+                'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/LiderazgoEstudiantil.png',
             ],
             [
@@ -51,7 +51,7 @@ class EventController extends Controller
                 'location' => 'Auditorium Central',
                 'time' => '8:00 PM',
                 'tag_gallery' => 'Galería',
-                'action_text' => 'Obtener boleto',
+                'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/Concierto.png',
             ],
             [
@@ -66,7 +66,7 @@ class EventController extends Controller
                 'time' => '10:00 AM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
-                'action_text' => 'Ver detalles',
+                'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/Exposicion.png',
             ],
             [
@@ -81,7 +81,7 @@ class EventController extends Controller
                 'time' => '3:00 PM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
-                'action_text' => 'Ver detalles',
+                'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/OcelotesVsJaguares.png',
             ],
             [
@@ -96,7 +96,7 @@ class EventController extends Controller
                 'time' => '2:00 PM',
                 'availability' => 'Inscripción Cerrada',
                 'availability_status' => 'closed',
-                'action_text' => 'Ver detalles',
+                'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/SemifinalBasquetbol.png',
             ],
         ];
@@ -119,6 +119,12 @@ class EventController extends Controller
                 $events = $events->filter(fn($e) => str_contains($e['calendar_date'], '2026-02'));
             }
         }
+        if ($request->filled('search')) {
+            $searchTerm = strtolower($request->search);
+            $events = $events->filter(function ($event) use ($searchTerm) {
+                return str_contains(strtolower($event['title']), $searchTerm);
+            });
+        }
         return view('events.index', compact('events'));
     }
 
@@ -136,13 +142,6 @@ class EventController extends Controller
 
         return view('events.show', compact('event'));
     }
-     // CALENDARIO
-    public function calendario()
-    {
 
-        $events = $this->index()->getData()['events'];
-
-        return view('calendario', compact('events'));
-    }
 
 }

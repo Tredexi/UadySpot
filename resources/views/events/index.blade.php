@@ -7,7 +7,16 @@
 
     <div class="container bg-white rounded-4 shadow border p-4 my-5">
 
-        <h1 class="fw-bold fs-3 mb-4">Encuentra tu próximo evento</h1>
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+            <h1 class="fw-bold fs-3 mb-0">Encuentra tu próximo evento</h1>
+            
+            <div class="input-group" style="max-width: 300px;">
+                <input type="text" name="search" form="filterForm" class="form-control" placeholder="Buscar evento..." value="{{ request('search') }}">
+                <button type="submit" form="filterForm" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
 
         <form action="{{ route('events.index') }}" method="GET" id="filterForm">
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
