@@ -22,6 +22,8 @@ class EventController extends Controller
                 'time' => '9:00 AM',
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open', 
+                                'price' => 130,
+
                 'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/Robotica.png',
             ],
@@ -38,6 +40,8 @@ class EventController extends Controller
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Comprar',
+                                'price' => 250,
+
                 'image' => 'Imagenes/Eventos_Imagenes/LiderazgoEstudiantil.png',
             ],
             [
@@ -51,6 +55,8 @@ class EventController extends Controller
                 'location' => 'Auditorium Central',
                 'time' => '8:00 PM',
                 'tag_gallery' => 'Galería',
+                                'price' => 450,
+
                 'action_text' => 'Comprar',
                 'image' => 'Imagenes/Eventos_Imagenes/Concierto.png',
             ],
@@ -67,6 +73,8 @@ class EventController extends Controller
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Comprar',
+                                'price' => 150,
+
                 'image' => 'Imagenes/Eventos_Imagenes/Exposicion.png',
             ],
             [
@@ -82,6 +90,8 @@ class EventController extends Controller
                 'availability' => 'Inscripción Abierta',
                 'availability_status' => 'open',
                 'action_text' => 'Comprar',
+                'price' => 150,
+
                 'image' => 'Imagenes/Eventos_Imagenes/OcelotesVsJaguares.png',
             ],
             [
@@ -97,6 +107,8 @@ class EventController extends Controller
                 'availability' => 'Inscripción Cerrada',
                 'availability_status' => 'closed',
                 'action_text' => 'Comprar',
+                'price' => 150,
+
                 'image' => 'Imagenes/Eventos_Imagenes/SemifinalBasquetbol.png',
             ],
         ];
@@ -125,23 +137,20 @@ class EventController extends Controller
                 return str_contains(strtolower($event['title']), $searchTerm);
             });
         }
-        return view('events.index', compact('events'));
+        return view('event.index', compact('events'));
     }
-
 
 
     public function show($id)
     {
-        $events = collect($this->index(request())->getData()['events']);
+        $events = $this->index(request())->getData()['events'];
         
-        $event = $events->firstWhere('id', $id);
+        $event = $events->firstWhere('id', (int) $id);
 
         if (!$event) {
             abort(404, 'Evento no encontrado');
         }
 
-        return view('events.show', compact('event'));
+        return view('event.detail', compact('event'));
     }
-
-
-}
+    }

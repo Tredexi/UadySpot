@@ -22,18 +22,24 @@
                 <li class="nav-item">
                     <a class="nav-link px-3 {{ request()->routeIs('inicio') ? 'active fw-bold' : '' }}" href="{{ route('inicio') }}">Inicio</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-3 {{ request()->routeIs('benefits.*') ? 'active fw-bold' : '' }}" href="{{ route('benefits.index') }}">Beneficios</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link px-3 {{ request()->routeIs('events.*') ? 'active fw-bold' : '' }}" href="{{ route('events.index') }}">Eventos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="{{ route('feed.index') }}">Feed</a>
+                    <a class="nav-link px-3" href="{{ route('social.index') }}">Social</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle px-3" href="#" data-bs-toggle="dropdown">Comunidad</a>
                     <ul class="dropdown-menu shadow border-0 mt-2">
-                        <li><a class="dropdown-item" href="{{ route('benefits.index') }}">Beneficios</a></li>
-                        <li><a class="dropdown-item" href="{{ route('jobs.index') }}">Bolsa de Trabajo</a></li>
                         <li><a class="dropdown-item" href="{{ route('news.index') }}">Noticias</a></li>
+                        <li><a class="dropdown-item" href="{{ route('jobs.index') }}">Bolsa de Trabajo</a></li>
+                        <li><a class="dropdown-item" href="{{ route('careers.index') }}">Carreras</a></li>
+
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('nosotros') }}">Nosotros</a></li>
                     </ul>

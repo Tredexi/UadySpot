@@ -9,7 +9,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\FeedController;
+use App\Http\Controllers\SocialController;
 
 // Página principal
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
@@ -45,11 +45,11 @@ Route::post('/carrito/add/{id}', [CartController::class, 'add'])->name('cart.add
 Route::get('/carrito', [CartController::class, 'index'])->name('cart.index');
 Route::post('/carrito/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/carrito/clear', [CartController::class, 'clear'])->name('cart.clear');
-Route::get('/eventos/{id}', [EventController::class, 'show'])->name('events.show');
+Route::get('/eventos/{id}', [EventController::class, 'show'])->name('event.detail');
 
 
 Route::get('/beneficios', [BenefitController::class, 'index'])->name('benefits.index');
 
 Route::get('/noticias', [NewsController::class, 'index'])->name('news.index');
 
-Route::get('/feed', [FeedController::class, 'index'])->name('feed.index');
+Route::get('/social', [SocialController::class, 'index'])->name('social.index');

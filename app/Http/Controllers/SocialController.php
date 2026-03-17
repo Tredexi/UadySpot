@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class FeedController extends Controller
+class SocialController extends Controller
 {
     public function index() {
         // Datos simulados (FeedData)
@@ -121,6 +121,6 @@ class FeedController extends Controller
             ]
         ];
 
-        return view('feed.index', compact('publicaciones'));
+        return view('social.index', compact('publicaciones'));
     }
 }

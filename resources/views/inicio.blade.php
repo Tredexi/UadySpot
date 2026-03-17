@@ -86,7 +86,10 @@
 
 
     <div class="categories-container">
-
+        <div class="category-item">
+            ✨
+            <span>Beneficios</span>
+        </div>
         <div class="category-item" onclick="window.location='{{ route('events.index') }}'">
             🎉
             <span>Eventos</span>
@@ -95,11 +98,6 @@
         <div class="category-item">
             📰
             <span>Noticias</span>
-        </div>
-
-        <div class="category-item">
-            ✨
-            <span>Beneficios</span>
         </div>
 
         <div class="category-item" onclick="window.location='{{ route('jobs.index') }}'">
@@ -112,255 +110,104 @@
             <span>Comunidad</span>
         </div>
 
-        <div class="category-item" onclick="window.location='{{ route('careers.index') }}'">
-            🎓
-            <span>Carreras</span>
-        </div>
-
         <div class="category-item" onclick="window.location='{{ route('calendario') }}'">
             🗓️
-            <span>Calendario</span>
+            <span>Social</span>
         </div>
 
-        <div class="category-item" onclick="window.location='{{ route('nosotros') }}'">
-            📣
-            <span>Nosotros</span>
-        </div>
+
 
     </div>
 
 
-
-<!-- EVENTOS -->
-    <section class="events-section">
+<section class="events-section">
 
     <div class="events-header">
-            <h2>Próximos Eventos UADY</h2>
+        <h2>Próximos Eventos UADY</h2>
 
-            <div class="events-filter">
-                <label for="eventCategory" class="filter-label">Filtrar por:</label>
-                <select id="eventCategory" class="campus-select">
-                    <option value="all">Todos los eventos</option>
-                    <option value="Academicos">Académicos</option>
-                    <option value="Culturales">Culturales</option>
-                    <option value="Deportivos">Deportivos</option>
-                    <option value="Cientificos">Científicos</option>
-                    <option value="Sociales">Sociales</option>
-                    <option value="Institucionales">Institucionales</option>
-                </select>
-            </div>
-
+        <div class="events-filter">
+            <label for="eventCategory" class="filter-label">Filtrar por:</label>
+            <select id="eventCategory" class="campus-select">
+                <option value="all">Todos los eventos</option>
+                <option value="Academicos">Académicos</option>
+                <option value="Culturales">Culturales</option>
+                <option value="Deportivos">Deportivos</option>
+                <option value="Cientificos">Científicos</option>
+                <option value="Sociales">Sociales</option>
+                <option value="Institucionales">Institucionales</option>
+            </select>
+        </div>
     </div>
 
-        <div class="events-grid">
-            <!-- EVENT CARD-->
-            <x-inicio.card-evento campus="Culturales">
+    <div class="events-grid">
+        
+        @foreach ($eventos as $evento)
+            <x-inicio.card-evento :campus="$evento['campus']">
+                
                 <x-slot name="imagen">
-                    <img src="imagenes/ProxEventos/filey2026.png" alt="evento">
+                    <img src="{{ asset($evento['imagen']) }}" alt="{{ $evento['titulo'] }}">
                 </x-slot>
+                
                 <x-slot name="etiqueta">
-                    Recien agregado
+                    {{ $evento['etiqueta'] }}
                 </x-slot>
+                
                 <x-slot name="titulo">
-                    Filey 2026
+                    {{ $evento['titulo'] }}
                 </x-slot>
+                
                 <x-slot name="fechaI">
-                    14
+                    {{ $evento['fechaI'] }}
                 </x-slot>
+                
                 <x-slot name="fechaF">
-                    22
+                    {{ $evento['fechaF'] }}
                 </x-slot>
+                
                 <x-slot name="mes">
-                    Marzo
+                    {{ $evento['mes'] }}
                 </x-slot>
+                
                 <x-slot name="anio">
-                    2026
+                    {{ $evento['anio'] }}
                 </x-slot>
+                
                 <x-slot name="costo">
-                    Entrada gratiuta
+                    {{ $evento['costo'] }}
                 </x-slot>
+                
             </x-inicio.card-evento>
+        @endforeach
 
+    </div>
+</section>
 
-            <x-inicio.card-evento campus="Academicos">
-                <x-slot name="imagen">
-                    <img src="/imagenes/ProxEventos/FeriaProfesiones.png" alt="evento">
-                </x-slot>
-                <x-slot name="etiqueta">
-                    
-                </x-slot>
-                <x-slot name="titulo">
-                    Feria Universitaria de Profesiones 2026
-                </x-slot>
-                <x-slot name="fechaI">
-                    7
-                </x-slot>
-                <x-slot name="fechaF">
-                    12
-                </x-slot>
-                <x-slot name="mes">
-                    Marzo
-                </x-slot>
-                <x-slot name="anio">
-                    2026
-                </x-slot>
-                <x-slot name="costo">
-                    Entrada gratiuta
-                </x-slot>
-            </x-inicio.card-evento>
-
-
-            <x-inicio.card-evento campus="Deportivos">
-                <x-slot name="imagen">
-                    <img src="/imagenes/ProxEventos/CarreraUady.png" alt="evento">
-                </x-slot>
-                <x-slot name="etiqueta">
-                    
-                </x-slot>
-                <x-slot name="titulo">
-                    Carrera UADY
-                </x-slot>
-                <x-slot name="fechaI">
-                    1
-                </x-slot>
-                <x-slot name="fechaF">
-                    
-                </x-slot>
-                <x-slot name="mes">
-                    Marzo
-                </x-slot>
-                <x-slot name="anio">
-                    2026
-                </x-slot>
-                <x-slot name="costo">
-                    $50 MXN
-                </x-slot>
-            </x-inicio.card-evento>
-
-
-            <x-inicio.card-evento campus="Culturales">
-                <x-slot name="imagen">
-                    <img src="/imagenes/ProxEventos/Beatles.png" alt="evento">
-                </x-slot>
-                <x-slot name="etiqueta">
-                    
-                </x-slot>
-                <x-slot name="titulo">
-                    Tributo a The Beatles
-                </x-slot>
-                <x-slot name="fechaI">
-                    6
-                </x-slot>
-                <x-slot name="fechaF">
-                    
-                </x-slot>
-                <x-slot name="mes">
-                    Abril
-                </x-slot>
-                <x-slot name="anio">
-                    2026
-                </x-slot>
-                <x-slot name="costo">
-                    $200 MXN
-                </x-slot>
-            </x-inicio.card-evento>
-            <!-- BASE
-            <x-inicio.card-evento campus="">
-                <x-slot name="imagen">
-                    <img src="" alt="evento">
-                </x-slot>
-                <x-slot name="etiqueta">
-                    
-                </x-slot>
-                <x-slot name="titulo">
-                    
-                </x-slot>
-                <x-slot name="fechaI">
-                    
-                </x-slot>
-                <x-slot name="fechaF">
-                    
-                </x-slot>
-                <x-slot name="mes">
-                    
-                </x-slot>
-                <x-slot name="anio">
-                    
-                </x-slot>
-                <x-slot name="costo">
-                    
-                </x-slot>
-            </x-inicio.card-evento>
-        -->
-        </div>
+<section class="events-section">
     </section>
-
-
 
 <section class="benefits-section">
 
-        <div class="benefits-header">
-            <h2>Beneficios exclusivos Uady Spot</h2>
-            <p>Descuentos y convenios solo por pertenecer a la comunidad</p>
-        </div>
+    <div class="benefits-header">
+        <h2>Beneficios exclusivos Uady Spot</h2>
+        <p>Descuentos y convenios solo por pertenecer a la comunidad</p>
+    </div>
 
-        <div class="benefits-slider">
+    <div class="benefits-slider">
+        
+        @foreach ($beneficios as $beneficio)
+            <x-inicio.card-beneficio 
+                :descuento="$beneficio['descuento']"
+                :imagen="$beneficio['imagen']"
+                :alt="$beneficio['alt']"
+                :titulo="$beneficio['titulo']"
+                :subtitulo="$beneficio['subtitulo']"
+                :etiqueta="$beneficio['etiqueta']"
+            />
+        @endforeach
 
-            <div class="benefit-card">
-                <span class="discount-badge">-25%</span>
-                <img src="/imagenes/BeneficiosExclusivos/Gym.png" alt="Gym">
-                <div class="benefit-content">
-                    <h3>Gym Universitario</h3>
-                    <p>Entrena con descuento exclusivo</p>
-                    <span class="benefit-only">Solo Uady Spot</span>
-                </div>
-            </div>
+    </div>
 
-            <div class="benefit-card">
-                <span class="discount-badge">-15%</span>
-                <img src="/imagenes/BeneficiosExclusivos/BlackBarberia.png" alt="Barber">
-                <div class="benefit-content">
-                    <h3>Barbería Black</h3>
-                    <p>Corte premium con descuento</p>
-                    <span class="benefit-only">Convenio activo</span>
-                </div>
-            </div>
-
-            <div class="benefit-card">
-                <span class="discount-badge">2x1</span>
-                <img src="/imagenes/BeneficiosExclusivos/ElPatioBar.png" alt="Restaurante">
-                <div class="benefit-content">
-                    <h3>Restaurante El Patio</h3>
-                    <p>Comparte sin pagar de más</p>
-                    <span class="benefit-only">Cupón limitado</span>
-                </div>
-            </div>
-
-            <div class="benefit-card">
-                <span class="discount-badge">-10%</span>
-                <img src="/imagenes/BeneficiosExclusivos/StarbucksVaso.png" alt="Cafe">
-                <div class="benefit-content">
-                    <h3>Starbucks</h3>
-                    <p>Tu café con descuento diario</p>
-                    <span class="benefit-only">Presentando app</span>
-                </div>
-            </div>
-
-            <div class="benefit-card">
-                <span class="discount-badge">-20%</span>
-                <img src="/imagenes/BeneficiosExclusivos/AzulCenote.png" alt="Cenote">
-                <div class="benefit-content">
-                    <h3>Cenote Azul</h3>
-                    <p>Escápate el fin de semana</p>
-                    <span class="benefit-only">Acceso exclusivo</span>
-                </div>
-            </div>
-
-        </div>
-
-
-
-
+</section>
 
 </section>
         <section class="jobs-section">

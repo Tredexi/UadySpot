@@ -67,44 +67,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* BUSCADOR */
-        .search-wrapper {
-            display: flex;
-            align-items: center;
-            background-color: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
-            padding: 5px 12px;
-            transition: 0.3s ease;
-        }
-
-        .search-wrapper i {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9rem;
-            margin-right: 8px;
-        }
-
-        .search-wrapper input {
-            border: none;
-            background: transparent;
-            outline: none;
-            color: white;
-            width: 180px;
-            font-size: 0.9rem;
-        }
-
-        .search-wrapper input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .search-wrapper:focus-within {
-            background-color: white;
-            border-color: var(--uady-gold);
-        }
-
-        .search-wrapper:focus-within input {
-            color: var(--uady-blue);
-        }
+    
 
         /* LOGIN / REGISTRO */
         .login-link {
