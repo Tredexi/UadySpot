@@ -3,57 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Evento; // Asegúrate de que esta línea esté aquí
 
 class HomeController extends Controller
 {
-    public function index() {
-   // Simulando la consulta SQL (Ej. $eventos = Evento::all();)
-        $eventos = [
-            [
-                'campus'   => 'Culturales',
-                'imagen'   => 'imagenes/ProxEventos/filey2026.png',
-                'etiqueta' => 'Recien agregado',
-                'titulo'   => 'Filey 2026',
-                'fechaI'   => '14',
-                'fechaF'   => '22',
-                'mes'      => 'Marzo',
-                'anio'     => '2026',
-                'costo'    => 'Entrada gratuita'
-            ],
-            [
-                'campus'   => 'Academicos',
-                'imagen'   => '/imagenes/ProxEventos/FeriaProfesiones.png',
-                'etiqueta' => '',
-                'titulo'   => 'Feria Universitaria de Profesiones 2026',
-                'fechaI'   => '7',
-                'fechaF'   => '12',
-                'mes'      => 'Marzo',
-                'anio'     => '2026',
-                'costo'    => 'Entrada gratuita'
-            ],
-            [
-                'campus'   => 'Deportivos',
-                'imagen'   => '/imagenes/ProxEventos/CarreraUady.png',
-                'etiqueta' => '',
-                'titulo'   => 'Carrera UADY',
-                'fechaI'   => '1',
-                'fechaF'   => '',
-                'mes'      => 'Marzo',
-                'anio'     => '2026',
-                'costo'    => '$50 MXN'
-            ],
-            [
-                'campus'   => 'Culturales',
-                'imagen'   => '/imagenes/ProxEventos/Beatles.png',
-                'etiqueta' => '',
-                'titulo'   => 'Tributo a The Beatles',
-                'fechaI'   => '6',
-                'fechaF'   => '',
-                'mes'      => 'Abril',
-                'anio'     => '2026',
-                'costo'    => '$200 MXN'
-            ]
-        ];
+    public function index() 
+    {
+        // 1. Traemos los eventos de la BASE DE DATOS
+    
+        $eventos = Evento::where('es_destacado', true)
+                        ->take(4) 
+                        ->get();
+
+        // 2. Definimos los beneficios 
         $beneficios = [
             [
                 'descuento' => '-25%',
@@ -97,7 +59,7 @@ class HomeController extends Controller
             ]
         ];
 
-        // Pasamos la variable a la vista usando compact()
-        return view('inicio', compact('eventos','beneficios'));
+        // 3. UN SOLO RETURN al final con ambas variables
+        return view('inicio', compact('eventos', 'beneficios'));
     }
 }

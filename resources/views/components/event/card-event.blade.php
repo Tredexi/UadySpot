@@ -69,7 +69,7 @@
 
             {{-- Ver Más Detalles (Lo pediste arriba del botón) --}}
             <div class="text-center mb-3">
-                <a href="{{ route('event.detail', $id) }}" class="text-muted text-decoration-none" style="font-size: 0.9rem;">
+                <a href="{{ route('events.show', $id) }}" class="text-muted text-decoration-none" style="font-size: 0.9rem;">
                     Ver más detalles <i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i>
                 </a>
             </div>

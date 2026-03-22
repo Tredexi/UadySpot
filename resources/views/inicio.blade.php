@@ -140,45 +140,17 @@
     </div>
 
     <div class="events-grid">
-        
-        @foreach ($eventos as $evento)
-            <x-inicio.card-evento :campus="$evento['campus']">
-                
-                <x-slot name="imagen">
-                    <img src="{{ asset($evento['imagen']) }}" alt="{{ $evento['titulo'] }}">
-                </x-slot>
-                
-                <x-slot name="etiqueta">
-                    {{ $evento['etiqueta'] }}
-                </x-slot>
-                
-                <x-slot name="titulo">
-                    {{ $evento['titulo'] }}
-                </x-slot>
-                
-                <x-slot name="fechaI">
-                    {{ $evento['fechaI'] }}
-                </x-slot>
-                
-                <x-slot name="fechaF">
-                    {{ $evento['fechaF'] }}
-                </x-slot>
-                
-                <x-slot name="mes">
-                    {{ $evento['mes'] }}
-                </x-slot>
-                
-                <x-slot name="anio">
-                    {{ $evento['anio'] }}
-                </x-slot>
-                
-                <x-slot name="costo">
-                    {{ $evento['costo'] }}
-                </x-slot>
-                
-            </x-inicio.card-evento>
+        @foreach($eventos as $evento)
+            <x-inicio.card-evento 
+                :id="$evento->id"
+                :titulo="$evento->titulo" 
+                :imagen="$evento->imagen"
+                :campus="$evento->campus"
+                :fechaI="$evento->dia_texto" 
+                :mes="$evento->mes_texto"
+                :precio="$evento->precio"
+            />
         @endforeach
-
     </div>
 </section>
 

@@ -40,6 +40,7 @@
     gap: 24px;
 }
 
+
 .event-card {
     display: block; /* 🔥 evita que se haga horizontal */
     background: white;
