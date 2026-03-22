@@ -1,6 +1,8 @@
 @extends('layout.app')
 @section('titulo_pagina', 'Carreras')
-
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/carreras.css') }}">
+@endsection
 @section('content')
 
 <div class="container py-5">
@@ -50,38 +52,5 @@ Explora las licenciaturas que ofrece la Universidad Autónoma de Yucatán en sus
 @endforeach
 
 </div>
-
-
-<style>
-
-.campus-title{
-color:var(--uady-blue);
-border-left:5px solid var(--uady-gold);
-padding-left:10px;
-}
-
-.career-card{
-
-border-radius:12px;
-transition:all 0.2s ease;
-cursor:pointer;
-min-height:90px;
-
-}
-
-.career-card:hover{
-
-transform:translateY(-5px);
-background:#f8fafc;
-
-}
-
-.career-card h6{
-
-font-size:15px;
-
-}
-
-</style>
 
 @endsection

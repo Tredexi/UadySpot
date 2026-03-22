@@ -1,18 +1,11 @@
 @extends('layout.app')
 @section('titulo_pagina', 'Bolsa de Trabajo')
-
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@endsection
 @section('content')
 
-<style>
-    .job-card {
-        transition: all 0.2s ease-in-out;
-        border: 1px solid #e0e0e0;
-    }
-    .job-card:hover {
-        border-color: #002E5F;
-        box-shadow: 0 4px 15px rgba(0,46,95,0.1);
-    }
-</style>
+
 
 <div class="container bg-white rounded-4 shadow border p-4 my-5">
 

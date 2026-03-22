@@ -1,11 +1,52 @@
-/* Sombra para todas las tarjetas de noticias y eventos */
+/* ================= CARDS ================= */
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: none !important; /* Quitamos el borde para que la sombra luzca mejor */
+    border: none; /* quité !important para evitar conflictos */
 }
-/* Efecto opcional: La sombra se intensifica al pasar el mouse */
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ================= EVENTOS ================= */
+.border-theme-blue { border-color: #3b82f6; }
+.border-theme-pink { border-color: #ec4899; }
+.border-theme-green { border-color: #10b981; }
+
+.bg-active-tag {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+/* ================= CATEGORÍAS ================= */
+.categories-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 16px;
+    flex-wrap: wrap; /* 🔥 esto evita que se rompa */
+}
+
+.category-item {
+    flex: 1;
+    min-width: 120px; /* 🔥 evita que se aplasten */
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%; /* círculo */
+    padding: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.category-item:hover {
+    background: #f1f5f9;
+}
+
+.category-item span {
+    display: block;
+    font-size: 14px;
+    margin-top: 8px;
 }

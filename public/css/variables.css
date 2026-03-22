@@ -1,11 +1,7 @@
-/* VARIABLES GLOBALES */
+/* ================= VARIABLES GLOBALES ================= */
 :root {
     --uady-blue: #002e5f;   /* Azul UADY */
     --uady-gold: #CB9605;   /* Dorado UADY */
-    --uady-white: #FFFFFF;   /* Blanco */
-    --uady-black: #000000;   /* Negro */
-}
-body {
-    background-color: var(--uady-white);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --uady-white: #FFFFFF;  /* Blanco */
+    --uady-black: #000000;  /* Negro */
 }

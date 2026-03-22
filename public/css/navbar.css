@@ -1,4 +1,10 @@
-/* NAVBAR PRINCIPAL */
+/* ================= BASE ================= */
+body {
+    background-color: #f8f9fa; /* puedes cambiar a var(--uady-white) si quieres */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ================= NAVBAR ================= */
 .navbar-uady {
     background-color: var(--uady-blue);
     border-bottom: 4px solid var(--uady-gold);
@@ -10,28 +16,32 @@
     font-weight: 800;
     letter-spacing: 1px;
 }
+
 .nav-link {
     color: var(--uady-white) !important;
     margin-right: 15px;
     font-weight: 500;
     transition: 0.3s;
 }
+
 .nav-link:hover {
     color: var(--uady-gold) !important;
 }
-/* BRAND (Logo + Texto) */
+
+/* ================= BRAND ================= */
 .brand-title {
     font-weight: 800;
     font-size: 1.1rem;
     letter-spacing: 1px;
     line-height: 1;
 }
+
 .brand-subtitle {
     font-size: 0.7rem;
     color: rgba(255,255,255,0.65);
-    letter-spacing: 0.5px;
 }
-/* BUSCADOR */
+
+/* ================= BUSCADOR ================= */
 .search-wrapper {
     display: flex;
     align-items: center;
@@ -39,39 +49,45 @@
     border: 1px solid rgba(255,255,255,0.3);
     border-radius: 25px;
     padding: 5px 12px;
-    transition: 0.3s ease;
+    transition: 0.3s;
 }
+
 .search-wrapper i {
     color: rgba(255,255,255,0.7);
-    font-size: 0.9rem;
     margin-right: 8px;
 }
+
 .search-wrapper input {
     border: none;
     background: transparent;
     outline: none;
     color: white;
     width: 180px;
-    font-size: 0.9rem;
 }
+
 .search-wrapper input::placeholder {
     color: rgba(255,255,255,0.6);
 }
+
 .search-wrapper:focus-within {
     background-color: white;
     border-color: var(--uady-gold);
 }
+
 .search-wrapper:focus-within input {
     color: var(--uady-blue);
 }
- /* LOGIN / REGISTRO */
+
+/* ================= LOGIN / REGISTER ================= */
 .login-link {
-    transition: 0.3s;
     white-space: nowrap;
+    transition: 0.3s;
 }
+
 .login-link:hover {
     color: var(--uady-gold);
 }
+
 .register-link {
     background-color: var(--uady-gold);
     color: var(--uady-blue);
@@ -81,10 +97,12 @@
     text-decoration: none;
     transition: 0.3s;
 }
+
 .register-link:hover {
     background-color: #e0a800;
-    color: var(--uady-blue);
 }
+
+/* ================= DROPDOWN ================= */
 .dropdown-menu {
     border-radius: 12px;
     border: none;
@@ -92,14 +110,18 @@
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     animation: fadeIn 0.2s ease-in-out;
 }
+
 .dropdown-item {
     padding: 10px 20px;
-    transition: 0.2s ease;
+    transition: 0.2s;
 }
+
 .dropdown-item:hover {
     background-color: rgba(203,150,5,0.1);
     color: var(--uady-blue);
 }
+
+/* ================= ANIMACIÓN ================= */
 @keyframes fadeIn {
     from {
         opacity: 0;

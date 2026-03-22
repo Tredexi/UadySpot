@@ -10,55 +10,7 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-/* Estilos para la sección de HERO */
-.hero-container {
-    position: relative;
-    height: 420px;
-    border-radius: 16px;
-    background-image: url('/Imagenes/concierto-candlelight.jpg'); 
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-}
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0.2));
-    padding: 60px;
-    color: white;
-}
-
-.hero-tag {
-    background: #f5b5ff;
-    color: #000;
-    padding: 6px 12px;
-    font-weight: bold;
-    border-radius: 6px;
-    display: inline-block;
-    margin-bottom: 12px;
-}
-
-.hero-title {
-    font-size: 48px;
-    font-weight: 800;
-    line-height: 1.1;
-}
-
-.hero-title span {
-    color: #8da2ff;
-}
-
-.hero-button {
-    margin-top: 24px;
-    display: inline-block;
-    background: white;
-    color: black;
-    padding: 14px 24px;
-    border-radius: 999px;
-    font-weight: 600;
-    text-decoration: none;
-}
 /* EVENTOS CAMPUS */
 .events-section {
     margin-top: 45px;
@@ -89,6 +41,7 @@
 }
 
 .event-card {
+    display: block; /* 🔥 evita que se haga horizontal */
     background: white;
     border-radius: 16px;
     overflow: hidden;
@@ -137,7 +90,7 @@
 
 
 
-/* Estilos para la sección de descuentos */
+/* BENEFITS */
 .benefits-section {
     margin: 80px 0;
 }
@@ -214,23 +167,9 @@
     border-radius: 999px;
 }
 
-.benefits-cta {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.cta-button {
-    background: var(--uady-blue);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 999px;
-    font-weight: 700;
-    text-decoration: none;
-}
 
 
-
-/* Estilos para la sección de bolsa de trabajo */
+/* JOBS */
 .jobs-section {
     padding: 80px 5%;
     background: linear-gradient(135deg, #0a0f1f, #050814);
@@ -268,6 +207,7 @@
 }
 
 .job-card {
+    display: block; /* 🔥 clave para que NO se vuelvan horizontales */
     background: rgba(255,255,255,0.05);
     border-radius: 20px;
     padding: 30px;
@@ -283,8 +223,10 @@
 }
 
 .job-card img {
+    display: block;
+    margin: 0 auto 20px auto;
     max-height: 50px;
-    margin-bottom: 20px;
+    width: auto;
 }
 
 .job-card h3 {
@@ -296,6 +238,7 @@
     font-size: 14px;
     color: #ccc;
 }
+
 .job-badge {
     display: inline-block;
     margin-top: 15px;
@@ -306,12 +249,14 @@
     font-size: 12px;
     font-weight: 700;
 }
+
 .jobs-cta {
     text-align: center;
     margin-top: 50px;
 }
 
 .jobs-button {
+    display: inline-block; /* 🔥 asegura que el botón sí se vea */
     padding: 16px 40px;
     background: linear-gradient(90deg, #ff3b3b, #ff9800);
     color: white;
@@ -322,7 +267,8 @@
 }
 
 
-/* Estilos para la sección de llamada al usuario */
+
+/* CTA FINAL */
 .benefits-cta {
     position: relative;
     margin: 100px auto;
@@ -332,7 +278,6 @@
     overflow: hidden;
 }
 
-/* Efecto glow animado */
 .benefits-cta::before {
     content: "";
     position: absolute;
@@ -342,20 +287,13 @@
     opacity: .7;
 }
 
-
-
 .benefits-cta h3 {
     font-size: 42px;
     font-weight: 900;
     margin-bottom: 15px;
-
     background: linear-gradient(90deg, #ff3b3b, #ff9800);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
-    /* fallback por si acaso */
-    background-clip: text;
-    color: transparent;
 }
 
 .benefits-cta p {
@@ -379,17 +317,18 @@
 
 .cta-button:hover {
     transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 25px 60px rgba(255,59,59,.7);
 }
- /* Corta el texto largo a 2 líneas para que las tarjetas midan lo mismo */
+
+
+
+/* UTILIDADES */
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-        
-/* Ajuste para los bordes de la tarjeta */
+
 .border-theme-blue { 
     border-color: #3b82f6 !important; 
     border-width: 2px !important; 
@@ -402,17 +341,16 @@
     border-color: #10b981 !important; 
     border-width: 2px !important; 
 }
-        
-        /* Etiqueta activa */
+
 .bg-active-tag { 
     background-color: #dbeafe !important; 
     color: #1d4ed8 !important; 
     border: 1px solid #bfdbfe !important; 
-}     
+}
 
 
-/* Modificaciones de Rafael */
 
+/* EXTRA (Rafael) */
 .events-container {
     width: 90%;
     max-width: 1200px;
@@ -420,9 +358,6 @@
 }
 
 .events-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
     gap: 20px;
 }
@@ -444,7 +379,6 @@
 .events-title {
     font-size: 2.2rem;
     font-weight: 800;
-    margin: 0;
 }
 
 .events-filter {
@@ -457,23 +391,4 @@
     font-size: 0.9rem;
     font-weight: 600;
     color: #555;
-}
-
-.campus-select {
-    padding: 10px 18px;
-    border-radius: 50px;
-    border: 2px solid #ffc107;
-    background: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.campus-select:hover {
-    box-shadow: 0 6px 15px rgba(255, 193, 7, 0.25);
-}
-
-.campus-select:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3);
 }
