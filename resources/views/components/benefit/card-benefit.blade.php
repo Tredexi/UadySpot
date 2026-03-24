@@ -59,7 +59,6 @@
                 <div><i class="bi bi-calendar-x-fill me-1 text-muted"></i> Válido hasta: {{ $fechaExpiracion }}</div>
             </div>
             
-            {{-- EL BOTÓN: Apunta al ID único del modal de esta tarjeta --}}
             <button type="button" class="btn btn-outline-dark w-100 fw-bold rounded-pill"
                     data-bs-toggle="modal" 
                     data-bs-target="#qrModal-{{ $id }}">
