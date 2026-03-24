@@ -165,18 +165,17 @@
     </div>
 
     <div class="benefits-slider">
-        
         @foreach ($beneficios as $beneficio)
-            <x-inicio.card-beneficio 
-                :descuento="$beneficio['descuento']"
-                :imagen="$beneficio['imagen']"
-                :alt="$beneficio['alt']"
-                :titulo="$beneficio['titulo']"
-                :subtitulo="$beneficio['subtitulo']"
-                :etiqueta="$beneficio['etiqueta']"
-            />
-        @endforeach
-
+        <x-inicio.card-beneficio 
+            :id="$beneficio->id"
+            :descuento="$beneficio->valor . ' ' . $beneficio->type->nombre"
+            :imagen="$beneficio->imagen"
+            :alt="$beneficio->alt"
+            :titulo="$beneficio->titulo"
+            :subtitulo="$beneficio->subtitulo"
+            :etiqueta="$beneficio->etiqueta"
+        />
+    @endforeach
     </div>
 
 </section>

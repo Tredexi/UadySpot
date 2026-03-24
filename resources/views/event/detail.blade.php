@@ -17,40 +17,41 @@
             
             {{-- Imagen Hero --}}
             <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-5">
-                <img src="{{ asset($event['image']) }}" alt="{{ $event['title'] }}" class="w-100 object-fit-cover" style="max-height: 450px;">
+                <img src="{{ asset($event->imagen) }}" alt="{{ $event->titulo }}" class="w-100 object-fit-cover" style="max-height: 450px;">
             </div>
 
             {{-- Contenido del Evento --}}
             <div class="mb-4">
-                <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 fs-6">{{ $event['category'] ?? 'Evento' }}</span>
+                <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 fs-6">{{ $event->categoria ?? 'Evento' }}</span>
                 <h1 class="fw-bolder text-uppercase mb-3" style="color: var(--uady-blue, #002E5F); font-size: 2.5rem;">
-                    {{ $event['title'] }}
+                    {{ $event->titulo }}
                 </h1>
                 
                 <hr class="my-4">
 
                 <h4 class="fw-bold mb-3">Acerca de este evento</h4>
                 <p class="text-muted fs-5 mb-4">
-                    No te pierdas de este gran evento de la comunidad en <strong>{{ $event['location'] }}</strong>. 
-                    Prepara tu agenda en Mérida para el próximo {{ $event['date_day'] }} de {{ strtolower($event['date_month']) }}.
+                    No te pierdas de este gran evento de la comunidad en <strong>{{ $event->ubicacion }}</strong>. 
+                    Prepara tu agenda en Mérida para el próximo {{ $event->dia_texto }} de {{ strtolower                ($event->mes_texto) }}.
                 </p>
+
+                {{-- AQUÍ PONEMOS LA DESCRIPCIÓN DE LA BASE DE DATOS --}}
                 <p class="text-secondary" style="line-height: 1.8;">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    {{ $event->descripcion }}
                 </p>
             </div>
         </div>
 
         {{-- 3. COLUMNA LATERAL (Derecha: Tarjeta de Compra Flotante) --}}
         <div class="col-lg-4">
-            {{-- Usamos sticky-top para que la tarjeta baje junto con la pantalla --}}
             <div class="card shadow-lg border-0 rounded-4 sticky-top" style="top: 2rem;">
                 <div class="card-body p-4 p-lg-5">
                     
-                    {{-- Precio Monumental --}}
+                    {{-- Precio --}}
                     <div class="text-center mb-4 pb-4 border-bottom">
                         <h2 class="fw-bolder mb-0 text-dark" style="font-size: 2.5rem;">
-                            @if(isset($event['price']) && $event['price'] > 0)
-                                ${{ $event['price'] }} <span class="fs-6 text-muted fw-normal">MXN</span>
+                            @if($event->precio > 0)
+                                ${{ number_format($event->precio, 2) }} <span class="fs-6 text-muted fw-normal">MXN</span>
                             @else
                                 Gratis
                             @endif
@@ -64,8 +65,8 @@
                                 <i class="bi bi-calendar-event text-primary fs-4"></i>
                             </div>
                             <div>
-                                <p class="mb-0 fw-bold fs-5">{{ $event['date_day'] }} de {{ $event['date_month'] }}</p>
-                                <small class="text-muted text-uppercase">{{ $event['calendar_date'] }}</small>
+                                <p class="mb-0 fw-bold fs-5">{{ $event->dia_texto }} de {{ $event->mes_texto }}</p>
+                                <small class="text-muted text-uppercase">{{ $event->fecha_calendario }}</small>
                             </div>
                         </div>
 
@@ -74,7 +75,7 @@
                                 <i class="bi bi-clock text-primary fs-4"></i>
                             </div>
                             <div>
-                                <p class="mb-0 fw-bold fs-5">{{ $event['time'] }}</p>
+                                <p class="mb-0 fw-bold fs-5">{{ $event->hora }}</p>
                             </div>
                         </div>
 
@@ -83,36 +84,36 @@
                                 <i class="bi bi-geo-alt text-primary fs-4"></i>
                             </div>
                             <div>
-                                <p class="mb-0 fw-bold fs-6">{{ $event['location'] }}</p>
+                                <p class="mb-0 fw-bold fs-6">{{ $event->ubicacion }}</p>
                             </div>
                         </div>
                     </div>
 
                     {{-- Alerta de Disponibilidad --}}
-                    @if(isset($event['availability']))
-                        <div class="alert {{ $event['availability_status'] == 'open' ? 'alert-success' : 'alert-danger' }} rounded-3 mb-4 border-0 shadow-sm">
-                            <i class="bi {{ $event['availability_status'] == 'open' ? 'bi-check-circle-fill' : 'bi-x-circle-fill' }} me-2"></i>
-                            <strong>{{ $event['availability'] }}</strong>
+                    @if($event->disponibilidad)
+                        <div class="alert {{ $event->disponibilidad_status == 'open' ? 'alert-success' : 'alert-danger' }} rounded-3 mb-4 border-0 shadow-sm">
+                            <i class="bi {{ $event->disponibilidad_status == 'open' ? 'bi-check-circle-fill' : 'bi-x-circle-fill' }} me-2"></i>
+                            <strong>{{ $event->disponibilidad }}</strong>
                         </div>
                     @endif
 
                     {{-- Botón Principal de Acción --}}
-                    <form action="{{ route('cart.add', $event['id']) }}" method="POST">
+                    <form action="{{ route('cart.add', $event->id) }}" method="POST">
                         @csrf
                         @php
-                            $isTicket = str_contains(strtolower($event['action_text']), 'boleto');
+                            $isTicket = str_contains(strtolower($event->texto_accion), 'boleto');
                             $btnClass = $isTicket ? 'btn-info text-white' : 'btn-dark';
                         @endphp
                         
                         <button type="submit" 
                                 class="btn {{ $btnClass }} w-100 py-3 rounded-pill fw-bold fs-5 shadow" 
-                                {{ $event['availability_status'] == 'closed' ? 'disabled' : '' }}>
+                                {{ $event->disponibilidad_status == 'closed' ? 'disabled' : '' }}>
                             
                             @if($isTicket)
                                 <i class="bi bi-ticket-perforated me-2"></i>
                             @endif
                             
-                            {{ $event['action_text'] }}
+                            {{ $event->texto_accion }}
                         </button>
                     </form>
 

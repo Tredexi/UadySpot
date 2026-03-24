@@ -25,7 +25,7 @@
             @php $cats = ['Todos', 'Talleres', 'Conferencias', 'Conciertos', 'Deportes', 'Exposiciones', 'Comunidad']; @endphp
             @foreach($cats as $cat)
                 <a href="{{ route('events.index', ['category' => $cat == 'Todos' ? '' : $cat]) }}" 
-                   class="btn {{ (request('category') == $cat || (request('category') == '' && $cat == 'Todos')) ? 'btn-primary' : 'btn-outline-secondary' }} rounded-pill px-4">
+                    class="btn {{ (request('category') == $cat || (request('category') == '' && $cat == 'Todos')) ? 'btn-primary' : 'btn-outline-secondary' }} rounded-pill px-4">
                     {{ $cat }}
                 </a>
             @endforeach
