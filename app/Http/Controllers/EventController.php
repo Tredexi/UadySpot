@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Evento; // <--- Asegúrate de que esta línea esté aquí
+use App\Models\Evento;
 
 class EventController extends Controller
 {
