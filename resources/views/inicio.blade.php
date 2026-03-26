@@ -85,8 +85,8 @@
 
 
 
-    <div class="categories-container">
-        <div class="category-item">
+    <div class="categories-container" >
+        <div class="category-item" onclick="window.location='{{ route('benefits.index') }}'">
             ✨
             <span>Beneficios</span>
         </div>
