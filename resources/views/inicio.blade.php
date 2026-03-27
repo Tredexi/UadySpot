@@ -2,6 +2,8 @@
 
 @section('titulo_pagina', 'Inicio')
 
+@section('styles') <style> .categories-container { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 10px; position: relative; z-index: 10; } /* 🔥 BOTONES INTEGRADOS AL TEMA */ .category-btn { flex: 1; height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(255,255,255,0.05); /* 🔥 BORDE MÁS VISIBLE */ border: 2px solid rgba(255,255,255,0.25); border-radius: 18px; backdrop-filter: blur(8px); text-decoration: none; color: rgb(0, 0, 0); font-weight: 600; font-size: 14px; transition: all 0.25s ease; position: relative; z-index: 1; } /* icono */ .category-btn .icon { font-size: 30px; margin-bottom: 8px; } /* hover moderno */ .category-btn:hover { border-color: rgba(0, 0, 0, 0.6); /* 🔥 resalta más */ background: rgba(255,255,255,0.12); } /* click */ .category-btn:active { transform: scale(0.95); } </style> @endsection
+
 @section('content')
 
 
@@ -85,39 +87,39 @@
 
 
 
-    <div class="categories-container" >
-        <div class="category-item" onclick="window.location='{{ route('benefits.index') }}'">
-            ✨
-            <span>Beneficios</span>
+        <div class="categories-container">
+
+            <a href="{{ route('benefits.index') }}" class="category-btn">
+                <span class="icon">✨</span>
+                <span>Beneficios</span>
+            </a>
+
+            <a href="{{ route('events.index') }}" class="category-btn">
+                <span class="icon">🎉</span>
+                <span>Eventos</span>
+            </a>
+
+            <div class="category-btn">
+                <span class="icon">📰</span>
+                <span>Noticias</span>
+            </div>
+
+            <a href="{{ route('jobs.index') }}" class="category-btn">
+                <span class="icon">💼</span>
+                <span>Trabajo</span>
+            </a>
+
+            <div class="category-btn">
+                <span class="icon">🤝</span>
+                <span>Comunidad</span>
+            </div>
+
+            <a href="{{ route('calendario') }}" class="category-btn">
+                <span class="icon">🗓️</span>
+                <span>Calendario</span>
+            </a>
+
         </div>
-        <div class="category-item" onclick="window.location='{{ route('events.index') }}'">
-            🎉
-            <span>Eventos</span>
-        </div>
-
-        <div class="category-item">
-            📰
-            <span>Noticias</span>
-        </div>
-
-        <div class="category-item" onclick="window.location='{{ route('jobs.index') }}'">
-            💼
-            <span>Trabajo</span>
-        </div>
-
-        <div class="category-item">
-            🤝
-            <span>Comunidad</span>
-        </div>
-
-        <div class="category-item" onclick="window.location='{{ route('calendario') }}'">
-            🗓️
-            <span>Social</span>
-        </div>
-
-
-
-    </div>
 
 
 <section class="events-section">
