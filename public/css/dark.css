@@ -1,0 +1,149 @@
+/* 🌙 MODO OSCURO GLOBAL */
+[data-bs-theme="dark"] {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* CARDS */
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .event-card {
+    background-color: #1e1e1e !important;
+    color: #ffffff;
+}
+
+/* TEXTOS */
+[data-bs-theme="dark"] p,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3 {
+    color: #ffffff !important;
+}
+
+/* BOTONES CATEGORÍAS */
+[data-bs-theme="dark"] .category-btn {
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* SELECT */
+[data-bs-theme="dark"] .campus-select {
+    background-color: #1e1e1e;
+    color: #fff;
+    border-color: #444;
+}
+
+[data-bs-theme="dark"] .event-date {
+    color: #bbbbbb !important;
+}
+
+[data-bs-theme="dark"] .event-tag,
+[data-bs-theme="dark"] .event-category {
+    background-color: rgba(255,255,255,0.1);
+    color: #ffffff !important;
+}
+
+/* 💰 PRECIO BASE (modo claro) */
+.price-text {
+    color: #000;
+}
+
+[data-bs-theme="dark"] .price-text {
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* 🔵 BOTÓN PRINCIPAL (COMPRAR / ACCIÓN) */
+.btn-uady-primary {
+    background-color: var(--uady-blue);
+    color: #fff;
+    border: 2px solid var(--uady-blue);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.btn-uady-primary:hover {
+    background-color: #001f3f;
+    border-color: #001f3f;
+}
+
+/* 🌙 DARK MODE FIX */
+[data-bs-theme="dark"] .btn-uady-primary {
+    color: #fff !important;
+}
+
+.card .btn-outline-dark:hover,
+.card .btn-outline-dark:hover * {
+    color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .btn-outline-dark {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .btn-outline-dark:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* 🌞 modo claro */
+.social-title {
+    color: var(--uady-blue);
+}
+
+/* 🌙 modo oscuro */
+[data-bs-theme="dark"] .social-title {
+    color: #e0e0e0 !important;
+}
+
+/* 🌞 modo claro */
+.campus-title {
+    color: var(--uady-blue);
+}
+
+/* 🌙 modo oscuro */
+[data-bs-theme="dark"] .campus-title {
+    color: #ffffff;
+    text-shadow: 0 0 6px rgba(255,255,255,0.08);
+}
+
+#themeBtn {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    font-size: 1.1rem;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    padding: 0;
+}
+
+/* hover bonito */
+#themeBtn:hover {
+    background: var(--uady-gold);
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* cuando estás en navbar oscuro o tema oscuro */
+[data-bs-theme="dark"] #themeBtn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* hover en modo oscuro */
+[data-bs-theme="dark"] #themeBtn:hover {
+    background: white;
+    color: black;
+}

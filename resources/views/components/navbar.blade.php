@@ -47,6 +47,9 @@
             </ul>
                 
             <div class="d-flex align-items-center gap-4 ms-auto">
+
+            <button onclick="toggleTheme()" id="themeBtn">🌙</button>
+
                 <a href="{{ route('cart.index') }}" class="text-white text-decoration-none position-relative px-2">
                     <i class="bi bi-cart3 fs-5"></i>
                     @if(session('cart') && count(session('cart')) > 0)

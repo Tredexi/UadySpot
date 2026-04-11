@@ -9,7 +9,7 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v19.0"></script>
 
     <div class="w-100" style="max-width: 600px;">
-        <h4 class="fw-bold mb-4" style="color: var(--uady-blue);">Publicaciones Oficiales</h4>
+        <h4 class="fw-bold mb-4 social-title" style="color: var(--uady-blue);">Publicaciones Oficiales</h4>
         
         {{-- Paso 2: El contenedor mágico de Facebook --}}
         {{-- Aquí le pones la URL de la página pública que quieres mostrar --}}

@@ -63,7 +63,7 @@
             {{-- Precio --}}
             @if(isset($price))
             <div class="text-center mb-2">
-                 <span class="fw-bold fs-5 text-dark">${{ $price }}</span>
+                <span class="fw-bold fs-5 price-text">${{ $price }}</span>
             </div>
             @endif
 

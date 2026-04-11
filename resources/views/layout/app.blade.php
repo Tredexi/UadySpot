@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cards.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dark.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -21,7 +22,7 @@
 
     @yield('styles')  
 </head>
-<body>
+<body data-bs-theme="light">
     <!-- ESTA ETIQUETA LLAMA AL NAVBAR QUE ESTA DENTRO DE COMPONENTS>NAVBAR.BLADE.PHP-->
     @include('components.navbar')
 
@@ -33,21 +34,54 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!--esto es para seleccionar los campus o esuelas en los eventos -->
-    <script>
-        const select = document.querySelector('.campus-select');
-        const cards = document.querySelectorAll('.event-card');
+<script>
+const btn = document.getElementById("themeBtn");
 
-        select.addEventListener('change', () => {
-            const campus = select.value;
+function updateIcon() {
+    const theme = document.body.getAttribute("data-bs-theme");
+    btn.textContent = theme === "dark" ? "☀️" : "🌙";
+}
 
-            cards.forEach(card => {
-                if (campus === 'all' || card.dataset.campus === campus) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+function toggleTheme() {
+    const body = document.body;
+    const current = body.getAttribute("data-bs-theme");
+
+    if (current === "dark") {
+        body.setAttribute("data-bs-theme", "light");
+        localStorage.setItem("theme", "light");
+    } else {
+        body.setAttribute("data-bs-theme", "dark");
+        localStorage.setItem("theme", "dark");
+    }
+
+    updateIcon();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+        document.body.setAttribute("data-bs-theme", savedTheme);
+    }
+    updateIcon();
+});
+
+// 🔧 FIX FILTRO
+const select = document.querySelector('.campus-select');
+const cards = document.querySelectorAll('.event-card');
+
+if (select) {
+    select.addEventListener('change', () => {
+        const campus = select.value;
+
+        cards.forEach(card => {
+            if (campus === 'all' || card.dataset.campus === campus) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
         });
-    </script>
+    });
+}
+</script>
 </body>
 </html>
