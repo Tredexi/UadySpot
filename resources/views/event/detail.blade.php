@@ -44,7 +44,7 @@
 
         {{-- 3. COLUMNA LATERAL (Derecha: Tarjeta de Compra Flotante) --}}
         <div class="col-lg-4">
-            <div class="card shadow-lg border-0 rounded-4 sticky-top" style="top: 2rem;">
+            <div class="card shadow-lg border-0 rounded-4" style="top: 2rem;">
                 <div class="card-body p-4 p-lg-5">
                     
                     {{-- Precio --}}
