@@ -19,6 +19,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto align-items-lg-center ms-lg-4">
+                {{-- SIEMPRE VISIBLES --}}
                 <li class="nav-item">
                     <a class="nav-link px-3 {{ request()->routeIs('inicio') ? 'active fw-bold' : '' }}" href="{{ route('inicio') }}">Inicio</a>
                 </li>
@@ -30,6 +31,10 @@
                 <li class="nav-item">
                     <a class="nav-link px-3 {{ request()->routeIs('events.*') ? 'active fw-bold' : '' }}" href="{{ route('events.index') }}">Eventos</a>
                 </li>
+
+                {{-- SOLO SI ESTA LOGUEADO --}}
+                
+                @auth
                 <li class="nav-item">
                     <a class="nav-link px-3" href="{{ route('social.index') }}">Social</a>
                 </li>
@@ -45,20 +50,81 @@
                     </ul>
                 </li>
             </ul>
-                
+            @endauth
+
+            
             <div class="d-flex align-items-center gap-4 ms-auto">
-                <a href="{{ route('cart.index') }}" class="text-white text-decoration-none position-relative px-2">
+
+                {{-- Carrito --}}
+                <a href="{{ route('cart.index') }}" 
+                class="text-white text-decoration-none position-relative px-2">
                     <i class="bi bi-cart3 fs-5"></i>
                     @if(session('cart') && count(session('cart')) > 0)
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
-                            {{ count(session('cart')) }}
-                        </span>
-                    @endif
-                </a>
 
-                <a href="{{ route('login') }}" class="text-white text-decoration-none small d-flex align-items-center login-link border border-white border-opacity-25 rounded-pill px-3 py-1">
-                    <i class="bi bi-person me-1"></i>Iniciar sesión
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style="font-size: 0.6rem;">
+
+                        {{ count(session('cart')) }}
+                    </span>
+                    @endif
+
                 </a>
+                {{-- Usuario --}}
+                <ul class="navbar-nav">
+
+                    @guest
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                        href="{{ route('login') }}">
+
+                            <i class="bi bi-person"></i>
+                            Iniciar sesión
+
+                        </a>
+
+                    </li>
+
+                    @endguest
+
+                    @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i>
+
+                            {{ Auth::user()->name }}
+
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            {{-- Solo admin --}}
+                            @if(Auth::user()->is_admin)
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                href="{{ route('admin.dashboard') }}">
+
+                                    Panel Administrador
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            @endif
+                            <li>
+                                <a class="dropdown-item"
+                                href="{{ route('logout') }}">
+                                    Cerrar sesión
+
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endauth
+                </ul>
             </div>
         </div>
     </div>

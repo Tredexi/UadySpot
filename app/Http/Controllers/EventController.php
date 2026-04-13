@@ -46,4 +46,95 @@ class EventController extends Controller
 
         return view('event.detail', compact('event'));
     }
+
+
+
+
+
+
+
+    // Métodos para la vistas de administación
+    public function adminIndex()
+        {
+
+            $eventos = \App\Models\Evento::latest()
+                            ->paginate(10);
+
+            return view(
+                'admin.evento.index',
+                compact('eventos')
+            );
+
+        }
+
+    public function adminCreate()
+    {
+
+        return view('admin.evento.create');
+
+    }
+    
+    public function adminEdit($id)
+    {
+
+        $evento = \App\Models\Evento::findOrFail($id);
+
+        return view(
+            'admin.evento.edit',
+            compact('evento')
+        );
+
+
+    }
+    public function adminUpdate(Request $request, $id)
+    {
+
+        $evento = \App\Models\Evento::findOrFail($id);
+
+        $evento->update([
+
+            'titulo' => $request->titulo,
+            'categoria' => $request->categoria,
+            'ubicacion' => $request->ubicacion,
+            'fecha_calendario' => $request->fecha_calendario,
+            'descripcion' => $request->descripcion,
+
+        ]);
+
+        return redirect()
+            ->route('admin.evento.index')
+            ->with('success','Evento actualizado correctamente');
+
+    }
+    public function adminDestroy($id)
+    {
+
+        $evento = \App\Models\Evento::findOrFail($id);
+
+        $evento->delete();
+
+        return redirect()
+            ->route('admin.evento.index')
+            ->with('success','Evento eliminado');
+
+    }
+    public function adminStore(Request $request)
+    {
+
+        \App\Models\Evento::create([
+
+            'titulo' => $request->titulo,
+            'categoria' => $request->categoria,
+            'ubicacion' => $request->ubicacion,
+            'fecha_calendario' => $request->fecha_calendario,
+            'descripcion' => $request->descripcion,
+
+        ]);
+
+        return redirect()
+            ->route('admin.evento.index')
+            ->with('success','Evento creado');
+
+    }
+
 }
