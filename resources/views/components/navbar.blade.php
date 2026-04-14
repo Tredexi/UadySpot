@@ -31,26 +31,31 @@
                 <li class="nav-item">
                     <a class="nav-link px-3 {{ request()->routeIs('events.*') ? 'active fw-bold' : '' }}" href="{{ route('events.index') }}">Eventos</a>
                 </li>
+                
 
                 {{-- SOLO SI ESTA LOGUEADO --}}
-                
-                @auth
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="{{ route('social.index') }}">Social</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3" href="#" data-bs-toggle="dropdown">Comunidad</a>
-                    <ul class="dropdown-menu shadow border-0 mt-2">
-                        <li><a class="dropdown-item" href="{{ route('news.index') }}">Noticias</a></li>
-                        <li><a class="dropdown-item" href="{{ route('jobs.index') }}">Bolsa de Trabajo</a></li>
-                        <li><a class="dropdown-item" href="{{ route('careers.index') }}">Carreras</a></li>
+                    
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="{{ route('social.index') }}">Social</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle px-3" href="#" data-bs-toggle="dropdown">Comunidad</a>
+                        <ul class="dropdown-menu shadow border-0 mt-2">
+                            <li><a class="dropdown-item" href="{{ route('news.index') }}">Noticias</a></li>
+                            <li><a class="dropdown-item" href="{{ route('jobs.index') }}">Bolsa de Trabajo</a></li>
+                            <li><a class="dropdown-item" href="{{ route('careers.index') }}">Carreras</a></li>
 
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ route('nosotros') }}">Nosotros</a></li>
-                    </ul>
-                </li>
+                            
+
+                        </ul>
+                    </li>
+                    @endauth
+
+                    
+                <li class="nav-item"><a class="nav-link px-3" href="{{ route('nosotros') }}">Nosotros</a></li> 
             </ul>
-            @endauth
+
 
             
             <div class="d-flex align-items-center gap-4 ms-auto">

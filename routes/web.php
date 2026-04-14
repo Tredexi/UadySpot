@@ -11,6 +11,8 @@ use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ComentarioController;
+
 // ============================
 // RUTAS PUBLICAS
 // ============================
@@ -39,7 +41,11 @@ Route::get('/nosotros', function () {
     return view('nosotros');
 })->name('nosotros');
 
-
+//comentarios
+Route::post(
+'/comentarios',
+[ComentarioController::class,'store']
+)->name('comentarios.store');
 
 
 // ============================
@@ -91,6 +97,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/carrito/clear',
         [CartController::class, 'clear'])
         ->name('cart.clear');
+
+
 
 });
 
