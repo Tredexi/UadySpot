@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             EventoSeeder::class,   // Llena la tabla 'eventos'
             BenefitSeeder::class,  // Llena 'benefit_catagories', 'benefit_types' y 'benefits'
+            TrabajoSeeder::Class,
+            UserSeeder::Class
         ]);
     }
 }

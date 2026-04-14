@@ -119,8 +119,11 @@ Route::middleware([
         Route::get('/',
             [AdminController::class,'dashboard']
         )->name('admin.dashboard');
+           
+        // =========================
+       // ADMIN EVENTOS           
+       //  // =========================
 
-       // ADMIN EVENTOS
 
             Route::get(
                 '/eventos',
@@ -151,12 +154,89 @@ Route::middleware([
                 '/eventos/{id}',
                 [EventController::class,'adminDestroy']
             )->name('admin.evento.destroy');
+
+
+
+
+            // =========================
+            // ADMIN BENEFICIOS
+            // =========================
+
+            Route::get(
+            '/beneficios',
+            [BenefitController::class,'adminIndex']
+            )->name('admin.beneficio.index');
+
+            Route::get(
+            '/beneficios/create',
+            [BenefitController::class,'adminCreate']
+            )->name('admin.beneficio.create');
+
+            Route::post(
+            '/beneficios',
+            [BenefitController::class,'adminStore']
+            )->name('admin.beneficio.store');
+
+            Route::get(
+            '/beneficios/{id}/edit',
+            [BenefitController::class,'adminEdit']
+            )->name('admin.beneficio.edit');
+
+            Route::put(
+            '/beneficios/{id}',
+            [BenefitController::class,'adminUpdate']
+            )->name('admin.beneficio.update');
+
+            Route::delete(
+            '/beneficios/{id}',
+            [BenefitController::class,'adminDestroy']
+            )->name('admin.beneficio.destroy');
         
+
+
+
+            // =========================
+            // ADMIN TRABAJOS
+            // =========================
+
+            Route::get(
+            '/trabajos',
+            [JobController::class,'adminIndex']
+            )->name('admin.trabajo.index');
+
+            Route::get(
+            '/trabajos/create',
+            [JobController::class,'adminCreate']
+            )->name('admin.trabajo.create');
+
+            Route::post(
+            '/trabajos',
+            [JobController::class,'adminStore']
+            )->name('admin.trabajo.store');
+
+            Route::get(
+            '/trabajos/{id}/edit',
+            [JobController::class,'adminEdit']
+            )->name('admin.trabajo.edit');
+
+            Route::put(
+            '/trabajos/{id}',
+            [JobController::class,'adminUpdate']
+            )->name('admin.trabajo.update');
+
+            Route::delete(
+            '/trabajos/{id}',
+            [JobController::class,'adminDestroy']
+            )->name('admin.trabajo.destroy');
+
+
+
+
+
         // ADMIN NOTICIAS 
 
         Route::resource('noticias', NewsController::class);
 
-        Route::resource('beneficios', BenefitController::class);
 
 });
 // Logout

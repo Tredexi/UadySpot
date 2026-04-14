@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\News;
 use App\Models\Benefit;
+use App\Models\Trabajo;
 
 class AdminController extends Controller
 {
@@ -13,7 +14,7 @@ class AdminController extends Controller
     {
 
         $totalEventos = Evento::count();
-
+        $totalTrabajos = Trabajo::count();
 
         $totalBeneficios = Benefit::count();
 
@@ -24,6 +25,7 @@ class AdminController extends Controller
         return view('admin.dashboard', compact(
             'totalEventos',
             'totalBeneficios',
+            'totalTrabajos',
             'eventos'
         ));
 

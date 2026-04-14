@@ -1,101 +1,85 @@
 @extends('layout.app')
 
 @section('content')
+    <div class="container py-4">
 
-<div class="container py-4">
+        <h2 class="mb-4">
 
-<h2 class="mb-4">
+            Editar Evento
 
-Editar Evento
+        </h2>
 
-</h2>
+        <div class="card shadow-sm">
 
-<div class="card shadow-sm">
+            <div class="card-body">
 
-<div class="card-body">
+                <form action="{{ route('admin.evento.update', $evento->id) }}" method="POST">
 
-<form action="{{ route('admin.evento.update',$evento->id) }}"
-method="POST">
+                    @csrf
+                    @method('PUT')
 
-@csrf
-@method('PUT')
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Título</label>
 
-<label>Título</label>
+                        <input type="text" name="titulo" value="{{ $evento->titulo }}" class="form-control">
 
-<input type="text"
-name="titulo"
-value="{{ $evento->titulo }}"
-class="form-control">
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Categoría</label>
 
-<label>Categoría</label>
+                        <input type="text" name="categoria" value="{{ $evento->categoria }}" class="form-control">
 
-<input type="text"
-name="categoria"
-value="{{ $evento->categoria }}"
-class="form-control">
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Ubicación</label>
 
-<label>Ubicación</label>
+                        <input type="text" name="ubicacion" value="{{ $evento->ubicacion }}" class="form-control">
 
-<input type="text"
-name="ubicacion"
-value="{{ $evento->ubicacion }}"
-class="form-control">
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Fecha</label>
 
-<label>Fecha</label>
+                        <input type="date" name="fecha_calendario" value="{{ $evento->fecha_calendario }}"
+                            class="form-control">
 
-<input type="date"
-name="fecha_calendario"
-value="{{ $evento->fecha_calendario }}"
-class="form-control">
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Descripción</label>
 
-<label>Descripción</label>
+                        <textarea name="descripcion" class="form-control">
 
-<textarea name="descripcion"
-class="form-control">
+                        {{ $evento->descripcion }}
 
-{{ $evento->descripcion }}
+                        </textarea>
 
-</textarea>
+                    </div>
 
-</div>
+                    <button class="btn btn-primary">
 
-<button class="btn btn-primary">
+                        Actualizar Evento
 
-Actualizar Evento
+                    </button>
 
-</button>
+                    <a href="{{ route('admin.evento.index') }}" class="btn btn-secondary">
 
-<a href="{{ route('admin.evento.index') }}"
-class="btn btn-secondary">
+                        Cancelar
 
-Cancelar
+                    </a>
 
-</a>
+                </form>
 
-</form>
+            </div>
 
-</div>
+        </div>
 
-</div>
-
-</div>
-
+    </div>
 @endsection

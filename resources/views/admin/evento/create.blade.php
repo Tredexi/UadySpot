@@ -1,93 +1,77 @@
-
 @extends('layout.app')
 
 @section('content')
+    <div class="container py-4">
 
-<div class="container py-4">
+        <h2 class="mb-4">
+            Crear Evento
+        </h2>
 
-<h2 class="mb-4">
-Crear Evento
-</h2>
+        <div class="card shadow-sm">
 
-<div class="card shadow-sm">
+            <div class="card-body">
 
-<div class="card-body">
+                <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
 
-<form action="{{ route('eventos.store') }}"
-method="POST"
-enctype="multipart/form-data">
+                    @csrf
 
-@csrf
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Título</label>
 
-<label>Título</label>
+                        <input type="text" name="titulo" class="form-control" required>
 
-<input type="text"
-name="titulo"
-class="form-control"
-required>
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Categoría</label>
 
-<label>Categoría</label>
+                        <input type="text" name="categoria" class="form-control">
 
-<input type="text"
-name="categoria"
-class="form-control">
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Ubicación</label>
 
-<label>Ubicación</label>
+                        <input type="text" name="ubicacion" class="form-control">
 
-<input type="text"
-name="ubicacion"
-class="form-control">
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Fecha</label>
 
-<label>Fecha</label>
+                        <input type="date" name="fecha_calendario" class="form-control">
 
-<input type="date"
-name="fecha_calendario"
-class="form-control">
+                    </div>
 
-</div>
+                    <div class="mb-3">
 
-<div class="mb-3">
+                        <label>Descripción</label>
 
-<label>Descripción</label>
+                        <textarea name="descripcion" class="form-control"></textarea>
 
-<textarea name="descripcion"
-class="form-control"></textarea>
+                    </div>
 
-</div>
+                    <button class="btn btn-success">
 
-<button class="btn btn-success">
+                        Guardar Evento
 
-Guardar Evento
+                    </button>
 
-</button>
+                    <a href="{{ route('eventos.index') }}" class="btn btn-secondary">
 
-<a href="{{ route('eventos.index') }}"
-class="btn btn-secondary">
+                        Cancelar
 
-Cancelar
+                    </a>
 
-</a>
+                </form>
 
-</form>
+            </div>
 
-</div>
+        </div>
 
-</div>
-
-</div>
-
+    </div>
 @endsection

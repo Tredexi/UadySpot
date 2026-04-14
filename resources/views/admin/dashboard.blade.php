@@ -21,7 +21,20 @@
                 <h5>Beneficios</h5>
                 <h2>{{ $totalBeneficios }}</h2>
 
-                <a href="{{ route('beneficios.index') }}"
+                <a href="{{ route('admin.beneficio.index') }}"
+                class="btn btn-primary">
+                Administrar
+                    </a>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Trabajos</h5>
+                <h2>{{ $totalTrabajos }}</h2>
+
+                <a href="{{ route('admin.trabajo.index') }}"
                 class="btn btn-primary">
                 Administrar
                     </a>
