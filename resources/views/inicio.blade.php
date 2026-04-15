@@ -6,7 +6,7 @@
 
 @section('content')
 
-
+{{ Auth::check() ? 'LOGUEADO' : 'NO LOGUEADO' }}
     <div id="mainHeroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="10000">
 
     <div class="carousel-inner">

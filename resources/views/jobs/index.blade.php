@@ -82,18 +82,18 @@
     <div class="row">
         <div class="col-12">
             @forelse($jobs as $job)
-                <x-job.card-job 
-                    :id="$job['id']"
-                    :title="$job['title']"
-                    :company="$job['company']"
-                    :location="$job['location']"
-                    :salary="$job['salary']"
-                    :type="$job['type']"
-                    :modality="$job['modality']"
-                    :posted-at="$job['posted_at']"
-                    :is-new="$job['is_new']"
-                    :urgent="$job['urgent']"
-                    :description="$job['description']"
+              <x-job.card-job 
+                    :id="$job->id"
+                    :title="$job->title"
+                    :company="$job->company"
+                    :location="$job->location"
+                    :salary="$job->salary"
+                    :type="$job->type"
+                    :description="$job->description"
+                    :modality="$job->modality"
+                    :posted_at="$job->posted_at"
+                    :is_new="$job->is_new"
+                    :urgent="$job->urgent"
                 />
             @empty
                 <div class="text-center py-5">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Benefit;
 use App\Models\BenefitCategory; // Para mostrar los botones de categorías
+use App\Models\BenefitType;
 
 class BenefitController extends Controller
 {
@@ -37,5 +38,108 @@ class BenefitController extends Controller
     $categorias = BenefitCategory::orderBy('nombre')->get();
 
     return view('benefit.index', compact('beneficios', 'categorias'));
+}
+
+
+// ADMIN LISTA
+public function adminIndex()
+{
+    $beneficios = Benefit::latest()->get();
+
+    return view(
+        'admin.beneficio.index',
+        compact('beneficios')
+    );
+}
+
+
+// ADMIN CREAR
+public function adminCreate()
+{
+    $categories = BenefitCategory::all();
+
+    $types = BenefitType::all();
+
+    return view(
+        'admin.beneficio.create',
+        compact('categories','types')
+    );
+}
+
+
+// ADMIN GUARDAR
+public function adminStore(Request $request)
+{
+
+    $request->validate([
+
+        'titulo' => 'required',
+        'descripcion' => 'required',
+
+    ]);
+
+    Benefit::create($request->all());
+
+    return redirect()
+        ->route('admin.beneficio.index')
+        ->with('success',
+        'Beneficio creado correctamente');
+
+}
+
+
+// ADMIN EDITAR
+public function adminEdit($id)
+{
+    $beneficio = Benefit::findOrFail($id);
+
+    $categories = BenefitCategory::all();
+
+    $types = BenefitType::all();
+
+    return view(
+        'admin.beneficio.edit',
+        compact(
+            'beneficio',
+            'categories',
+            'types'
+        )
+    );
+}
+
+
+// ADMIN ACTUALIZAR
+public function adminUpdate(Request $request,$id)
+{
+
+    $beneficio =
+        Benefit::findOrFail($id);
+
+    $beneficio->update(
+        $request->all()
+    );
+
+    return redirect()
+        ->route('admin.beneficio.index')
+        ->with('success',
+        'Beneficio actualizado');
+
+}
+
+
+// ADMIN ELIMINAR
+public function adminDestroy($id)
+{
+
+    $beneficio =
+        Benefit::findOrFail($id);
+
+    $beneficio->delete();
+
+    return redirect()
+        ->route('admin.beneficio.index')
+        ->with('success',
+        'Beneficio eliminado');
+
 }
 }
