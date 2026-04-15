@@ -60,15 +60,14 @@
             
             <div class="d-flex align-items-center gap-4 ms-auto">
 
-<<<<<<< HEAD
+
             <button onclick="toggleTheme()" id="themeBtn">🌙</button>
 
                 <a href="{{ route('cart.index') }}" class="text-white text-decoration-none position-relative px-2">
-=======
+
                 {{-- Carrito --}}
                 <a href="{{ route('cart.index') }}" 
                 class="text-white text-decoration-none position-relative px-2">
->>>>>>> 091210151e4d67d075000ee48f7777da787b0ef1
                     <i class="bi bi-cart3 fs-5"></i>
                     @if(session('cart') && count(session('cart')) > 0)
 
