@@ -6,7 +6,7 @@
 
 @section('content')
 
-{{ Auth::check() ? 'LOGUEADO' : 'NO LOGUEADO' }}
+
     <div id="mainHeroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="10000">
 
     <div class="carousel-inner">
@@ -99,20 +99,20 @@
                 <span>Eventos</span>
             </a>
 
-            <div class="category-btn">
+            <a href="{{ route('news.index') }}" class="category-btn">
                 <span class="icon">📰</span>
                 <span>Noticias</span>
-            </div>
+            </a>
 
             <a href="{{ route('jobs.index') }}" class="category-btn">
                 <span class="icon">💼</span>
                 <span>Trabajo</span>
             </a>
 
-            <div class="category-btn">
+            <a href="{{ route('social.index') }}" class="category-btn">
                 <span class="icon">🤝</span>
                 <span>Comunidad</span>
-            </div>
+            </a>
 
             <a href="{{ route('calendario') }}" class="category-btn">
                 <span class="icon">🗓️</span>

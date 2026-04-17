@@ -70,7 +70,7 @@ Calendario UADY
 
 
 <script>
-const platformEvents = @json($events);
+const platformEvents = @json($eventos);
 
 const months=[
 "Enero","Febrero","Marzo","Abril","Mayo","Junio",
@@ -142,9 +142,9 @@ dayEvents.push({name:v.name,type:"vacation"});
 
 // eventos UADY SPOT
 for(let e of platformEvents){
-if(e.calendar_date === date){
+if(e.fecha_calendario === date){
 dayEvents.push({
-name: e.title,
+name: e.titulo,
 type: "platform"
 });
 }

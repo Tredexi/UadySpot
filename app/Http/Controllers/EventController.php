@@ -137,4 +137,11 @@ class EventController extends Controller
 
     }
 
+    public function calendario()
+    {
+        $eventos = Evento::all(); // traer eventos reales
+
+        return view('calendario', compact('eventos'));
+    }
+
 }
