@@ -29,17 +29,21 @@ Explora las licenciaturas que ofrece la Universidad Autónoma de Yucatán en sus
 
 <div class="col-md-6 col-lg-3 mb-4">
 
+<a href="{{ $carrera['url'] }}" target="_blank" class="text-decoration-none text-reset">
+
 <div class="card career-card h-100 shadow-sm border-0">
 
 <div class="card-body text-center d-flex align-items-center justify-content-center">
 
 <h6 class="fw-bold mb-0">
-{{ $carrera }}
+{{ $carrera['nombre'] }}
 </h6>
 
 </div>
 
 </div>
+
+</a>
 
 </div>
 
