@@ -124,22 +124,15 @@
 
 <section class="events-section">
 
-    <div class="events-header">
+    <div class="events-header text-center">
         <h2>Próximos Eventos UADY</h2>
 
-        <div class="events-filter">
-            <label for="eventCategory" class="filter-label">Filtrar por:</label>
-            <select id="eventCategory" class="campus-select">
-                <option value="all">Todos los eventos</option>
-                <option value="Academicos">Académicos</option>
-                <option value="Culturales">Culturales</option>
-                <option value="Deportivos">Deportivos</option>
-                <option value="Cientificos">Científicos</option>
-                <option value="Sociales">Sociales</option>
-                <option value="Institucionales">Institucionales</option>
-            </select>
+        <div class="mt-3">
+            <a href="{{ route('events.index') }}" class="btn btn-dark px-4 py-2 rounded-pill">
+                Ver todos los eventos →
+            </a>
         </div>
-    </div>
+    </div> <!-- 👈 ESTE FALTABA -->
 
     <div class="events-grid">
         @foreach($eventos as $evento)
@@ -154,6 +147,7 @@
             />
         @endforeach
     </div>
+
 </section>
 
 <section class="events-section">
