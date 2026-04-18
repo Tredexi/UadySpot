@@ -7,9 +7,17 @@
         <div class="col-md-6 col-lg-5">
             <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
                 
-                <div class="card-header text-white text-center py-4" style="background-color: var(--uady-blue); border-bottom: 4px solid var(--uady-gold);">
+                <div class="card-header text-white text-center py-4"
+                    style="background-color: var(--uady-blue); border-bottom: 4px solid var(--uady-gold);">
+
+                    <img src="/imagenes/logos/LogoUady.png" 
+                        alt="UADY" 
+                        style="height: 90px; margin-bottom: 10px;">
+
                     <h4 class="mb-0 fw-bold">Inicia sesión</h4>
-                    <p class="mb-0 small" style="color: rgba(255,255,255,0.8);">Accede a tu cuenta de UADY SPOT</p>
+                    <p class="mb-0 small" style="color: rgba(255,255,255,0.8);">
+                        Accede a tu cuenta de UADY SPOT
+                    </p>
                 </div>
 
                 <div class="card-body p-4 p-md-5 bg-white">

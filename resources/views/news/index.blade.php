@@ -64,7 +64,7 @@
         {{-- 3. BARRA LATERAL (SIDEBAR): BENEFICIOS RÁPIDOS (Ocupa 4 de 12 columnas) --}}
         <div class="col-lg-4">
             
-            <div class="card border-0 shadow-sm rounded-4 bg-light p-4 sticky-top" style="top: 2rem;">
+            <div class="card border-0 shadow-sm rounded-4 bg-light p-4" style="top: 2rem;">
                 
                 {{-- Encabezado de la sección lateral --}}
                 <div class="d-flex justify-content-between align-items-center mb-4">

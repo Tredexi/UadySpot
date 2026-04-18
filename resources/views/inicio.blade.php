@@ -132,7 +132,7 @@
                 Ver todos los eventos →
             </a>
         </div>
-    </div> <!-- 👈 ESTE FALTABA -->
+    </div> 
 
     <div class="events-grid">
         @foreach($eventos as $evento)
