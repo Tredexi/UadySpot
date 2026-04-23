@@ -4,23 +4,32 @@
 
 <div class="container mt-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    {{-- HEADER --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h2>
+        {{-- IZQUIERDA: botón volver + título --}}
+        <div class="d-flex align-items-center gap-3">
 
-            Administrar Trabajos
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-dark btn-sm">
+                <i class="bi bi-arrow-left"></i>
+            </a>
 
-        </h2>
+            <h2 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                <i class="bi bi-briefcase"></i>
+                Gestión de Trabajos
+            </h2>
 
-        <a href="{{ route('admin.trabajo.create') }}"
-           class="btn btn-success">
+        </div>
 
+        {{-- DERECHA: botón agregar --}}
+        <a href="{{ route('admin.trabajo.create') }}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i>
             Agregar Trabajo
-
         </a>
 
     </div>
 
+    {{-- TABLA --}}
     <div class="card shadow-sm">
 
         <div class="card-body">
@@ -30,103 +39,54 @@
                 <table class="table table-bordered table-hover align-middle">
 
                     <thead class="table-dark">
-
                         <tr>
-
                             <th>ID</th>
-
                             <th>Título</th>
-
                             <th>Empresa</th>
-
                             <th>Ubicación</th>
-
                             <th>Modalidad</th>
-
                             <th>Tipo</th>
-
                             <th>Salario</th>
-
-                            <th width="180">
-
-                                Acciones
-
-                            </th>
-
+                            <th width="180">Acciones</th>
                         </tr>
-
                     </thead>
 
                     <tbody>
 
                         @forelse($trabajos as $trabajo)
-
                         <tr>
 
-                            <td>
+                            <td>{{ $trabajo->id }}</td>
 
-                                {{ $trabajo->id }}
+                            <td>{{ $trabajo->title }}</td>
 
-                            </td>
+                            <td>{{ $trabajo->company }}</td>
 
-                            <td>
+                            <td>{{ $trabajo->location }}</td>
 
-                                {{ $trabajo->title }}
+                            <td>{{ $trabajo->modality }}</td>
 
-                            </td>
+                            <td>{{ $trabajo->type }}</td>
 
-                            <td>
-
-                                {{ $trabajo->company }}
-
-                            </td>
-
-                            <td>
-
-                                {{ $trabajo->location }}
-
-                            </td>
-
-                            <td>
-
-                                {{ $trabajo->modality }}
-
-                            </td>
-
-                            <td>
-
-                                {{ $trabajo->type }}
-
-                            </td>
-
-                            <td>
-
-                                {{ $trabajo->salary }}
-
-                            </td>
+                            <td>{{ $trabajo->salary }}</td>
 
                             <td>
 
                                 <a href="{{ route('admin.trabajo.edit', $trabajo->id) }}"
-                                   class="btn btn-primary btn-sm">
-
-                                    Editar
-
+                                    class="btn btn-primary btn-sm">
+                                    <i class="bi bi-pencil"></i>
                                 </a>
 
                                 <form action="{{ route('admin.trabajo.destroy', $trabajo->id) }}"
-                                      method="POST"
-                                      class="d-inline">
-
+                                    method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
 
                                     <button type="submit"
                                             class="btn btn-danger btn-sm"
                                             onclick="return confirm('¿Eliminar este trabajo?')">
-
-                                        Eliminar
-
+                                        <i class="bi bi-trash"></i>
                                     </button>
 
                                 </form>
@@ -136,18 +96,11 @@
                         </tr>
 
                         @empty
-
                         <tr>
-
-                            <td colspan="8"
-                                class="text-center">
-
+                            <td colspan="8" class="text-center text-muted">
                                 No hay trabajos registrados
-
                             </td>
-
                         </tr>
-
                         @endforelse
 
                     </tbody>

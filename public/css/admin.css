@@ -1,0 +1,215 @@
+/* EVITA DESPLAZAMIENTO HORIZONTAL GLOBAL */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* BASE DARK MODE SUPPORT */
+body[data-bs-theme="dark"] {
+    background: #0b1220;
+}
+
+/* LAYOUT GENERAL */
+.admin-layout {
+    display: flex;
+    min-height: 80vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* SIDEBAR */
+.admin-sidebar {
+    background: #0f172a;
+    color: white;
+    width: 240px;
+    padding: 20px;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+
+.admin-sidebar h4 {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* USER */
+.admin-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* AVATAR */
+.admin-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #1e88e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+}
+
+/* LINKS */
+.admin-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.admin-link i {
+    font-size: 18px;
+}
+
+.admin-link:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+.admin-link.active {
+    background: #1e293b;
+    color: white;
+}
+
+/* 🔹 CONTENIDO */
+.admin-content {
+    flex: 1;
+    padding: 25px;
+    background: #f8fafc;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* DARK MODE CONTENT */
+body[data-bs-theme="dark"] .admin-content {
+    background: #0b1220;
+    color: #e5e7eb;
+}
+
+/* STATS */
+.admin-stat {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 0;
+}
+
+/* DARK STATS */
+body[data-bs-theme="dark"] .admin-stat {
+    background: #111827;
+    color: #e5e7eb;
+}
+
+/* ICONOS */
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.icon-eventos { background: #1e88e5; }
+.icon-beneficios { background: #43a047; }
+.icon-trabajos { background: #fb8c00; }
+
+/* SECCIONES */
+.admin-section {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+    max-width: 100%;
+}
+
+/* DARK SECTIONS */
+body[data-bs-theme="dark"] .admin-section {
+    background: #111827;
+    color: #e5e7eb;
+}
+
+/* ACTIVIDAD */
+.admin-activity {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-activity li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* DARK ACTIVITY */
+body[data-bs-theme="dark"] .admin-activity li {
+    background: #1f2937;
+    color: #e5e7eb;
+}
+
+/* BOTÓN TOGGLE */
+.admin-toggle {
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        height: 100%;
+        width: 240px;
+        z-index: 1000;
+    }
+
+    .admin-sidebar.active {
+        left: 0;
+    }
+
+    .admin-content {
+        padding: 15px;
+    }
+
+    .admin-toggle {
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    img, canvas, table {
+        max-width: 100%;
+    }
+}

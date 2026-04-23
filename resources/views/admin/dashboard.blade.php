@@ -1,46 +1,177 @@
 @extends('layout.app')
+
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+@endsection
+
 @section('content')
 
-<h2>Panel Administrador</h2>
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Eventos</h5>
-                <h2>{{ $totalEventos }}</h2>
-                <a href="{{ route('admin.evento.index') }}"
-                    class="btn btn-primary">
-                    Administrar
-                    </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Beneficios</h5>
-                <h2>{{ $totalBeneficios }}</h2>
+<div class="admin-layout">
 
-                <a href="{{ route('admin.beneficio.index') }}"
-                class="btn btn-primary">
-                Administrar
-                    </a>
+    {{-- SIDEBAR --}}
+    <aside class="admin-sidebar">
+        <div class="admin-user mb-4">
+            <div class="admin-avatar">
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+            </div>
+            <div>
+                <strong>{{ auth()->user()->name }}</strong>
+                <small class="d-block text-white-50">Administrador</small>
             </div>
         </div>
-    </div>
-        <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Trabajos</h5>
-                <h2>{{ $totalTrabajos }}</h2>
 
-                <a href="{{ route('admin.trabajo.index') }}"
-                class="btn btn-primary">
-                Administrar
-                    </a>
+        <a href="#" class="admin-link active">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+
+        <a href="{{ route('admin.evento.index') }}" class="admin-link">
+            <i class="bi bi-calendar-event"></i> Eventos
+        </a>
+
+        <a href="{{ route('admin.beneficio.index') }}" class="admin-link">
+            <i class="bi bi-gift"></i> Beneficios
+        </a>
+
+        <a href="{{ route('admin.trabajo.index') }}" class="admin-link">
+            <i class="bi bi-briefcase"></i> Trabajos
+        </a>
+    </aside>
+
+    {{-- CONTENIDO --}}
+    <main class="admin-content">
+
+        {{-- BOTÓN MENÚ (SOLO MÓVIL) --}}
+        <button class="btn btn-dark admin-toggle mb-3" onclick="toggleSidebar()">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <h2 class="mb-4 fw-bold">Dashboard</h2>
+
+        {{-- MÉTRICAS --}}
+        <div class="row g-4 mb-4">
+
+            <div class="col-md-4">
+                <div class="admin-stat">
+                    <div class="stat-icon icon-eventos">
+                        <i class="bi bi-calendar-event"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1 text-muted">Eventos</h6>
+                        <h3 class="fw-bold mb-0">{{ $totalEventos }}</h3>
+                    </div>
+                </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="admin-stat">
+                    <div class="stat-icon icon-beneficios">
+                        <i class="bi bi-gift"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1 text-muted">Beneficios</h6>
+                        <h3 class="fw-bold mb-0">{{ $totalBeneficios }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="admin-stat">
+                    <div class="stat-icon icon-trabajos">
+                        <i class="bi bi-briefcase"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1 text-muted">Trabajos</h6>
+                        <h3 class="fw-bold mb-0">{{ $totalTrabajos }}</h3>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
+
+        {{-- GRÁFICA --}}
+        <div class="admin-section mb-4">
+            <h5 class="mb-3 fw-semibold">Resumen general</h5>
+            <canvas id="graficaGeneral" height="100"></canvas>
+        </div>
+
+        {{-- ACTIVIDAD --}}
+        <div class="admin-section">
+            <h5 class="mb-3 fw-semibold">Actividad reciente</h5>
+
+            <ul class="admin-activity">
+                <li><i class="bi bi-plus-circle text-primary"></i> Evento agregado</li>
+                <li><i class="bi bi-pencil text-warning"></i> Beneficio actualizado</li>
+                <li><i class="bi bi-briefcase text-success"></i> Vacante publicada</li>
+            </ul>
+        </div>
+
+    </main>
+
 </div>
+
+{{-- CHART --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('graficaGeneral');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Eventos', 'Beneficios', 'Trabajos'],
+        datasets: [{
+            label: 'Cantidad total',
+            data: [
+                {{ $totalEventos }},
+                {{ $totalBeneficios }},
+                {{ $totalTrabajos }}
+            ],
+            backgroundColor: [
+                'rgba(30, 136, 229, 0.5)',
+                'rgba(67, 160, 71, 0.5)',
+                'rgba(251, 140, 0, 0.5)'
+            ],
+            borderColor: [
+                '#1e88e5',
+                '#43a047',
+                '#fb8c00'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+</script>
+
+{{-- SIDEBAR TOGGLE --}}
+<script>
+function toggleSidebar() {
+    document.querySelector('.admin-sidebar').classList.toggle('active');
+}
+
+/* cerrar sidebar al hacer click fuera */
+document.addEventListener('click', function(e) {
+    const sidebar = document.querySelector('.admin-sidebar');
+    const toggle = document.querySelector('.admin-toggle');
+
+    if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+        sidebar.classList.remove('active');
+    }
+});
+</script>
 
 @endsection
