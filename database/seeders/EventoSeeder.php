@@ -4,14 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Evento;
+use Illuminate\Support\Facades\DB;
 
 class EventoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
+public function run(): void
+{
+    DB::table('eventos')->truncate(); 
         // 1. Taller de Robótica (Destacado)
         Evento::create([
             'titulo' => 'TALLER DE INTRODUCCION A LA ROBÓTICA',
@@ -123,6 +125,196 @@ class EventoSeeder extends Seeder
             'campus' => 'Central',
             'texto_accion' => 'Comprar',
             'descripcion' => 'Ven da disfrutar las semifinales de los equipos de basquetbol interfacultades.'
+        ]);
+
+                // 7. Hackathon UADY
+        Evento::create([
+            'titulo' => 'HACKATHON UADY 24H',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Hackathon.png',
+            'categoria' => 'Conferencias',
+            'ubicacion' => 'Fac. de Matemáticas',
+            'hora' => '8:00 AM',
+            'fecha_calendario' => '2026-03-15',
+            'dia_texto' => '15',
+            'mes_texto' => 'MAR',
+            'precio' => 0.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => true,
+            'campus' => 'Matemáticas',
+            'texto_accion' => 'Participar',
+            'descripcion' => 'Desarrolla soluciones innovadoras en 24 horas junto a otros estudiantes apasionados por la tecnología.'
+        ]);
+
+        // 8. Feria de Emprendimiento
+        Evento::create([
+            'titulo' => 'FERIA DE EMPRENDIMIENTO UADY',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Emprendimiento.png',
+            'categoria' => 'Comunidad',
+            'ubicacion' => 'Centro de Convenciones',
+            'hora' => '10:00 AM',
+            'fecha_calendario' => '2026-03-18',
+            'dia_texto' => '18',
+            'mes_texto' => 'MAR',
+            'precio' => 50.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Central',
+            'texto_accion' => 'Asistir',
+            'descripcion' => 'Conoce proyectos innovadores de estudiantes y emprendedores locales.'
+        ]);
+
+        // 9. Cine Universitario
+        Evento::create([
+            'titulo' => 'CINE UNIVERSITARIO: NOCHE DE CLÁSICOS',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Cine.png',
+            'categoria' => 'Exposiciones',
+            'ubicacion' => 'Auditorio Facultad de Ciencias Sociales',
+            'hora' => '7:00 PM',
+            'fecha_calendario' => '2026-03-20',
+            'dia_texto' => '20',
+            'mes_texto' => 'MAR',
+            'precio' => 30.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Sociales',
+            'texto_accion' => 'Reservar',
+            'descripcion' => 'Disfruta una selección de películas clásicas en una noche cultural.'
+        ]);
+
+        // 10. Taller de Finanzas
+        Evento::create([
+            'titulo' => 'TALLER DE FINANZAS PERSONALES',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Finanzas.png',
+            'categoria' => 'Talleres',
+            'ubicacion' => 'Fac. de Contaduría',
+            'hora' => '4:00 PM',
+            'fecha_calendario' => '2026-03-22',
+            'dia_texto' => '22',
+            'mes_texto' => 'MAR',
+            'precio' => 80.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Contaduría',
+            'texto_accion' => 'Inscribirse',
+            'descripcion' => 'Aprende a manejar tu dinero, ahorrar e invertir como estudiante.'
+        ]);
+
+        // 11. Torneo de eSports
+        Evento::create([
+            'titulo' => 'TORNEO DE ESPORTS UADY',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Esports.png',
+            'categoria' => 'Deportes',
+            'ubicacion' => 'Centro de Cómputo',
+            'hora' => '1:00 PM',
+            'fecha_calendario' => '2026-03-25',
+            'dia_texto' => '25',
+            'mes_texto' => 'MAR',
+            'precio' => 100.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => true,
+            'campus' => 'Ingeniería',
+            'texto_accion' => 'Competir',
+            'descripcion' => 'Participa en torneos de videojuegos y demuestra tus habilidades.'
+        ]);
+
+        // 12. Jornada de Salud
+        Evento::create([
+            'titulo' => 'JORNADA DE SALUD UNIVERSITARIA',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Salud.png',
+            'categoria' => 'Comunidad',
+            'ubicacion' => 'Fac. de Medicina',
+            'hora' => '9:00 AM',
+            'fecha_calendario' => '2026-03-27',
+            'dia_texto' => '27',
+            'mes_texto' => 'MAR',
+            'precio' => 0.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Medicina',
+            'texto_accion' => 'Asistir',
+            'descripcion' => 'Chequeos médicos gratuitos y orientación de salud para estudiantes.'
+        ]);
+
+        // 13. Networking Profesional
+        Evento::create([
+            'titulo' => 'NETWORKING PROFESIONAL UADY',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Networking.png',
+            'categoria' => 'Talleres',
+            'ubicacion' => 'Centro Cultural Universitario',
+            'hora' => '6:00 PM',
+            'fecha_calendario' => '2026-03-30',
+            'dia_texto' => '30',
+            'mes_texto' => 'MAR',
+            'precio' => 120.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Central',
+            'texto_accion' => 'Conectar',
+            'descripcion' => 'Conecta con empresas y profesionales del sector.'
+        ]);
+
+        // 14. Festival Cultural
+        Evento::create([
+            'titulo' => 'FESTIVAL CULTURAL UADY',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Festival.png',
+            'categoria' => 'Comunidad',
+            'ubicacion' => 'Plaza Central',
+            'hora' => '5:00 PM',
+            'fecha_calendario' => '2026-04-02',
+            'dia_texto' => '02',
+            'mes_texto' => 'ABR',
+            'precio' => 60.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => true,
+            'campus' => 'Central',
+            'texto_accion' => 'Disfrutar',
+            'descripcion' => 'Música, danza y cultura en un solo evento universitario.'
+        ]);
+
+        // 15. Conferencia de IA
+        Evento::create([
+            'titulo' => 'CONFERENCIA DE INTELIGENCIA ARTIFICIAL',
+            'imagen' => 'Imagenes/Eventos_Imagenes/IA.png',
+            'categoria' => 'Conferencias',
+            'ubicacion' => 'Fac. de Ingeniería',
+            'hora' => '11:00 AM',
+            'fecha_calendario' => '2026-04-05',
+            'dia_texto' => '05',
+            'mes_texto' => 'ABR',
+            'precio' => 200.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => true,
+            'campus' => 'Ingeniería',
+            'texto_accion' => 'Reservar',
+            'descripcion' => 'Descubre el futuro de la inteligencia artificial con expertos del área.'
+        ]);
+
+        // 16. Concurso de Innovación
+        Evento::create([
+            'titulo' => 'CONCURSO DE INNOVACIÓN UADY',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Innovacion.png',
+            'categoria' => 'Comunidad',
+            'ubicacion' => 'Fac. de Ingeniería',
+            'hora' => '9:00 AM',
+            'fecha_calendario' => '2026-04-08',
+            'dia_texto' => '08',
+            'mes_texto' => 'ABR',
+            'precio' => 0.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Ingeniería',
+            'texto_accion' => 'Participar',
+            'descripcion' => 'Presenta tu proyecto innovador y compite por premios.'
         ]);
     }
 }
