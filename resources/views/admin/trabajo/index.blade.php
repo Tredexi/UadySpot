@@ -36,9 +36,9 @@
 
             <div class="table-responsive">
 
-                <table class="table table-bordered table-hover align-middle">
+                <table class="table table-hover align-middle">
 
-                    <thead class="table-dark">
+                    <thead class="table-light">
                         <tr>
                             <th>ID</th>
                             <th>Título</th>
@@ -106,6 +106,10 @@
                     </tbody>
 
                 </table>
+
+                <div class="mt-3">
+                    {{ $trabajos->links('pagination::bootstrap-5') }}
+                </div>
 
             </div>
 

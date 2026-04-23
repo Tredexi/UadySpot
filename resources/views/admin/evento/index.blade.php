@@ -64,13 +64,13 @@
                         <td>
 
                             <a href="{{ route('admin.evento.edit', $evento->id) }}"
-                               class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm">
                                 <i class="bi bi-pencil"></i>
                             </a>
 
                             <form action="{{ route('admin.evento.destroy', $evento->id) }}"
-                                  method="POST"
-                                  class="d-inline">
+                                method="POST"
+                                class="d-inline">
                                 @csrf
                                 @method('DELETE')
 
@@ -96,9 +96,9 @@
 
             </table>
 
-            {{-- 🔹 PAGINACIÓN --}}
+            {{-- PAGINACIÓN --}}
             <div class="mt-3">
-                {{ $eventos->links() }}
+                {{ $eventos->links('pagination::bootstrap-5') }}
             </div>
 
         </div>

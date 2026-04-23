@@ -44,7 +44,7 @@ class BenefitController extends Controller
 // ADMIN LISTA
 public function adminIndex()
 {
-    $beneficios = Benefit::latest()->get();
+    $beneficios = Benefit::latest()->paginate(10);
 
     return view(
         'admin.beneficio.index',

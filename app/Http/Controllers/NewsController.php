@@ -21,7 +21,7 @@ class NewsController extends Controller
                     'autor'             => 'Control Escolar',
                     'fecha'             => '17 Mar 2026',
                     'tiempo_lectura'    => '3 min de lectura',
-                    'img'               => '/imagenes/Noticias/egel_prep.jpg',
+                    'img'               => '/Imagenes/Noticias/egel_prep.png',
                     'etiqueta_especial' => 'Urgente',
                     'url'               => '/noticias/1'
                 ],
@@ -33,7 +33,7 @@ class NewsController extends Controller
                     'autor'             => 'Facultad de Matemáticas',
                     'fecha'             => '15 Mar 2026',
                     'tiempo_lectura'    => '5 min de lectura',
-                    'img'               => '/imagenes/Noticias/hackathon.jpg',
+                    'img'               => '/Imagenes/Noticias/hackathon.png',
                     'etiqueta_especial' => 'Convocatoria',
                     'url'               => '/noticias/2'
                 ],
@@ -45,7 +45,7 @@ class NewsController extends Controller
                     'autor'             => 'Deportes UADY',
                     'fecha'             => '14 Mar 2026',
                     'tiempo_lectura'    => '2 min de lectura',
-                    'img'               => '/imagenes/Noticias/deportes_jaguares.jpg',
+                    'img'               => '/Imagenes/Noticias/deportes_jaguares.png',
                     'etiqueta_especial' => null,
                     'url'               => '/noticias/3'
                 ],
@@ -57,7 +57,7 @@ class NewsController extends Controller
                     'autor'             => 'Rectoría',
                     'fecha'             => '10 Mar 2026',
                     'tiempo_lectura'    => '4 min de lectura',
-                    'img'               => '/imagenes/Noticias/labs_ti.jpg',
+                    'img'               => '/Imagenes/Noticias/labs_ti.png',
                     'etiqueta_especial' => 'Nuevo',
                     'url'               => '/noticias/4'
                 ],
@@ -69,7 +69,7 @@ class NewsController extends Controller
                     'autor'             => 'Comunidad Estudiantil',
                     'fecha'             => '08 Mar 2026',
                     'tiempo_lectura'    => '6 min de lectura',
-                    'img'               => '/imagenes/Noticias/uady_spot_launch.jpg',
+                    'img'               => '/Imagenes/Noticias/uady_spot_launch.png',
                     'etiqueta_especial' => 'Destacado',
                     'url'               => '/noticias/5'
                 ]
@@ -80,17 +80,17 @@ class NewsController extends Controller
                 [
                     'titulo' => 'Descuento en Cafetería', 
                     'desc' => '10% de descuento en todas tus compras presentando credencial.', 
-                    'img' => '/imagenes/BeneficiosExclusivos/cafeteria.jpg'
+                    'img' => '/Imagenes/BeneficiosExclusivos/StarbucksVaso.png'
                 ],
                 [
                     'titulo' => 'Licencias de Software', 
                     'desc' => 'Acceso gratuito a herramientas de desarrollo y ofimática.', 
-                    'img' => '/imagenes/BeneficiosExclusivos/software.jpg'
+                    'img' => '/Imagenes/BeneficiosExclusivos/software.png'
                 ],
                 [
                     'titulo' => 'Transporte Universitario', 
                     'desc' => 'Conoce las nuevas rutas exclusivas para estudiantes.', 
-                    'img' => '/imagenes/BeneficiosExclusivos/transporte.jpg'
+                    'img' => '/Imagenes/BeneficiosExclusivos/Autobus.png'
                 ]
             ]
         ];

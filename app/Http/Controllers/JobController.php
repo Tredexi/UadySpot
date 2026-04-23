@@ -75,8 +75,7 @@ class JobController extends Controller
 public function adminIndex()
 {
 
-    $trabajos =
-        Trabajo::latest()->get();
+    $trabajos = Trabajo::latest()->paginate(10);
 
     return view(
         'admin.trabajo.index',
