@@ -98,6 +98,13 @@ Route::middleware(['auth'])->group(function () {
         [CartController::class, 'clear'])
         ->name('cart.clear');
 
+    Route::get('/perfil',
+        [AuthController::class, 'perfil'])
+        ->name('auth.profile');
+
+    Route::put('/perfil/update',
+    [AuthController::class, 'update'])
+    ->name('auth.profile.update');
 
 
 });
@@ -239,6 +246,10 @@ Route::middleware([
 
 
 });
+
+
+
+
 // Logout
 Route::get('/logout', function () {
 

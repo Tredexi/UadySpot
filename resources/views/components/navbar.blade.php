@@ -100,35 +100,50 @@
 
                     @auth
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                        href="#"
-                        data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle"></i>
-
-                            {{ Auth::user()->name }}
-
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" 
+                        href="#" 
+                        id="userDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            <i class="bi bi-person-circle fs-5"></i>
+                            <span>{{ Auth::user()->name }}</span>
                         </a>
 
-                        <ul class="dropdown-menu dropdown-menu-end">
-
-                            {{-- Solo admin --}}
-                            @if(Auth::user()->is_admin)
-
-                            <li>
-
-                                <a class="dropdown-item"
-                                href="{{ route('admin.dashboard') }}">
-
-                                    Panel Administrador
-                                </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userDropdown">
+                            {{-- Encabezado con información del usuario (Opcional, se ve muy bien) --}}
+                            <li class="px-3 py-2">
+                                <div class="text-muted small">Conectado como:</div>
+                                <div class="fw-bold text-truncate" style="max-width: 150px;">{{ Auth::user()->email }}</div>
                             </li>
                             <li><hr class="dropdown-divider"></li>
-                            @endif
-                            <li>
-                                <a class="dropdown-item"
-                                href="{{ route('logout') }}">
-                                    Cerrar sesión
 
+                            {{-- 🟢 OPCIÓN PARA TODOS: Ir al Perfil --}}
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('auth.profile') }}">
+                                    <i class="bi bi-person-badge text-primary"></i>
+                                    Mi Perfil
+                                </a>
+                            </li>
+
+                            {{-- 🔵 SOLO ADMIN: Panel de Control --}}
+                            @if(Auth::user()->is_admin)
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('admin.dashboard') }}">
+                                        <i class="bi bi-cpu text-danger"></i>
+                                        Panel Administrador
+                                    </a>
+                                </li>
+                            @endif
+
+                            <li><hr class="dropdown-divider"></li>
+
+                            {{-- 🔴 CERRAR SESIÓN --}}
+                            <li>
+                                {{-- Nota: Si usas el logout estándar de Laravel, recuerda que suele ser por POST --}}
+                                <a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="{{ route('logout') }}">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    Cerrar sesión
                                 </a>
                             </li>
                         </ul>

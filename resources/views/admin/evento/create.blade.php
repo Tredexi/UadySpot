@@ -11,7 +11,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.evento.store') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
@@ -61,7 +61,7 @@
 
                     </button>
 
-                    <a href="{{ route('eventos.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.evento.index') }}" class="btn btn-secondary">
 
                         Cancelar
 

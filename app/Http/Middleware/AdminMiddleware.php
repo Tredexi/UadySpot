@@ -9,22 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
 {
-    public function handle(Request $request, Closure $next)
-    {
-
-        if (!Auth::check()) {
-
-            return redirect()->route('login');
-
-        }
-
-        if (!Auth::user()->is_admin) {
-
-            abort(403, 'No tienes permisos de administrador');
-
-        }
-
+   public function handle(Request $request, Closure $next)
+{
+    if (Auth::check() && Auth::user()->is_admin) {
         return $next($request);
-
     }
+
+    return redirect('/')->with('error', 'No tienes permisos de administrador.');
+}
 }
