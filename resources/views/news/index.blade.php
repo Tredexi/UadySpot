@@ -19,7 +19,7 @@
                 </p>
             </div>
             <div class="col-md-4 d-none d-md-block text-end">
-                <i class="bi bi-newspaper text-light opacity-50" style="font-size: 8rem;"></i>
+                <i class="bi bi-newspaper text-black opacity-50" style="font-size: 8rem;"></i>
             </div>
         </div>
     </div>

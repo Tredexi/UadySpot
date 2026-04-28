@@ -10,7 +10,7 @@
     'url' => '#'
 ])
 
-<div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden d-flex flex-column" style="transition: transform 0.2s ease, box-shadow 0.2s ease;">
+<div class="card h-100 shadow-sm rounded-4 overflow-hidden d-flex flex-column" style="transition: transform 0.2s ease, box-shadow 0.2s ease;">
     
     {{-- Contenedor de la Imagen con etiquetas flotantes --}}
     <div class="position-relative w-100">

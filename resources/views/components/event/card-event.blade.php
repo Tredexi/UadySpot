@@ -13,7 +13,7 @@
     'price'
 ])
 
-<div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+<div class="card h-100 shadow-sm rounded-4 overflow-hidden">
     {{-- 1. Imagen --}}
     <img src="{{ asset($image) }}" alt="{{ $title }}" class="card-img-top object-fit-cover" style="height: 200px;">
 
@@ -23,6 +23,20 @@
         <h5 class="card-title fw-bold text-uppercase mb-4" style="font-size: 1.1rem; line-height: 1.3;">
             {{ $title }}
         </h5>
+
+                {{-- 4. Etiquetas (Categoría y Disponibilidad) --}}
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    @if(isset($category))
+                        <span class="badge bg-light text-secondary border fw-normal px-2 py-1">{{ $category }}</span>
+                    @endif
+                    
+                    @if(isset($availability))
+                        <div class="d-flex align-items-center" style="font-size: 0.85rem;">
+                            <i class="bi bi-circle-fill me-1 {{ $availabilityStatus == 'open' ? 'text-success' : 'text-danger' }}" style="font-size: 0.5rem;"></i>
+                            <span class="text-secondary">{{ $availability }}</span>
+                        </div>
+                    @endif
+                </div>
 
         {{-- 3. Info de Fecha, Ubicación y Hora --}}
         <div class="d-flex mb-4">
@@ -43,19 +57,7 @@
             </div>
         </div>
 
-        {{-- 4. Etiquetas (Categoría y Disponibilidad) --}}
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            @if(isset($category))
-                <span class="badge bg-light text-secondary border fw-normal px-2 py-1">{{ $category }}</span>
-            @endif
-            
-            @if(isset($availability))
-                <div class="d-flex align-items-center" style="font-size: 0.85rem;">
-                    <i class="bi bi-circle-fill me-1 {{ $availabilityStatus == 'open' ? 'text-success' : 'text-danger' }}" style="font-size: 0.5rem;"></i>
-                    <span class="text-secondary">{{ $availability }}</span>
-                </div>
-            @endif
-        </div>
+
 
         {{-- 5. Sección Inferior (Precio, Ver Más, Botón) --}}
         <div class="mt-auto">

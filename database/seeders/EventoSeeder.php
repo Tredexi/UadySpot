@@ -316,5 +316,119 @@ public function run(): void
             'texto_accion' => 'Participar',
             'descripcion' => 'Presenta tu proyecto innovador y compite por premios.'
         ]);
+
+        // 17. Taller de Ciberseguridad
+        Evento::create([
+            'titulo' => 'TALLER DE CIBERSEGURIDAD Y HACKING ÉTICO',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Ciberseguridad.png',
+            'categoria' => 'Talleres',
+            'ubicacion' => 'Fac. de Ingeniería',
+            'hora' => '3:00 PM',
+            'fecha_calendario' => '2026-04-12',
+            'dia_texto' => '12',
+            'mes_texto' => 'ABR',
+            'precio' => 180.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => true,
+            'campus' => 'Ingeniería',
+            'texto_accion' => 'Inscribirse',
+            'descripcion' => 'Aprende fundamentos de seguridad informática, pentesting y protección de redes.'
+        ]);
+
+        // 18. Torneo de Ajedrez
+        Evento::create([
+            'titulo' => 'TORNEO UNIVERSITARIO DE AJEDREZ',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Ajedrez.png',
+            'categoria' => 'Deportes',
+            'ubicacion' => 'Biblioteca Central',
+            'hora' => '10:00 AM',
+            'fecha_calendario' => '2026-04-15',
+            'dia_texto' => '15',
+            'mes_texto' => 'ABR',
+            'precio' => 50.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Central',
+            'texto_accion' => 'Competir',
+            'descripcion' => 'Demuestra tu estrategia y participa en el torneo universitario de ajedrez.'
+        ]);
+
+        // 19. Feria de Idiomas
+        Evento::create([
+            'titulo' => 'FERIA DE IDIOMAS INTERNACIONAL',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Idiomas.png',
+            'categoria' => 'Comunidad',
+            'ubicacion' => 'Centro de Idiomas UADY',
+            'hora' => '11:00 AM',
+            'fecha_calendario' => '2026-04-18',
+            'dia_texto' => '18',
+            'mes_texto' => 'ABR',
+            'precio' => 0.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Central',
+            'texto_accion' => 'Asistir',
+            'descripcion' => 'Descubre oportunidades académicas y culturales en distintos idiomas.'
+        ]);
+
+        // 20. Rally Deportivo
+        Evento::create([
+            'titulo' => 'RALLY DEPORTIVO INTERFACULTADES',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Rally.png',
+            'categoria' => 'Deportes',
+            'ubicacion' => 'Unidad Deportiva UADY',
+            'hora' => '8:00 AM',
+            'fecha_calendario' => '2026-04-20',
+            'dia_texto' => '20',
+            'mes_texto' => 'ABR',
+            'precio' => 70.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => false,
+            'campus' => 'Deportes',
+            'texto_accion' => 'Participar',
+            'descripcion' => 'Competencias físicas, retos grupales y mucha energía entre facultades.'
+        ]);
+
+        // 21. Workshop de Redes
+        Evento::create([
+            'titulo' => 'WORKSHOP DE REDES Y TELECOMUNICACIONES',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Redes.png',
+            'categoria' => 'Conferencias',
+            'ubicacion' => 'Fac. de Ingeniería',
+            'hora' => '1:00 PM',
+            'fecha_calendario' => '2026-04-22',
+            'dia_texto' => '22',
+            'mes_texto' => 'ABR',
+            'precio' => 160.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => true,
+            'campus' => 'Ingeniería',
+            'texto_accion' => 'Reservar',
+            'descripcion' => 'Conoce nuevas tendencias en redes, telecomunicaciones y conectividad empresarial.'
+        ]);
+
+        // 22. Festival Gamer
+        Evento::create([
+            'titulo' => 'FESTIVAL GAMER UADY',
+            'imagen' => 'Imagenes/Eventos_Imagenes/Gamer.png',
+            'categoria' => 'Comunidad',
+            'ubicacion' => 'Centro de Convenciones',
+            'hora' => '4:00 PM',
+            'fecha_calendario' => '2026-04-25',
+            'dia_texto' => '25',
+            'mes_texto' => 'ABR',
+            'precio' => 90.00,
+            'disponibilidad' => 'Inscripción Abierta',
+            'disponibilidad_status' => 'open',
+            'es_destacado' => true,
+            'campus' => 'Central',
+            'texto_accion' => 'Entrar',
+            'descripcion' => 'Torneos, cosplay, videojuegos y competencias para toda la comunidad universitaria.'
+        ]);
     }
 }

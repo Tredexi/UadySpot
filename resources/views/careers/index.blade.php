@@ -31,7 +31,7 @@ Explora las licenciaturas que ofrece la Universidad Autónoma de Yucatán en sus
 
 <a href="{{ $carrera['url'] }}" target="_blank" class="text-decoration-none text-reset">
 
-<div class="card career-card h-100 shadow-sm border-0">
+<div class="card career-card h-100 shadow-sm">
 
 <div class="card-body text-center d-flex align-items-center justify-content-center">
 
