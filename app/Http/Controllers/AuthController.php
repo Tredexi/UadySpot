@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 
@@ -72,47 +72,82 @@ class AuthController extends Controller
     }
 
     
-    public function login(Request $request)
-    {
-        // 1. Validamos todo (incluyendo el captcha)
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-            'captcha' => 'required|captcha',
-        ], [
-            'captcha.captcha' => 'El código de verificación es incorrecto.',
-        ]);
+  public function login(Request $request)
+{
+    // 1. Validar campos
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+        'g-recaptcha-response' => 'required'
+    ], [
+        'g-recaptcha-response.required' => 
+        'Por favor verifica el captcha.'
+    ]);
 
-        // 2. IMPORTANTE: Solo tomamos email y password para el intento de login
-        // Esto evita el error de "Unknown column 'captcha'"
-        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            $user = Auth::user();
+    // 2. VALIDAR CAPTCHA CON GOOGLE
 
-            // 3. NUEVA LÓGICA DE ADMIN: Verificar por dominio de correo
-            // Si el correo termina en @uadyspot.mx, es admin
-            $isAdmin = str_ends_with($user->email, '@uadyspot.mx');
+    $response = Http::asForm()->post(
+        'https://www.google.com/recaptcha/api/siteverify',
+        [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]
+    );
 
-            // Guardar variables de sesión
-            Session::put('user_id', $user->id);
-            Session::put('user_name', $user->name);
-            Session::put('user_email', $user->email);
-            Session::put('is_admin', $isAdmin); // Guardamos el resultado del check de correo
+    $captcha = $response->json();
 
-            // Redirección según el dominio del correo
-            if ($isAdmin) {
-                return redirect()->route('admin.dashboard');
-            }
+    if (!$captcha['success']) {
 
-            return redirect()->route('inicio');
+        return back()
+            ->withErrors([
+                'captcha' => 'Captcha incorrecto'
+            ])
+            ->withInput();
+
+    }
+
+
+    // 3. Intentar login
+
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+
+        $request->session()->regenerate();
+
+        $user = Auth::user();
+
+        // Verificar si es admin por dominio
+        $isAdmin = str_ends_with(
+            $user->email,
+            '@uadyspot.mx'
+        );
+
+        Session::put('user_id', $user->id);
+        Session::put('user_name', $user->name);
+        Session::put('user_email', $user->email);
+        Session::put('is_admin', $isAdmin);
+
+        if ($isAdmin) {
+
+            return redirect()
+                ->route('admin.dashboard');
+
         }
 
-        return back()->withErrors([
-            'email' => 'Credenciales incorrectas',
-        ]);
+        return redirect()
+            ->route('inicio');
+
     }
+
+
+    return back()->withErrors([
+        'email' => 'Credenciales incorrectas'
+    ]);
+
+}
         public function perfil()
     {
         return view('auth.profile');
