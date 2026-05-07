@@ -58,8 +58,11 @@ class JobController extends Controller
 
         }
 
-        // Obtener resultados reales
-        $jobs = $query->latest()->get();
+        // PAGINACIÓN
+        $jobs = $query
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         return view(
             'jobs.index',
@@ -72,93 +75,93 @@ class JobController extends Controller
 
 
     // ADMIN LISTA
-public function adminIndex()
-{
+    public function adminIndex()
+    {
 
-    $trabajos = Trabajo::latest()->paginate(10);
+        $trabajos = Trabajo::latest()->paginate(10);
 
-    return view(
-        'admin.trabajo.index',
-        compact('trabajos')
-    );
+        return view(
+            'admin.trabajo.index',
+            compact('trabajos')
+        );
 
-}
-
-
-// ADMIN CREAR
-public function adminCreate()
-{
-
-    return view(
-        'admin.trabajo.create'
-    );
-
-}
+    }
 
 
-// ADMIN GUARDAR
-public function adminStore(Request $request)
-{
+    // ADMIN CREAR
+    public function adminCreate()
+    {
 
-    Trabajo::create(
-        $request->all()
-    );
+        return view(
+            'admin.trabajo.create'
+        );
 
-    return redirect()
-        ->route('admin.trabajo.index')
-        ->with('success',
-        'Trabajo creado');
-
-}
+    }
 
 
-// ADMIN EDITAR
-public function adminEdit($id)
-{
+    // ADMIN GUARDAR
+    public function adminStore(Request $request)
+    {
 
-    $trabajo =
-        Trabajo::findOrFail($id);
+        Trabajo::create(
+            $request->all()
+        );
 
-    return view(
-        'admin.trabajo.edit',
-        compact('trabajo')
-    );
+        return redirect()
+            ->route('admin.trabajo.index')
+            ->with('success',
+            'Trabajo creado');
 
-}
-
-
-// ADMIN ACTUALIZAR
-public function adminUpdate(Request $request,$id)
-{
-
-    $trabajo =
-        Trabajo::findOrFail($id);
-
-    $trabajo->update(
-        $request->all()
-    );
-
-    return redirect()
-        ->route('admin.trabajo.index')
-        ->with('success',
-        'Trabajo actualizado');
-
-}
+    }
 
 
-// ADMIN ELIMINAR
-public function adminDestroy($id)
-{
+    // ADMIN EDITAR
+    public function adminEdit($id)
+    {
 
-    $trabajo =
-        Trabajo::findOrFail($id);
+        $trabajo =
+            Trabajo::findOrFail($id);
 
-    $trabajo->delete();
+        return view(
+            'admin.trabajo.edit',
+            compact('trabajo')
+        );
 
-    return redirect()
-        ->route('admin.trabajo.index')
-        ->with('success',
-        'Trabajo eliminado');
+    }
 
-}
+
+    // ADMIN ACTUALIZAR
+    public function adminUpdate(Request $request,$id)
+    {
+
+        $trabajo =
+            Trabajo::findOrFail($id);
+
+        $trabajo->update(
+            $request->all()
+        );
+
+        return redirect()
+            ->route('admin.trabajo.index')
+            ->with('success',
+            'Trabajo actualizado');
+
+    }
+
+
+    // ADMIN ELIMINAR
+    public function adminDestroy($id)
+    {
+
+        $trabajo =
+            Trabajo::findOrFail($id);
+
+        $trabajo->delete();
+
+        return redirect()
+            ->route('admin.trabajo.index')
+            ->with('success',
+            'Trabajo eliminado');
+
+    }
 }

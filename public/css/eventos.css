@@ -1,0 +1,81 @@
+/* CONTENEDOR */
+.pagination {
+    gap: 12px;
+    align-items: center;
+}
+
+/* BOTONES */
+.pagination .page-link {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px !important;
+
+    background: rgba(59, 130, 246, 0.08);
+
+    border: 2px solid rgba(59, 130, 246, 0.18);
+
+    backdrop-filter: blur(10px);
+
+    color: #2563eb;
+
+    font-weight: 700;
+    font-size: 15px;
+
+    transition: all 0.25s ease;
+
+    box-shadow:
+        0 4px 12px rgba(37,99,235,0.08);
+}
+
+/* HOVER */
+.pagination .page-link:hover {
+
+    transform: translateY(-3px);
+
+    background: rgba(59,130,246,0.18);
+
+    border-color: rgba(37,99,235,0.35);
+
+    color: #1d4ed8;
+
+    box-shadow:
+        0 10px 22px rgba(37,99,235,0.16);
+}
+
+/* ACTIVO */
+.pagination .page-item.active .page-link {
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    border-color: transparent;
+
+    color: white;
+
+    box-shadow:
+        0 10px 25px rgba(37,99,235,0.30);
+}
+
+/* FLECHAS */
+.pagination svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* OCULTA TEXTO */
+.small.text-muted {
+    display: none;
+}
+
+/* QUITA FOCUS FEO */
+.page-link:focus {
+    box-shadow: none !important;
+}

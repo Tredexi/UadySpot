@@ -34,7 +34,8 @@ class EventController extends Controller
                 ->whereYear('fecha_calendario', now()->year);
         }
 
-        $events = $query->get(); // Trae los resultados de la BD
+        // PAGINACIÓN
+        $events = $query->paginate(10)->withQueryString();
 
         return view('event.index', compact('events'));
     }
@@ -47,25 +48,19 @@ class EventController extends Controller
         return view('event.detail', compact('event'));
     }
 
-
-
-
-
-
-
     // Métodos para la vistas de administación
     public function adminIndex()
-        {
+    {
 
-            $eventos = \App\Models\Evento::latest()
-                            ->paginate(10);
+        $eventos = \App\Models\Evento::latest()
+                        ->paginate(10);
 
-            return view(
-                'admin.evento.index',
-                compact('eventos')
-            );
+        return view(
+            'admin.evento.index',
+            compact('eventos')
+        );
 
-        }
+    }
 
     public function adminCreate()
     {
@@ -84,8 +79,8 @@ class EventController extends Controller
             compact('evento')
         );
 
-
     }
+
     public function adminUpdate(Request $request, $id)
     {
 
@@ -106,6 +101,7 @@ class EventController extends Controller
             ->with('success','Evento actualizado correctamente');
 
     }
+
     public function adminDestroy($id)
     {
 
@@ -118,6 +114,7 @@ class EventController extends Controller
             ->with('success','Evento eliminado');
 
     }
+
     public function adminStore(Request $request)
     {
 

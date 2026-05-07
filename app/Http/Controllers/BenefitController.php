@@ -4,142 +4,143 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Benefit;
-use App\Models\BenefitCategory; // Para mostrar los botones de categorías
+use App\Models\BenefitCategory;
 use App\Models\BenefitType;
 
 class BenefitController extends Controller
 {
     public function index(Request $request) 
-{
-    // Iniciamos la consulta con sus relaciones
-    $query = Benefit::with(['category', 'type']);
+    {
+        // Iniciamos la consulta con sus relaciones
+        $query = Benefit::with(['category', 'type']);
 
-    // Filtro por BUSCADOR 
-    if ($request->filled('search')) {
-        $search = $request->search;
-        $query->where(function($q) use ($search) {
-            $q->where('titulo', 'LIKE', "%{$search}%")
-            ->orWhere('proveedor', 'LIKE', "%{$search}%")
-            ->orWhere('subtitulo', 'LIKE', "%{$search}%");
-        });
+        // Filtro por BUSCADOR 
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function($q) use ($search) {
+                $q->where('titulo', 'LIKE', "%{$search}%")
+                ->orWhere('proveedor', 'LIKE', "%{$search}%")
+                ->orWhere('subtitulo', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Filtro por CATEGORÍA
+        if ($request->filled('categoria')) {
+            $query->whereHas('category', function($q) use ($request) {
+                $q->where('nombre', $request->categoria);
+            });
+        }
+
+        // PAGINACIÓN
+        $beneficios = $query->paginate(10)->withQueryString();
+
+        // Traemos categorías ordenadas para tus botones del Navbar
+        $categorias = BenefitCategory::orderBy('nombre')->get();
+
+        return view('benefit.index', compact('beneficios', 'categorias'));
     }
 
-    // Filtro por CATEGORÍA
-    if ($request->filled('categoria')) {
-        $query->whereHas('category', function($q) use ($request) {
-            $q->where('nombre', $request->categoria);
-        });
+
+    // ADMIN LISTA
+    public function adminIndex()
+    {
+        $beneficios = Benefit::latest()->paginate(10);
+
+        return view(
+            'admin.beneficio.index',
+            compact('beneficios')
+        );
     }
 
-    // Obtenemos los beneficios finales
-    $beneficios = $query->get();
 
-    // Traemos categorías ordenadas para tus botones del Navbar
-    $categorias = BenefitCategory::orderBy('nombre')->get();
+    // ADMIN CREAR
+    public function adminCreate()
+    {
+        $categories = BenefitCategory::all();
 
-    return view('benefit.index', compact('beneficios', 'categorias'));
-}
+        $types = BenefitType::all();
 
-
-// ADMIN LISTA
-public function adminIndex()
-{
-    $beneficios = Benefit::latest()->paginate(10);
-
-    return view(
-        'admin.beneficio.index',
-        compact('beneficios')
-    );
-}
+        return view(
+            'admin.beneficio.create',
+            compact('categories','types')
+        );
+    }
 
 
-// ADMIN CREAR
-public function adminCreate()
-{
-    $categories = BenefitCategory::all();
+    // ADMIN GUARDAR
+    public function adminStore(Request $request)
+    {
 
-    $types = BenefitType::all();
+        $request->validate([
 
-    return view(
-        'admin.beneficio.create',
-        compact('categories','types')
-    );
-}
+            'titulo' => 'required',
+            'descripcion' => 'required',
 
+        ]);
 
-// ADMIN GUARDAR
-public function adminStore(Request $request)
-{
+        Benefit::create($request->all());
 
-    $request->validate([
+        return redirect()
+            ->route('admin.beneficio.index')
+            ->with('success',
+            'Beneficio creado correctamente');
 
-        'titulo' => 'required',
-        'descripcion' => 'required',
-
-    ]);
-
-    Benefit::create($request->all());
-
-    return redirect()
-        ->route('admin.beneficio.index')
-        ->with('success',
-        'Beneficio creado correctamente');
-
-}
+    }
 
 
-// ADMIN EDITAR
-public function adminEdit($id)
-{
-    $beneficio = Benefit::findOrFail($id);
+    // ADMIN EDITAR
+    public function adminEdit($id)
+    {
+        $beneficio = Benefit::findOrFail($id);
 
-    $categories = BenefitCategory::all();
+        $categories = BenefitCategory::all();
 
-    $types = BenefitType::all();
+        $types = BenefitType::all();
 
-    return view(
-        'admin.beneficio.edit',
-        compact(
-            'beneficio',
-            'categories',
-            'types'
-        )
-    );
-}
-
-
-// ADMIN ACTUALIZAR
-public function adminUpdate(Request $request,$id)
-{
-
-    $beneficio =
-        Benefit::findOrFail($id);
-
-    $beneficio->update(
-        $request->all()
-    );
-
-    return redirect()
-        ->route('admin.beneficio.index')
-        ->with('success',
-        'Beneficio actualizado');
-
-}
+        return view(
+            'admin.beneficio.edit',
+            compact(
+                'beneficio',
+                'categories',
+                'types'
+            )
+        );
+    }
 
 
-// ADMIN ELIMINAR
-public function adminDestroy($id)
-{
+    // ADMIN ACTUALIZAR
+    public function adminUpdate(Request $request,$id)
+    {
 
-    $beneficio =
-        Benefit::findOrFail($id);
+        $beneficio =
+            Benefit::findOrFail($id);
 
-    $beneficio->delete();
+        $beneficio->update(
+            $request->all()
+        );
 
-    return redirect()
-        ->route('admin.beneficio.index')
-        ->with('success',
-        'Beneficio eliminado');
+        return redirect()
+            ->route('admin.beneficio.index')
+            ->with('success',
+            'Beneficio actualizado');
 
-}
+    }
+
+
+    // ADMIN ELIMINAR
+    public function adminDestroy($id)
+    {
+
+        $beneficio =
+            Benefit::findOrFail($id);
+
+        $beneficio->delete();
+
+        return redirect()
+            ->route('admin.beneficio.index')
+            ->with('success',
+            'Beneficio eliminado');
+
+    }
 }

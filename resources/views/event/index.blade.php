@@ -66,6 +66,11 @@
         @endforeach
     </div>
 
+    {{-- PAGINACIÓN --}}
+<div class="d-flex justify-content-center mt-5">
+    {{ $events->onEachSide(1)->links('pagination::bootstrap-5') }}
+</div>
+
     @if($events->isEmpty())
         <div class="text-center py-5">
             <p class="text-muted">No se encontraron eventos con esos filtros.</p>
