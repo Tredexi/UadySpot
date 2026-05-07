@@ -62,16 +62,10 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="captcha-group">
-                            <div class="captcha-image-wrapper">
-                                {!! captcha_img() !!}
+                        {{-- CAPTCHA --}}
+                            <div class="g-recaptcha"
+                                data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}">
                             </div>
-                            
-                            <input type="text" name="captcha" 
-                                placeholder="Introduce el código" 
-                                class="input captcha-input" 
-                                required>
-                        </div>
 
                         <button type="submit"
                             class="btn w-100 fw-bold py-2 mb-3"

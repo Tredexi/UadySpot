@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
@@ -8,35 +8,7 @@
 
 <div class="admin-layout">
 
-    {{-- SIDEBAR --}}
-    <aside class="admin-sidebar">
-        <div class="admin-user mb-4">
-            <div class="admin-avatar">
-                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-            </div>
-            <div>
-                <strong>{{ auth()->user()->name }}</strong>
-                <small class="d-block text-white-50">Administrador</small>
-            </div>
-        </div>
-
-        <a href="#" class="admin-link active">
-            <i class="bi bi-speedometer2"></i> Dashboard
-        </a>
-
-        <a href="{{ route('admin.evento.index') }}" class="admin-link">
-            <i class="bi bi-calendar-event"></i> Eventos
-        </a>
-
-        <a href="{{ route('admin.beneficio.index') }}" class="admin-link">
-            <i class="bi bi-gift"></i> Beneficios
-        </a>
-
-        <a href="{{ route('admin.trabajo.index') }}" class="admin-link">
-            <i class="bi bi-briefcase"></i> Trabajos
-        </a>
-    </aside>
-
+    
     {{-- CONTENIDO --}}
     <main class="admin-content">
 
@@ -163,15 +135,7 @@ function toggleSidebar() {
     document.querySelector('.admin-sidebar').classList.toggle('active');
 }
 
-/* cerrar sidebar al hacer click fuera */
-document.addEventListener('click', function(e) {
-    const sidebar = document.querySelector('.admin-sidebar');
-    const toggle = document.querySelector('.admin-toggle');
 
-    if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
-        sidebar.classList.remove('active');
-    }
-});
 </script>
 
 @endsection

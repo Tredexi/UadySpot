@@ -14,7 +14,7 @@
 
 {{-- TARJETA DEL BENEFICIO --}}
 
-<div class="card h-100 shadow-sm rounded-4 overflow-hidden position-relative transition-transform">
+<div class="card h-100 shadow-lg border rounded-4 overflow-hidden position-relative transition-transform">
     
     {{-- Etiqueta flotante de Descuento/Promo --}}
     <div class="position-absolute top-0 start-0 m-3 z-3">
