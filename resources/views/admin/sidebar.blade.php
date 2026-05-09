@@ -1,4 +1,5 @@
 <div class="admin-sidebar p-3">
+    <div class="sidebar-logo mb-4">
     <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.dashboard') }} ">
         <img src="{{ asset('Imagenes/logo_uady.png') }}" 
         alt="Logo" 
@@ -9,6 +10,7 @@
             <div class="brand-subtitle border-top border-white-50 mt-1" style="font-size: 0.65rem; color: rgba(255,255,255,0.8);">Plataforma Universitaria</div>
         </div>
     </a>
+    </div>
     {{-- Usuario --}}
     <div class="admin-user mb-4 ">
             <div class="admin-avatar">

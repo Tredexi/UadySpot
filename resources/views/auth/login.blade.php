@@ -2,6 +2,7 @@
 @section('titulo_pagina', 'Iniciar Sesión')
 
 @section('content')
+<script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
@@ -62,10 +63,10 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- CAPTCHA --}}
+                        {{-- CAPTCHA 
                             <div class="g-recaptcha"
                                 data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}">
-                            </div>
+                            </div>--}}
 
                         <button type="submit"
                             class="btn w-100 fw-bold py-2 mb-3"
@@ -89,4 +90,40 @@
         </div>
     </div>
 </div>
+
+<script>
+
+document.querySelector('form').addEventListener('submit', function(e) {
+
+    e.preventDefault();
+
+    const form = this;
+
+    grecaptcha.ready(function() {
+
+        grecaptcha.execute(
+            '{{ config("services.recaptcha.site_key") }}',
+            { action: 'login' }
+        )
+
+        .then(function(token) {
+
+            let input = document.createElement('input');
+
+            input.type = 'hidden';
+            input.name = 'recaptcha_token';
+            input.value = token;
+
+            form.appendChild(input);
+
+            form.submit();
+
+        });
+
+    });
+
+});
+
+</script>
+
 @endsection

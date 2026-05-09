@@ -20,7 +20,7 @@
                 </div>
 
                 <form action="{{ route('registro.post') }}" method="POST">
-                    @csrf 
+                    @csrf
                     
                     <div class="mb-3">
                         <label for="name" class="form-label fw-medium text-secondary small">Nombre Completo</label>
@@ -107,7 +107,7 @@
 
                         {{-- Slide 3: Empleos --}}
                         <div class="carousel-item h-100">
-                            <img src="/imagenes/Registro/trabajo.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Bolsa de trabajo UADY" style="filter: brightness(0.7);">
+                            <img src="/imagenes/trabajo.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Bolsa de trabajo UADY" style="filter: brightness(0.7);">
                             <div class="carousel-caption d-none d-md-block pb-5 text-start">
                                 <h3 class="fw-bolder display-6 text-white text-shadow">Impulsa tu Carrera</h3>
                                 <p class="fs-5 text-white opacity-75">Encuentra tu primer empleo o prácticas profesionales en las mejores empresas.</p>

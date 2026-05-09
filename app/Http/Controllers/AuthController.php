@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 
@@ -78,7 +79,7 @@ class AuthController extends Controller
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-        'g-recaptcha-response' => 'required'
+        //'g-recaptcha-response' => 'required'
     ], [
         'g-recaptcha-response.required' => 
         'Por favor verifica el captcha.'
@@ -86,7 +87,7 @@ class AuthController extends Controller
 
 
     // 2. VALIDAR CAPTCHA CON GOOGLE
-
+/*
     $response = Http::asForm()->post(
         'https://www.google.com/recaptcha/api/siteverify',
         [
@@ -107,7 +108,7 @@ class AuthController extends Controller
             ->withInput();
 
     }
-
+*/
 
     // 3. Intentar login
 
