@@ -47,6 +47,22 @@ Route::post(
 [ComentarioController::class,'store']
 )->name('comentarios.store');
 
+//Ruta de pago
+Route::get(
+    '/pago', [CartController::class, 'payment']
+)->name('cart.payment');
+
+
+//Incrementar y reducir boletos en el carrito
+Route::post(
+    '/carrito/increase/{id}',
+    [CartController::class, 'increase']
+)->name('cart.increase');
+
+Route::post(
+    '/carrito/decrease/{id}',
+    [CartController::class, 'decrease']
+)->name('cart.decrease');
 
 // ============================
 // RUTAS PROTEGIDAS (LOGIN)

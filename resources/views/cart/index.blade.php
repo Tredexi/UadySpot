@@ -28,7 +28,44 @@
                                         </div>
                                     </td>
                                     <td>${{ number_format($details['price'], 2) }}</td>
-                                    <td>{{ $details['quantity'] }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+
+                                            {{-- RESTAR --}}
+                                            <form action="{{ route('cart.decrease', $id) }}" method="POST">
+                                                @csrf
+                                                <button
+                                                    class="btn btn-sm btn-outline-secondary rounded-circle"
+                                                    style="width:32px; height:32px;">
+                                                    -
+                                                </button>
+                                            </form>
+
+                                            {{-- CANTIDAD --}}
+                                            <span class="fw-bold">
+                                                {{ $details['quantity'] }}
+                                            </span>
+
+                                            {{-- SUMAR --}}
+                                            <form action="{{ route('cart.increase', $id) }}" method="POST">
+                                                @csrf
+                                                <button
+                                                    class="btn btn-sm btn-outline-primary rounded-circle"
+                                                    style="width:32px; height:32px;"
+                                                    {{ $details['quantity'] >= 5 ? 'disabled' : '' }}>
+                                                    +
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        {{-- MENSAJE LIMITE --}}
+                                        @if($details['quantity'] >= 5)
+                                            <small class="text-danger">
+                                                Máximo 5 boletos
+                                            </small>
+                                        @endif
+                                    </td>
+
                                     <td>${{ number_format($details['price'] * $details['quantity'], 2) }}</td>
                                     <td>
                                         <form action="{{ route('cart.remove', $id) }}" method="POST">
@@ -55,9 +92,10 @@
                         <span class="fw-bold fs-5">Total</span>
                         <span class="fw-bold fs-5 text-primary">${{ number_format($total, 2) }}</span>
                     </div>
-                    <button class="btn btn-primary w-100 fw-bold py-3 rounded-3">
-                        PROCEDER AL PAGO
-                    </button>
+                        <a href="{{ route('cart.payment') }}"
+                            class="btn btn-primary w-100 fw-bold py-3 rounded-3">
+                                PROCEDER AL PAGO
+                            </a>
                     <a href="{{ route('events.index') }}" class="btn btn-link w-100 text-dark mt-2">Seguir buscando</a>
                 </div>
             </div>
