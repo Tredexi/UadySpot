@@ -13,23 +13,17 @@ class CartController extends Controller
     // =========================
     public function index()
     {
-
         $cart = session()->get('cart', []);
-
         $total = 0;
-
-        // Calcular total
         foreach ($cart as $item) {
-
-            $total += $item['price'] * $item['quantity'];
-
+            $total +=
+                $item['price'] *
+                $item['quantity'];
         }
-
         return view(
             'cart.index',
             compact('cart', 'total')
         );
-
     }
 
 
@@ -38,65 +32,43 @@ class CartController extends Controller
     // =========================
     public function add(Request $request, $id)
     {
-
-        // Buscar evento
         $event = Evento::find($id);
-
-        // Validar existencia
         if (!$event) {
-
             return back()->with(
                 'error',
                 'Evento no encontrado'
             );
-
         }
-
-        // Obtener carrito actual
         $cart = session()->get('cart', []);
 
-        // Si ya existe
+        // SI YA EXISTE
         if (isset($cart[$id])) {
 
-            // Límite de 5 boletos
+            // LÍMITE 5 BOLETOS
             if ($cart[$id]['quantity'] >= 5) {
-
                 return back()->with(
                     'error',
                     'Máximo 5 boletos por evento.'
                 );
-
             }
-
             $cart[$id]['quantity']++;
-
         } else {
 
-            // Nuevo producto
+            // NUEVO EVENTO
             $cart[$id] = [
-
                 "title" => $event->titulo,
-
                 "quantity" => 1,
-
                 "price" => $event->precio,
-
                 "image" => $event->imagen
-
             ];
-
         }
-
-        // Guardar carrito
         session()->put('cart', $cart);
-
         return redirect()
             ->route('cart.index')
             ->with(
                 'success',
                 'Evento añadido al carrito.'
             );
-
     }
 
 
@@ -105,22 +77,15 @@ class CartController extends Controller
     // =========================
     public function remove($id)
     {
-
         $cart = session()->get('cart', []);
-
         if (isset($cart[$id])) {
-
             unset($cart[$id]);
-
             session()->put('cart', $cart);
-
         }
-
         return back()->with(
             'success',
             'Evento eliminado del carrito.'
         );
-
     }
 
 
@@ -129,31 +94,19 @@ class CartController extends Controller
     // =========================
     public function increase($id)
     {
-
         $cart = session()->get('cart', []);
-
         if (isset($cart[$id])) {
-
-            // Máximo 5
             if ($cart[$id]['quantity'] < 5) {
-
                 $cart[$id]['quantity']++;
-
                 session()->put('cart', $cart);
-
             } else {
-
                 return back()->with(
                     'error',
                     'Solo puedes comprar máximo 5 boletos por evento.'
                 );
-
             }
-
         }
-
         return back();
-
     }
 
 
@@ -162,24 +115,14 @@ class CartController extends Controller
     // =========================
     public function decrease($id)
     {
-
         $cart = session()->get('cart', []);
-
         if (isset($cart[$id])) {
-
-            // Mínimo 1
             if ($cart[$id]['quantity'] > 1) {
-
                 $cart[$id]['quantity']--;
-
                 session()->put('cart', $cart);
-
             }
-
         }
-
         return back();
-
     }
 
 
@@ -188,35 +131,35 @@ class CartController extends Controller
     // =========================
     public function payment()
     {
-
         $cart = session()->get('cart', []);
 
-        // Carrito vacío
+        // CARRITO VACÍO
         if (empty($cart)) {
-
             return redirect()
                 ->route('cart.index')
                 ->with(
                     'error',
                     'Tu carrito está vacío.'
                 );
-
         }
 
-        // Calcular total
+        // TOTAL
         $total = 0;
-
         foreach ($cart as $item) {
-
             $total +=
                 $item['price'] *
                 $item['quantity'];
-
         }
 
+        // TARJETA GUARDADA
+        $savedCard = session()->get('saved_card');
         return view(
             'cart.payment',
-            compact('cart', 'total')
+            compact(
+                'cart',
+                'total',
+                'savedCard'
+            )
         );
 
     }
@@ -227,61 +170,95 @@ class CartController extends Controller
     // =========================
     public function processPayment(Request $request)
     {
-
         $cart = session()->get('cart', []);
-
-        // Validar carrito
         if (empty($cart)) {
-
             return redirect()
                 ->route('cart.index');
-
         }
 
-        // Generar código único
+        // =========================
+        // VALIDACIONES
+        // =========================
+        $request->validate([
+            'card_number' => 'required',
+            'card_name' => 'required',
+            'expiration' => [
+                'required',
+                'regex:/^(0[1-9]|1[0-2]|[1-9])\/([0-9]{2})$/'
+            ],
+            'cvv' => 'required|digits:3'
+        ]);
+
+
+
+        // =========================
+        // GUARDAR TARJETA
+        // =========================
+        if ($request->has('save_card')) {
+            $cleanCard = str_replace(
+                ' ',
+                '',
+                $request->card_number
+            );
+
+            session()->put('saved_card', [
+                'number' => $request->card_number,
+                'last_four' => substr($cleanCard, -4),
+                'name' => $request->card_name,
+                'expiration' => $request->expiration
+            ]);
+        }
+
+
+
+        // =========================
+        // GENERAR TICKET
+        // =========================
         $ticketCode = strtoupper(
             'UADY-' . uniqid()
         );
 
-        // Generar asientos
+
+
+        // =========================
+        // GENERAR ASIENTOS
+        // =========================
         $asientos = [];
-
         $filas = ['A', 'B', 'C', 'D', 'E', 'F'];
-
         foreach ($cart as $item) {
-
             for ($i = 0; $i < $item['quantity']; $i++) {
-
                 $fila = $filas[array_rand($filas)];
-
                 $numero = rand(1, 20);
-
                 $asientos[] = $fila . $numero;
-
             }
-
         }
 
-        // Guardar ticket
+
+
+        // =========================
+        // GUARDAR TICKET
+        // =========================
         session()->put('ticket', [
-
             'code' => $ticketCode,
-
             'cart' => $cart,
-
             'asientos' => $asientos,
-
             'created_at' => now()
-
         ]);
 
-        // Vaciar carrito
+
+
+        // =========================
+        // LIMPIAR CARRITO
+        // =========================
         session()->forget('cart');
 
-        // Redirigir ticket
+
+
+        // =========================
+        // REDIRIGIR AL QR
+        // =========================
         return redirect()
             ->route('cart.ticket');
-
     }
 
 
@@ -290,20 +267,29 @@ class CartController extends Controller
     // =========================
     public function ticket()
     {
-
         $ticket = session()->get('ticket');
-
-        // Si no existe ticket
         if (!$ticket) {
-
             return redirect()
                 ->route('events.index');
-
         }
 
         return view(
             'cart.ticket',
             compact('ticket')
+        );
+    }
+
+    // =========================
+    // ELIMINAR TARJETA GUARDADA
+    // =========================
+    public function deleteSavedCard()
+    {
+
+        session()->forget('saved_card');
+
+        return back()->with(
+            'success',
+            'Tarjeta eliminada correctamente.'
         );
 
     }

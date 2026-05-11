@@ -74,6 +74,11 @@ Route::get(
     [CartController::class, 'ticket']
 )->name('cart.ticket');
 
+Route::post(
+    '/tarjeta/eliminar',
+    [CartController::class, 'deleteSavedCard']
+)->name('cart.deleteCard');
+
 // ============================
 // RUTAS PROTEGIDAS (LOGIN)
 // ============================

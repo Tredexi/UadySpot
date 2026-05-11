@@ -6,18 +6,16 @@
 
 <style>
 
-    /* Texto escrito dentro de inputs */
+    /* TEXTO INPUTS */
     .form-control {
         color: #6c757d !important;
     }
 
-    /* Placeholder */
     .form-control::placeholder {
         color: #adb5bd !important;
         opacity: 1;
     }
 
-    /* Cuando el usuario hace focus */
     .form-control:focus {
         color: #495057 !important;
     }
@@ -28,6 +26,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-7">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+
                 {{-- HEADER --}}
                 <div
                     class="text-white p-4"
@@ -44,7 +43,7 @@
                             </p>
                         </div>
 
-                        {{-- TEMPORIZADOR --}}
+                        {{-- TIMER --}}
                         <div
                             class="bg-white text-dark px-4 py-2 rounded-3 shadow-sm text-center">
                             <small class="text-muted d-block">
@@ -59,14 +58,15 @@
                     </div>
                 </div>
 
+
                 {{-- BODY --}}
                 <div class="card-body p-4 p-lg-5">
+
                     {{-- RESUMEN --}}
                     <div class="bg-light rounded-4 p-4 mb-5">
                         <h5 class="fw-bold mb-3">
                             Resumen de compra
                         </h5>
-
                         @foreach($cart as $item)
                             <div class="d-flex justify-content-between mb-2">
                                 <span>
@@ -77,9 +77,7 @@
                                     ${{ number_format($item['price'] * $item['quantity'], 2) }}
                                 </span>
                             </div>
-
                         @endforeach
-
                         <hr>
                         <div class="d-flex justify-content-between">
                             <span class="fw-bold fs-5">
@@ -91,18 +89,63 @@
                         </div>
                     </div>
 
+
+                    {{-- TARJETA GUARDADA --}}
+                    @if(isset($savedCard))
+                        <div class="alert alert-light border rounded-4 shadow-sm mb-4">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                <div>
+                                    <div class="fw-bold mb-1">
+                                        Tarjeta guardada
+                                    </div>
+                                    <small class="text-muted">
+                                        **** **** **** {{ $savedCard['last_four'] }}
+                                    </small>
+                                </div>
+                                <div class="d-flex gap-2">
+
+                                    {{-- USAR TARJETA --}}
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-primary rounded-pill"
+                                        onclick="useSavedCard()">
+                                        <i class="bi bi-credit-card me-1"></i>
+                                        Usar tarjeta
+                                    </button>
+
+                                    {{-- ELIMINAR TARJETA --}}
+                                    <form
+                                        method="POST"
+                                        action="{{ route('cart.deleteCard') }}">
+                                        @csrf
+                                        <button
+                                            type="submit"
+                                            class="btn btn-outline-danger rounded-pill">
+                                            <i class="bi bi-trash me-1"></i>
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+
                     {{-- FORMULARIO --}}
-                    <form method="POST"
+                    <form
+                        method="POST"
                         action="{{ route('cart.processPayment') }}">
                         @csrf
+
                         {{-- TARJETA --}}
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-secondary small mb-2">
                                 Número de tarjeta
                             </label>
-
                             <input
                                 type="text"
+                                id="card_number"
+                                name="card_number"
                                 class="form-control form-control-lg rounded-3 shadow-sm"
                                 placeholder="1234 5678 9012 3456"
                                 maxlength="19"
@@ -114,14 +157,16 @@
                                 required>
                         </div>
 
+
                         {{-- TITULAR --}}
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-secondary small mb-2">
                                 Nombre del titular
                             </label>
-
                             <input
                                 type="text"
+                                id="card_name"
+                                name="card_name"
                                 class="form-control form-control-lg rounded-3 shadow-sm"
                                 placeholder="Nombre completo"
                                 style="
@@ -129,19 +174,19 @@
                                     padding: 14px;
                                 "
                                 required>
+
                         </div>
                         <div class="row">
 
-                            {{-- FECHA --}}
+                            {{-- EXPIRACIÓN --}}
                             <div class="col-md-6 mb-4">
-
                                 <label class="form-label fw-semibold text-secondary small mb-2">
                                     Expiración
                                 </label>
-
                                 <input
                                     type="text"
                                     id="expiration"
+                                    name="expiration"
                                     class="form-control form-control-lg rounded-3 shadow-sm"
                                     placeholder="MM/AA"
                                     maxlength="5"
@@ -150,18 +195,20 @@
                                         padding: 14px;
                                     "
                                     required>
+                                <small class="text-muted">
+                                    Formato válido: 01/27
+                                </small>
 
                                 <small
                                     id="expirationError"
                                     class="text-danger d-none">
-                                    Formato válido: 01/27
+                                    Formato inválido.
                                 </small>
-
                             </div>
+
 
                             {{-- CVV --}}
                             <div class="col-md-6 mb-4">
-
                                 <label class="form-label fw-semibold text-secondary small mb-2">
                                     CVV
                                 </label>
@@ -169,6 +216,7 @@
                                 <input
                                     type="password"
                                     id="cvv"
+                                    name="cvv"
                                     class="form-control form-control-lg rounded-3 shadow-sm"
                                     placeholder="123"
                                     maxlength="3"
@@ -177,14 +225,14 @@
                                         padding: 14px;
                                     "
                                     required>
-
                                 <small
                                     id="cvvError"
                                     class="text-danger d-none">
                                     El CVV debe contener exactamente 3 números.
                                 </small>
-
                             </div>
+                        </div>
+
 
                         {{-- GUARDAR TARJETA --}}
                         <div class="form-check mb-4">
@@ -193,7 +241,6 @@
                                 type="checkbox"
                                 id="saveCard"
                                 name="save_card">
-
                             <label
                                 class="form-check-label text-secondary"
                                 for="saveCard">
@@ -201,10 +248,11 @@
                             </label>
                         </div>
 
+
                         {{-- BOTONES --}}
                         <div class="d-flex gap-3">
 
-                            {{-- REGRESAR --}}
+                            {{-- VOLVER --}}
                             <a
                                 href="{{ route('cart.index') }}"
                                 class="btn btn-outline-secondary w-50 py-3 fw-bold rounded-3">
@@ -212,14 +260,13 @@
                                 Volver al carrito
                             </a>
 
+
                             {{-- PAGAR --}}
-                            <button type="submit"
+                            <button
+                                type="submit"
                                 class="btn btn-success w-100 py-3 fw-bold rounded-4 shadow-sm">
-
                                 <i class="bi bi-credit-card-2-front me-2"></i>
-
                                 PAGAR AHORA
-
                             </button>
                         </div>
                     </form>
@@ -229,136 +276,110 @@
     </div>
 </div>
 
-{{-- SCRIPT TEMPORIZADOR --}}
+
+
+{{-- SCRIPT TIMER --}}
 <script>
-
 let time = 180;
-
-const countdown = document.getElementById('countdown');
-
+const countdown =
+    document.getElementById('countdown');
 const timer = setInterval(() => {
-
-    let minutes = Math.floor(time / 60);
-
-    let seconds = time % 60;
-
-    seconds = seconds < 10
+    let minutes =
+        Math.floor(time / 60);
+    let seconds =
+        time % 60;
+    seconds =
+        seconds < 10
         ? '0' + seconds
         : seconds;
-
     countdown.innerHTML =
         minutes + ':' + seconds;
-
     time--;
-
     if (time < 0) {
-
         clearInterval(timer);
-
         alert(
             'El tiempo de pago expiró. Serás redirigido al carrito.'
         );
-
         window.location.href =
             "{{ route('cart.index') }}";
-
     }
-
 }, 1000);
-
 </script>
 
+
+
+{{-- SCRIPT FORMATO FECHA --}}
 <script>
-
-/* =========================
-   VALIDACIÓN FECHA
-========================= */
-
 const expirationInput =
     document.getElementById('expiration');
-
 const expirationError =
     document.getElementById('expirationError');
-
 expirationInput.addEventListener('input', function () {
-
-    // SOLO NÚMEROS
-    let value = this.value.replace(/\D/g, '');
-
-    // FORMATO MM/AA
+    let value =
+        this.value.replace(/\D/g, '');
+    // AUTO /
     if (value.length >= 3) {
-
         value =
             value.substring(0, 2) +
             '/' +
             value.substring(2, 4);
-
     }
-
     this.value = value;
-
 });
 
 
 expirationInput.addEventListener('blur', function () {
-
     const regex =
-        /^(0[1-9]|1[0-2])\/\d{2}$/;
-
+        /^(0[1-9]|1[0-2]|[1-9])\/\d{2}$/;
     if (!regex.test(this.value)) {
-
         expirationError.classList.remove('d-none');
-
         this.classList.add('is-invalid');
-
     } else {
-
         expirationError.classList.add('d-none');
-
         this.classList.remove('is-invalid');
-
     }
-
 });
+</script>
 
 
-/* =========================
-   VALIDACIÓN CVV
-========================= */
 
+{{-- SCRIPT CVV --}}
+<script>
 const cvvInput =
     document.getElementById('cvv');
-
 const cvvError =
     document.getElementById('cvvError');
-
 cvvInput.addEventListener('input', function () {
-
-    // SOLO NÚMEROS
     this.value =
         this.value.replace(/\D/g, '');
-
 });
 
 
 cvvInput.addEventListener('blur', function () {
-
     if (this.value.length !== 3) {
-
         cvvError.classList.remove('d-none');
-
         this.classList.add('is-invalid');
-
     } else {
-
         cvvError.classList.add('d-none');
-
         this.classList.remove('is-invalid');
-
     }
-
 });
-
 </script>
 
+
+
+{{-- SCRIPT TARJETA GUARDADA --}}
+@if(isset($savedCard))
+<script>
+function useSavedCard() {
+    document.getElementById('card_number').value =
+        "{{ $savedCard['number'] }}";
+    document.getElementById('card_name').value =
+        "{{ $savedCard['name'] }}";
+    document.getElementById('expiration').value =
+        "{{ $savedCard['expiration'] }}";
+}
+
+</script>
+@endif
 @endsection
