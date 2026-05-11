@@ -92,7 +92,9 @@
                     </div>
 
                     {{-- FORMULARIO --}}
-                    <form>
+                    <form method="POST"
+                        action="{{ route('cart.processPayment') }}">
+                        @csrf
                         {{-- TARJETA --}}
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-secondary small mb-2">
@@ -132,38 +134,57 @@
 
                             {{-- FECHA --}}
                             <div class="col-md-6 mb-4">
+
                                 <label class="form-label fw-semibold text-secondary small mb-2">
                                     Expiración
                                 </label>
+
                                 <input
                                     type="text"
+                                    id="expiration"
                                     class="form-control form-control-lg rounded-3 shadow-sm"
                                     placeholder="MM/AA"
+                                    maxlength="5"
                                     style="
                                         font-size: 1rem;
                                         padding: 14px;
                                     "
                                     required>
+
+                                <small
+                                    id="expirationError"
+                                    class="text-danger d-none">
+                                    Formato válido: 01/27
+                                </small>
+
                             </div>
 
                             {{-- CVV --}}
                             <div class="col-md-6 mb-4">
+
                                 <label class="form-label fw-semibold text-secondary small mb-2">
                                     CVV
                                 </label>
 
                                 <input
                                     type="password"
+                                    id="cvv"
                                     class="form-control form-control-lg rounded-3 shadow-sm"
                                     placeholder="123"
-                                    maxlength="4"
+                                    maxlength="3"
                                     style="
                                         font-size: 1rem;
                                         padding: 14px;
                                     "
                                     required>
+
+                                <small
+                                    id="cvvError"
+                                    class="text-danger d-none">
+                                    El CVV debe contener exactamente 3 números.
+                                </small>
+
                             </div>
-                        </div>
 
                         {{-- GUARDAR TARJETA --}}
                         <div class="form-check mb-4">
@@ -192,11 +213,13 @@
                             </a>
 
                             {{-- PAGAR --}}
-                            <button
-                                type="submit"
-                                class="btn btn-success w-50 py-3 fw-bold rounded-3 shadow">
-                                <i class="bi bi-credit-card me-2"></i>
-                                PAGAR
+                            <button type="submit"
+                                class="btn btn-success w-100 py-3 fw-bold rounded-4 shadow-sm">
+
+                                <i class="bi bi-credit-card-2-front me-2"></i>
+
+                                PAGAR AHORA
+
                             </button>
                         </div>
                     </form>
@@ -242,6 +265,99 @@ const timer = setInterval(() => {
     }
 
 }, 1000);
+
+</script>
+
+<script>
+
+/* =========================
+   VALIDACIÓN FECHA
+========================= */
+
+const expirationInput =
+    document.getElementById('expiration');
+
+const expirationError =
+    document.getElementById('expirationError');
+
+expirationInput.addEventListener('input', function () {
+
+    // SOLO NÚMEROS
+    let value = this.value.replace(/\D/g, '');
+
+    // FORMATO MM/AA
+    if (value.length >= 3) {
+
+        value =
+            value.substring(0, 2) +
+            '/' +
+            value.substring(2, 4);
+
+    }
+
+    this.value = value;
+
+});
+
+
+expirationInput.addEventListener('blur', function () {
+
+    const regex =
+        /^(0[1-9]|1[0-2])\/\d{2}$/;
+
+    if (!regex.test(this.value)) {
+
+        expirationError.classList.remove('d-none');
+
+        this.classList.add('is-invalid');
+
+    } else {
+
+        expirationError.classList.add('d-none');
+
+        this.classList.remove('is-invalid');
+
+    }
+
+});
+
+
+/* =========================
+   VALIDACIÓN CVV
+========================= */
+
+const cvvInput =
+    document.getElementById('cvv');
+
+const cvvError =
+    document.getElementById('cvvError');
+
+cvvInput.addEventListener('input', function () {
+
+    // SOLO NÚMEROS
+    this.value =
+        this.value.replace(/\D/g, '');
+
+});
+
+
+cvvInput.addEventListener('blur', function () {
+
+    if (this.value.length !== 3) {
+
+        cvvError.classList.remove('d-none');
+
+        this.classList.add('is-invalid');
+
+    } else {
+
+        cvvError.classList.add('d-none');
+
+        this.classList.remove('is-invalid');
+
+    }
+
+});
 
 </script>
 

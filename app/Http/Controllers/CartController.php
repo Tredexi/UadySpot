@@ -8,9 +8,12 @@ use App\Models\Evento;
 class CartController extends Controller
 {
 
+    // =========================
     // MOSTRAR CARRITO
+    // =========================
     public function index()
     {
+
         $cart = session()->get('cart', []);
 
         $total = 0;
@@ -22,18 +25,24 @@ class CartController extends Controller
 
         }
 
-        return view('cart.index', compact('cart', 'total'));
+        return view(
+            'cart.index',
+            compact('cart', 'total')
+        );
+
     }
 
 
+    // =========================
     // AGREGAR AL CARRITO
+    // =========================
     public function add(Request $request, $id)
     {
 
         // Buscar evento
         $event = Evento::find($id);
 
-        // Si no existe
+        // Validar existencia
         if (!$event) {
 
             return back()->with(
@@ -46,14 +55,24 @@ class CartController extends Controller
         // Obtener carrito actual
         $cart = session()->get('cart', []);
 
-        // Si ya existe en carrito
+        // Si ya existe
         if (isset($cart[$id])) {
+
+            // Límite de 5 boletos
+            if ($cart[$id]['quantity'] >= 5) {
+
+                return back()->with(
+                    'error',
+                    'Máximo 5 boletos por evento.'
+                );
+
+            }
 
             $cart[$id]['quantity']++;
 
         } else {
 
-            // Agregar nuevo
+            // Nuevo producto
             $cart[$id] = [
 
                 "title" => $event->titulo,
@@ -75,12 +94,15 @@ class CartController extends Controller
             ->route('cart.index')
             ->with(
                 'success',
-                'Evento añadido al carrito'
+                'Evento añadido al carrito.'
             );
+
     }
 
 
+    // =========================
     // ELIMINAR DEL CARRITO
+    // =========================
     public function remove($id)
     {
 
@@ -96,97 +118,194 @@ class CartController extends Controller
 
         return back()->with(
             'success',
-            'Eliminado correctamente'
+            'Evento eliminado del carrito.'
         );
+
     }
 
+
+    // =========================
+    // AUMENTAR CANTIDAD
+    // =========================
+    public function increase($id)
+    {
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+
+            // Máximo 5
+            if ($cart[$id]['quantity'] < 5) {
+
+                $cart[$id]['quantity']++;
+
+                session()->put('cart', $cart);
+
+            } else {
+
+                return back()->with(
+                    'error',
+                    'Solo puedes comprar máximo 5 boletos por evento.'
+                );
+
+            }
+
+        }
+
+        return back();
+
+    }
+
+
+    // =========================
+    // DISMINUIR CANTIDAD
+    // =========================
+    public function decrease($id)
+    {
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+
+            // Mínimo 1
+            if ($cart[$id]['quantity'] > 1) {
+
+                $cart[$id]['quantity']--;
+
+                session()->put('cart', $cart);
+
+            }
+
+        }
+
+        return back();
+
+    }
+
+
+    // =========================
+    // VISTA DE PAGO
+    // =========================
     public function payment()
-{
+    {
 
-    $cart = session()->get('cart', []);
+        $cart = session()->get('cart', []);
 
-    // Si el carrito está vacío
-    if (empty($cart)) {
+        // Carrito vacío
+        if (empty($cart)) {
 
+            return redirect()
+                ->route('cart.index')
+                ->with(
+                    'error',
+                    'Tu carrito está vacío.'
+                );
+
+        }
+
+        // Calcular total
+        $total = 0;
+
+        foreach ($cart as $item) {
+
+            $total +=
+                $item['price'] *
+                $item['quantity'];
+
+        }
+
+        return view(
+            'cart.payment',
+            compact('cart', 'total')
+        );
+
+    }
+
+
+    // =========================
+    // PROCESAR PAGO
+    // =========================
+    public function processPayment(Request $request)
+    {
+
+        $cart = session()->get('cart', []);
+
+        // Validar carrito
+        if (empty($cart)) {
+
+            return redirect()
+                ->route('cart.index');
+
+        }
+
+        // Generar código único
+        $ticketCode = strtoupper(
+            'UADY-' . uniqid()
+        );
+
+        // Generar asientos
+        $asientos = [];
+
+        $filas = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+        foreach ($cart as $item) {
+
+            for ($i = 0; $i < $item['quantity']; $i++) {
+
+                $fila = $filas[array_rand($filas)];
+
+                $numero = rand(1, 20);
+
+                $asientos[] = $fila . $numero;
+
+            }
+
+        }
+
+        // Guardar ticket
+        session()->put('ticket', [
+
+            'code' => $ticketCode,
+
+            'cart' => $cart,
+
+            'asientos' => $asientos,
+
+            'created_at' => now()
+
+        ]);
+
+        // Vaciar carrito
+        session()->forget('cart');
+
+        // Redirigir ticket
         return redirect()
-            ->route('cart.index')
-            ->with(
-                'error',
-                'Tu carrito está vacío.'
-            );
+            ->route('cart.ticket');
 
     }
 
-    // Calcular total
-    $total = 0;
 
-    foreach ($cart as $item) {
+    // =========================
+    // MOSTRAR TICKET QR
+    // =========================
+    public function ticket()
+    {
 
-        $total +=
-            $item['price'] *
-            $item['quantity'];
+        $ticket = session()->get('ticket');
 
-    }
+        // Si no existe ticket
+        if (!$ticket) {
 
-    return view(
-        'cart.payment',
-        compact('cart', 'total')
-    );
-
-}
-
-// AUMENTAR CANTIDAD
-public function increase($id)
-{
-
-    $cart = session()->get('cart', []);
-
-    if (isset($cart[$id])) {
-
-        // LÍMITE DE 5
-        if ($cart[$id]['quantity'] < 5) {
-
-            $cart[$id]['quantity']++;
-
-            session()->put('cart', $cart);
-
-        } else {
-
-            return back()->with(
-                'error',
-                'Solo puedes comprar máximo 5 boletos por evento.'
-            );
+            return redirect()
+                ->route('events.index');
 
         }
 
-    }
-
-    return back();
-
-}
-
-
-// DISMINUIR CANTIDAD
-public function decrease($id)
-{
-
-    $cart = session()->get('cart', []);
-
-    if (isset($cart[$id])) {
-
-        // mínimo 1
-        if ($cart[$id]['quantity'] > 1) {
-
-            $cart[$id]['quantity']--;
-
-            session()->put('cart', $cart);
-
-        }
+        return view(
+            'cart.ticket',
+            compact('ticket')
+        );
 
     }
-
-    return back();
-
-}
 
 }

@@ -64,6 +64,16 @@ Route::post(
     [CartController::class, 'decrease']
 )->name('cart.decrease');
 
+Route::post(
+    '/pago/procesar',
+    [CartController::class, 'processPayment']
+)->name('cart.processPayment');
+
+Route::get(
+    '/ticket',
+    [CartController::class, 'ticket']
+)->name('cart.ticket');
+
 // ============================
 // RUTAS PROTEGIDAS (LOGIN)
 // ============================
@@ -142,7 +152,6 @@ Route::middleware([
         Route::get('/',
             [AdminController::class,'dashboard']
         )->name('admin.dashboard');
-           
         // =========================
        // ADMIN EVENTOS           
        //  // =========================
