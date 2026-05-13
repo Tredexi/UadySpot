@@ -143,4 +143,6 @@ class BenefitController extends Controller
             'Beneficio eliminado');
 
     }
+
+ 
 }

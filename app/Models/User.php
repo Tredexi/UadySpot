@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo',
 
     ];
 
@@ -50,4 +51,8 @@ class User extends Authenticatable
     {
         return str_ends_with($this->email, '@uadyspot.mx');
     }
+    public function benefitRatings()
+{
+    return $this->hasMany(BenefitRating::class);
+}
 }

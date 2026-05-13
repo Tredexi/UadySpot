@@ -72,7 +72,19 @@ class JobController extends Controller
     }
 
 
+    public function detail($id)
+    {
 
+        $job = Trabajo::findOrFail($id);
+
+        return view(
+            'jobs.detail',
+            compact('job')
+        );
+
+    }
+
+    
 
     // ADMIN LISTA
     public function adminIndex()

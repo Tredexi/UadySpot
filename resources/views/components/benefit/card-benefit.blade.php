@@ -9,7 +9,9 @@
     'etiqueta',
     'proveedor',
     'ubicacion',
-    'fechaExpiracion'
+    'fechaExpiracion',
+        'averageRating'
+
 ])
 
 {{-- TARJETA DEL BENEFICIO --}}
@@ -47,6 +49,34 @@
                 </span>
             @endif
         </div>
+        @auth
+
+        <p class="mb-0">
+            ⭐ {{ $averageRating }}/5
+        </p>
+
+        <form method="POST" action="{{ route('benefits.rate', $id) }}">
+            @csrf
+
+            <div class="d-flex gap-1">
+
+                @for($i = 1; $i <= 5; $i++)
+
+                    <button type="submit"
+                            name="rating"
+                            value="{{ $i }}"
+                            class="btn btn-link p-0 border-0">
+
+                        <i class="bi bi-star-fill text-warning"></i>
+
+                    </button>
+
+                @endfor
+
+            </div>
+        </form>
+
+        @endauth
         
         {{-- Título y Subtítulo --}}
         <h5 class="card-title fw-bold mb-2">{{ $titulo }}</h5>

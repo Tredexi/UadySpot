@@ -28,4 +28,12 @@ public function category() {
 public function type() {
     return $this->belongsTo(BenefitType::class, 'type_id');
 }
+public function ratings()
+{
+    return $this->hasMany(BenefitRating::class);
+}
+public function averageRating()
+{
+    return round($this->ratings()->avg('rating'), 1);
+}
 }

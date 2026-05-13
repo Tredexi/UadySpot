@@ -79,38 +79,10 @@ class AuthController extends Controller
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-        //'g-recaptcha-response' => 'required'
-    ], [
-        'g-recaptcha-response.required' => 
-        'Por favor verifica el captcha.'
     ]);
 
 
-    // 2. VALIDAR CAPTCHA CON GOOGLE
-/*
-    $response = Http::asForm()->post(
-        'https://www.google.com/recaptcha/api/siteverify',
-        [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->input('g-recaptcha-response'),
-            'remoteip' => $request->ip(),
-        ]
-    );
-
-    $captcha = $response->json();
-
-    if (!$captcha['success']) {
-
-        return back()
-            ->withErrors([
-                'captcha' => 'Captcha incorrecto'
-            ])
-            ->withInput();
-
-    }
-*/
-
-    // 3. Intentar login
+    // 2. Intentar login
 
     $credentials = $request->only('email', 'password');
 
@@ -168,10 +140,26 @@ class AuthController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
+        ///// Manejo de foto de perfil
+        if (
+            $request->hasFile('profile_photo') &&
+            $request->file('profile_photo')->isValid()
+        ) {
 
-        if ($request->hasFile('profile_photo')) {
-            $path = $request->file('profile_photo')->store('avatars', 'public');
-            $user->profile_photo = $path; // Asegúrate de tener esta columna en tu DB
+            $file = $request->file('profile_photo');
+
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            $destination = public_path('uploads/avatars');
+
+            // Crear carpeta si no existe
+            if (!file_exists($destination)) {
+                mkdir($destination, 0777, true);
+            }
+
+            $file->move($destination, $filename);
+
+            $user->profile_photo = 'uploads/avatars/' . $filename;
         }
 
         $user->save();

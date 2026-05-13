@@ -1,4 +1,7 @@
-@extends('layout.app')
+@extends('layout.admin')
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+@endsection
 
 @section('content')
     <div class="container py-4">

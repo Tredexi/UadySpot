@@ -68,6 +68,7 @@
                     :proveedor="$beneficio->proveedor"
                     :ubicacion="$beneficio->ubicacion"
                     :fechaExpiracion="$beneficio->fecha_expiracion"
+                    :averageRating="$beneficio->averageRating()"
                 />
             </div>
 

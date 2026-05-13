@@ -12,6 +12,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\BenefitRatingController;
 
 // ============================
 // RUTAS PUBLICAS
@@ -83,7 +84,10 @@ Route::post(
 // RUTAS PROTEGIDAS (LOGIN)
 // ============================
 // Rutas protegidas para usuarios autenticados
-
+Route::post(
+    '/beneficios/{id}/calificar',
+    [BenefitRatingController::class, 'store']
+)->middleware('auth')->name('benefits.rate');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -91,7 +95,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bolsa-de-trabajo',
         [JobController::class, 'index'])
         ->name('jobs.index');
+        
 
+    // Bolsa de trabajo
+    Route::get('/bolsa-de-trabajo/{id}',
+        [JobController::class, 'detail'])
+        ->name('jobs.detail');
     // Carreras
     Route::get('/carreras',
         [CareerController::class, 'index'])

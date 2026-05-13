@@ -44,7 +44,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <input type="hidden" name="recaptcha_token" id="recaptcha_token">   
                         <div class="mb-4">
                             <label for="password" class="form-label fw-medium text-secondary">Contraseña</label>
                             <div class="input-group">
@@ -63,10 +63,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- CAPTCHA 
-                            <div class="g-recaptcha"
-                                data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}">
-                            </div>--}}
 
                         <button type="submit"
                             class="btn w-100 fw-bold py-2 mb-3"
@@ -99,22 +95,14 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
     const form = this;
 
-    grecaptcha.ready(function() {
+    grecaptcha.ready(function () {
 
         grecaptcha.execute(
-            '{{ config("services.recaptcha.site_key") }}',
+            '{{ env("RECAPTCHA_SITE_KEY") }}',
             { action: 'login' }
-        )
+        ).then(function(token) {
 
-        .then(function(token) {
-
-            let input = document.createElement('input');
-
-            input.type = 'hidden';
-            input.name = 'recaptcha_token';
-            input.value = token;
-
-            form.appendChild(input);
+            document.getElementById('recaptcha_token').value = token;
 
             form.submit();
 

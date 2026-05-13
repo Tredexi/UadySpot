@@ -7,10 +7,13 @@
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm border-0 text-center p-4">
                 <div class="position-relative d-inline-block mx-auto mb-3">
-                    <img src="{{ Auth::user()->profile_photo ? asset('storage/'.Auth::user()->profile_photo) : 'https://ui-avatars.com/api/?name='.urlencode(Auth::user()->name).'&background=003366&color=fff' }}" 
-                         class="rounded-circle img-thumbnail shadow-sm" 
-                         style="width: 150px; height: 150px; object-fit: cover;" 
-                         alt="Avatar">
+                    <img src="{{ Auth::user()->profile_photo 
+                        ? asset(Auth::user()->profile_photo) 
+                        : 'https://ui-avatars.com/api/?name='.urlencode(Auth::user()->name).'&background=003366&color=fff' }}"
+                        
+                        class="rounded-circle img-thumbnail shadow-sm" 
+                        style="width: 150px; height: 150px; object-fit: cover;" 
+                        alt="Avatar">
                     @if(Auth::user()->is_admin)
                         <span class="position-absolute bottom-0 end-0 badge rounded-pill bg-danger shadow">
                             Admin <i class="bi bi-shield-check"></i>
