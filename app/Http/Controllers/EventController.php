@@ -35,7 +35,7 @@ class EventController extends Controller
         }
 
         // PAGINACIÓN
-        $events = $query->paginate(10)->withQueryString();
+        $events = $query->paginate(8)->withQueryString();
 
         return view('event.index', compact('events'));
     }
@@ -53,7 +53,7 @@ class EventController extends Controller
     {
 
         $eventos = \App\Models\Evento::latest()
-                        ->paginate(10);
+                        ->paginate(8);
 
         return view(
             'admin.evento.index',

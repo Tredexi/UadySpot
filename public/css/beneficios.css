@@ -272,3 +272,13 @@
 .story-right{
     right: 0;
 }
+
+.benefit-btn{
+    transition: all .25s ease;
+}
+
+.benefit-btn:hover{
+    background-color: #e0a800;
+    border-color: #e0a800;
+    color: white;
+}

@@ -19,7 +19,7 @@
 
             <h2 class="fw-bold mb-0 d-flex align-items-center gap-2">
                 <i class="bi bi-briefcase"></i>
-                Gestión de Trabajos
+                Bolsa de trabajo
             </h2>
 
         </div>

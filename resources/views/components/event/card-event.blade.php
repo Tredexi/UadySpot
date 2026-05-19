@@ -32,8 +32,13 @@
                     
                     @if(isset($availability))
                         <div class="d-flex align-items-center" style="font-size: 0.85rem;">
-                            <i class="bi bi-circle-fill me-1 {{ $availabilityStatus == 'open' ? 'text-success' : 'text-danger' }}" style="font-size: 0.5rem;"></i>
-                            <span class="text-secondary">{{ $availability }}</span>
+                            <span class="px-2 rounded-pill text-dark d-inline-flex align-items-center gap-1"
+                                style="background-color: #cfe9d8;">
+
+                                <i class="bi bi-circle-fill text-success" style="font-size: 0.45rem;"></i>
+
+                                {{ $availability }}
+                            </span>
                         </div>
                     @endif
                 </div>
@@ -84,7 +89,7 @@
                     $isTicket = str_contains(strtolower($actionText), 'boleto');
                     $buttonClass = $isTicket ? 'btn-info text-white border-info' : 'btn-outline-dark text-dark border-2';
                 @endphp
-                <button type="submit" class="btn {{ $buttonClass }} w-100 fw-bold py-2 rounded-3">
+                <button type="submit" class="btn {{ $buttonClass }} event-btn w-100 fw-bold py-2 rounded-3">
                     @if($isTicket)
                         <i class="bi bi-ticket-perforated me-1"></i>
                     @endif

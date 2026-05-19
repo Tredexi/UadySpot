@@ -40,7 +40,7 @@ class BenefitController extends Controller
         )->take(10)->get();
 
         // PAGINACIÓN
-        $beneficios = $query->paginate(10)->withQueryString();
+        $beneficios = $query->paginate(8)->withQueryString();
 
         // Traemos categorías ordenadas para tus botones del Navbar
         $categorias = BenefitCategory::orderBy('nombre')->get();
@@ -52,7 +52,7 @@ class BenefitController extends Controller
     // ADMIN LISTA
     public function adminIndex()
     {
-        $beneficios = Benefit::latest()->paginate(10);
+        $beneficios = Benefit::latest()->paginate(8);
 
         return view(
             'admin.beneficio.index',

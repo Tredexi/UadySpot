@@ -67,5 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 </script>
+</div>
+</div>
 
 @endsection

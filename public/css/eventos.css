@@ -79,3 +79,15 @@
 .page-link:focus {
     box-shadow: none !important;
 }
+
+.event-btn{
+    transition: all .25s ease;
+}
+
+.event-btn:hover,
+.event-btn:focus,
+.event-btn:active{
+    background-color: #e0a800 !important;
+    border-color: #e0a800 !important;
+    color: white !important;
+}
