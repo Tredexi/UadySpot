@@ -32,13 +32,20 @@ class BenefitController extends Controller
             });
         }
 
+
+
+        $beneficiosDestacados = Benefit::where(
+            'es_destacado',
+            true
+        )->take(10)->get();
+
         // PAGINACIÓN
         $beneficios = $query->paginate(10)->withQueryString();
 
         // Traemos categorías ordenadas para tus botones del Navbar
         $categorias = BenefitCategory::orderBy('nombre')->get();
 
-        return view('benefit.index', compact('beneficios', 'categorias'));
+        return view('benefit.index', compact('beneficios', 'categorias', 'beneficiosDestacados'));
     }
 
 

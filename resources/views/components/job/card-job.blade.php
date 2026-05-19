@@ -18,7 +18,7 @@
             
             {{-- Título y Etiqueta Nuevo --}}
             <div class="d-flex align-items-center gap-2 mb-1">
-                <a href="#" class="job-title fs-5 fw-bold text-decoration-none" style="color: var(--uady-blue, #002E5F);">
+                <a href="{{ route('jobs.detail', $id) }}" class="job-title fs-5 fw-bold text-decoration-none" style="color: var(--uady-blue, #002E5F);">
                     {{ $title }}
                 </a>
                 @if($isNew)
@@ -35,9 +35,32 @@
             </p>
             
             {{-- Ubicación y Salario --}}
-            <div class="d-flex flex-wrap gap-3 mb-3 text-secondary small">
-                <div><i class="bi bi-geo-alt me-1"></i>{{ $location }}</div>
-                <div><i class="bi bi-cash me-1"></i>{{ $salary }}</div>
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3 small">
+
+                {{-- Ubicación --}}
+                <div class="text-secondary">
+                    <i class="bi bi-geo-alt me-1"></i>
+                    {{ $location }}
+                </div>
+
+                {{-- Salario destacado --}}
+                <div class="d-flex flex-wrap align-items-center gap-3 mb-3 small">
+
+                    {{-- Salario --}}
+                    <div
+                        class="px-3 py-1 rounded-pill fw-semibold"
+                        style="
+                            background-color: rgba(25, 135, 84, 0.12);
+                            color: #198754;
+                            border: 1px solid rgba(25, 135, 84, 0.25);
+                        "
+                    >
+                        <i class="bi bi-cash-stack me-1"></i>
+                        {{ $salary }}
+                    </div>
+
+                </div>
+
             </div>
 
             {{-- Etiquetas de Tipo, Modalidad y Urgencia --}}
@@ -63,15 +86,47 @@
         
         {{-- Columna Derecha: Botones y Fecha --}}
         <div class="col-md-3 d-flex flex-column justify-content-between align-items-end mt-3 mt-md-0">
-            <button class="btn btn-light rounded-circle text-muted shadow-sm border" style="width: 40px; height: 40px;" title="Guardar empleo">
-                <i class="bi bi-heart"></i>
-            </button>
+            @php
+
+                $isFavorite = auth()->check()
+                    ? auth()->user()
+                        ->favoriteJobs()
+                        ->where('trabajo_id', $id)
+                        ->exists()
+                    : false;
+
+            @endphp
+
+            @if(auth()->check())
+
+            <form action="{{ route('jobs.favorite', $id) }}"
+                method="POST">
+
+                @csrf
+
+                <button
+                    type="submit"
+                    class="btn rounded-circle shadow-sm border"
+                    style="
+                        width: 40px;
+                        height: 40px;
+                        background-color: white;
+                    "
+                    title="Guardar empleo">
+
+                    <i class="bi {{ $isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart text-muted' }}"></i>
+
+                </button>
+
+            </form>
+
+            @endif
             
             <div class="text-end">
                 <p class="small text-muted mb-2">{{ $postedAt }}</p>
                 {{-- Aquí puedes usar el ID para la ruta real de postulación --}}
                 <a href="#" class="btn btn-sm fw-bold px-3 py-2" style="background-color: var(--uady-gold, #CBA052); color: var(--uady-blue, #002E5F);">
-                    Postulación rápida
+                    Postularse
                 </a>
             </div>
         </div>
