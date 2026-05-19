@@ -225,31 +225,68 @@ class JobController extends Controller
 
     ]);
 
-    // FOTO
-    if($request->hasFile('profile_photo')){
+   // FOTO PERFIL
+    if (
+        $request->hasFile('profile_photo') &&
+        $request->file('profile_photo')->isValid()
+    ) {
 
-        $path = $request
-            ->file('profile_photo')
-            ->store('profiles', 'public');
+        $file = $request->file('profile_photo');
+
+        $filename =
+            time() . '_' .
+            $file->getClientOriginalName();
+
+        $destination =
+            public_path('uploads/avatars');
+
+        // crear carpeta
+        if (!file_exists($destination)) {
+
+            mkdir($destination, 0777, true);
+
+        }
+
+        $file->move($destination, $filename);
 
         auth()->user()->update([
 
-            'profile_photo' => $path
+            'profile_photo' =>
+                'uploads/avatars/' . $filename
 
         ]);
 
     }
 
     // PDF CV
-    if($request->hasFile('cv_file')){
+// PDF CV
+        if (
+            $request->hasFile('cv_file') &&
+            $request->file('cv_file')->isValid()
+        ) {
 
-        $cvPath = $request
-            ->file('cv_file')
-            ->store('cv', 'public');
+            $file = $request->file('cv_file');
 
-        $resume->cv_file = $cvPath;
+            $filename =
+                time() . '_cv_' .
+                $file->getClientOriginalName();
 
-    }
+            $destination =
+                public_path('uploads/cv');
+
+            // crear carpeta si no existe
+            if (!file_exists($destination)) {
+
+                mkdir($destination, 0777, true);
+
+            }
+
+            $file->move($destination, $filename);
+
+            $resume->cv_file =
+                'uploads/cv/' . $filename;
+
+        }
 
     $resume->phone = $request->phone;
     $resume->career = $request->career;

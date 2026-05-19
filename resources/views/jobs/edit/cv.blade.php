@@ -69,11 +69,10 @@
 
                                 {{-- FOTO --}}
                                 <div class="col-12 text-center">
-
+                                    
                                     <img
-                                        src="{{ auth()->user()->profile_photo
-                                            ? asset('storage/' . auth()->user()->profile_photo)
-                                            : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) }}"
+                                        src="{{ asset(auth()->user()->profile_photo) ?: 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name)  }}"
+                                          
                                         class="rounded-circle shadow mb-3"
                                         width="120"
                                         height="120"
@@ -257,12 +256,12 @@
 
                                 <div class="mt-3">
 
-                                    <a href="{{ asset('storage/' . $resume->cv_file) }}"
-                                       target="_blank"
-                                       class="btn btn-outline-primary rounded-3">
+                                   <a
+                                        href="{{ asset($resume->cv_file) }}"
+                                        target="_blank"
+                                        class="btn btn-danger">
 
-                                        <i class="bi bi-file-earmark-pdf"></i>
-                                        Ver CV actual
+                                        Ver CV PDF
 
                                     </a>
 

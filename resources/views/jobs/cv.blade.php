@@ -17,9 +17,10 @@
                      style="background:#002E5F;">
 
                     <img
-                        src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=D4A017&color=002E5F"
-                        class="rounded-circle mb-3"
-                        width="120">
+                        src="{{ asset(auth()->user()->profile_photo) }}"
+                        class="rounded-circle"
+                        width="120"
+                    >
 
                     <h3 class="fw-bold mb-1">
                         {{ auth()->user()->name }}
