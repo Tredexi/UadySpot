@@ -15,7 +15,11 @@ class DatabaseSeeder extends Seeder
             EventoSeeder::class,   // Llena la tabla 'eventos'
             BenefitSeeder::class,  // Llena 'benefit_catagories', 'benefit_types' y 'benefits'
             TrabajoSeeder::Class,
-            UserSeeder::Class
+            UserSeeder::Class,
+            ResumeSeeder::class,
+            JobApplicationSeeder::class,
+            FavoriteJobSeeder::class,
+
         ]);
     }
 }

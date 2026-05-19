@@ -29,7 +29,11 @@
                 default => 'bg-primary'
             };
         @endphp
-        <span class="badge {{ $bgClass }} fs-6 px-3 py-2 rounded-pill shadow-sm fw-bold">
+        <span class="badge {{ $bgClass }} fs-6 px-3 py-2 rounded-pill shadow-sm fw-bold d-inline-flex align-items-center gap-1">
+            
+            <i class="bi bi-ticket-perforated-fill"
+            style="transform: rotate(-25deg); display: inline-block;"></i>
+
             {{ $valor }}
         </span>
     </div>
@@ -51,28 +55,22 @@
         </div>
         @auth
 
-        <p class="mb-0">
+        {{-- <p class="mb-0">
             ⭐ {{ $averageRating }}/5
         </p>
+        --}}
 
         <form method="POST" action="{{ route('benefits.rate', $id) }}">
             @csrf
-
             <div class="d-flex gap-1">
-
                 @for($i = 1; $i <= 5; $i++)
-
                     <button type="submit"
                             name="rating"
                             value="{{ $i }}"
                             class="btn btn-link p-0 border-0">
-
-                        <i class="bi bi-star-fill text-warning"></i>
-
+                        <i class="bi {{ $i <= round($averageRating) ? 'bi-star-fill text-warning' : 'bi-star text-secondary' }}"></i>
                     </button>
-
                 @endfor
-
             </div>
         </form>
 
@@ -89,7 +87,7 @@
                 <div><i class="bi bi-calendar-x-fill me-1 text-muted"></i> Válido hasta: {{ $fechaExpiracion }}</div>
             </div>
             
-            <button type="button" class="btn btn-outline-dark w-100 fw-bold rounded-pill"
+            <button type="button" class="btn btn-outline-dark benefit-btn w-100 fw-bold rounded-pill"
                     data-bs-toggle="modal" 
                     data-bs-target="#qrModal-{{ $id }}">
                 <i class="bi bi-qr-code-scan me-2"></i> Usar beneficio

@@ -1,6 +1,8 @@
 @extends('layout.app')
 @section('titulo_pagina', 'Beneficios Exclusivos')
-
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/beneficios.css') }}">
+@endsection
 @section('content')
 <div class="container my-5">
 
@@ -22,6 +24,94 @@
             style="width: 400px; height: 400px; bottom: -150px; right: 150px; z-index: 1;">
         </div>
     </div>
+
+
+    {{-- STORIES BENEFICIOS --}}
+    @if($beneficiosDestacados->count())
+
+    <div class="mb-5">
+
+        <div class="d-flex align-items-center gap-3 overflow-auto pb-2">
+
+            @foreach($beneficiosDestacados as $beneficio)
+
+               <div
+                    class="story-item text-center"
+                    onclick="openStory({{ $loop->index }})"
+                    style="cursor:pointer; min-width:90px;"
+                >
+
+                    {{-- FOTO --}}
+                    <div
+                        class="story-ring mx-auto mb-2">
+
+                       <img
+                            src="{{ asset($beneficio->imagen) }}"
+                            class="story-image"
+                            alt="{{ $beneficio->titulo }}"
+                        >
+
+                    </div>
+
+
+                </div>
+
+            @endforeach
+
+            {{-- STORY VIEWER --}}
+            {{-- STORY VIEWER --}}
+            <div id="storyViewer" class="story-viewer d-none">
+
+                <div class="story-container">
+
+                    {{-- BARRA --}}
+                    <div class="story-progress">
+                        <div id="storyBar"></div>
+                    </div>
+
+                    {{-- PROVEEDOR --}}
+                    <div
+                        id="storyProvider"
+                        class="story-provider">
+                    </div>
+
+                    {{-- CERRAR --}}
+                    <button
+                        class="story-close"
+                        onclick="closeStory()">
+
+                        ✕
+
+                    </button>
+
+                    {{-- IMAGEN --}}
+                    <img
+                        id="storyImage"
+                        class="story-full-image">
+
+                    {{-- CLICK IZQ --}}
+                    <div
+                        class="story-left"
+                        onclick="prevStory()">
+                    </div>
+
+                    {{-- CLICK DER --}}
+                    <div
+                        class="story-right"
+                        onclick="nextStory()">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @endif
+
+
 
     {{-- FILTROS DE CATEGORÍAS --}}
     <div class="d-flex flex-wrap align-items-center gap-2 mb-5 pb-3 border-bottom">
@@ -161,5 +251,121 @@
         }
 
     });
+</script>
+
+
+
+
+
+<script>
+
+const stories = @json(
+    $beneficiosDestacados->map(fn($b) => [
+        'imagen' => asset($b->imagen),
+        'proveedor' => $b->proveedor
+    ])
+);
+
+let currentStory = 0;
+let timer;
+
+function openStory(index){
+
+    currentStory = index;
+
+    document
+        .getElementById('storyViewer')
+        .classList
+        .remove('d-none');
+
+    showStory();
+
+}
+
+function showStory(){
+
+    const image =
+        document.getElementById('storyImage');
+
+    const provider =
+        document.getElementById('storyProvider');
+
+    image.src =
+        stories[currentStory].imagen;
+
+    provider.innerText =
+        stories[currentStory].proveedor;
+
+    startProgress();
+
+}
+
+function startProgress(){
+
+    clearInterval(timer);
+
+    const bar =
+        document.getElementById('storyBar');
+
+    let width = 0;
+
+    bar.style.width = "0%";
+
+    timer = setInterval(() => {
+
+        width += 1;
+
+        bar.style.width = width + "%";
+
+        if(width >= 100){
+
+            nextStory();
+
+        }
+
+    }, 50);
+
+}
+
+function nextStory(){
+
+    currentStory++;
+
+    if(currentStory >= stories.length){
+
+        closeStory();
+        return;
+
+    }
+
+    showStory();
+
+}
+
+function prevStory(){
+
+    currentStory--;
+
+    if(currentStory < 0){
+
+        currentStory = 0;
+
+    }
+
+    showStory();
+
+}
+
+function closeStory(){
+
+    clearInterval(timer);
+
+    document
+        .getElementById('storyViewer')
+        .classList
+        .add('d-none');
+
+}
+
 </script>
 @endsection

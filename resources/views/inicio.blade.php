@@ -2,7 +2,7 @@
 
 @section('titulo_pagina', 'Inicio')
 
-@section('styles') <style> .categories-container { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 10px; position: relative; z-index: 10; } /* 🔥 BOTONES INTEGRADOS AL TEMA */ .category-btn { flex: 1; height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(255,255,255,0.05); /* 🔥 BORDE MÁS VISIBLE */ border: 2px solid rgba(255,255,255,0.25); border-radius: 18px; backdrop-filter: blur(8px); text-decoration: none; color: rgb(0, 0, 0); font-weight: 600; font-size: 14px; transition: all 0.25s ease; position: relative; z-index: 1; } /* icono */ .category-btn .icon { font-size: 30px; margin-bottom: 8px; } /* hover moderno */ .category-btn:hover { border-color: rgba(0, 0, 0, 0.6); /* 🔥 resalta más */ background: rgba(255,255,255,0.12); } /* click */ .category-btn:active { transform: scale(0.95); } </style> @endsection
+@section('styles') 
 
 @section('content')
 
@@ -223,9 +223,20 @@
 
 
 
-    <div class="benefits-cta">
-        <h3>Desbloquea todos los beneficios UADY Spot</h3>
-        <p>Eventos, descuentos, vacantes y convenios solo para estudiantes registrados</p>
-        <a href="/registro" class="cta-button">Únete ahora</a>
-    </div>
+    @guest
+
+        <div class="benefits-cta">
+            <h3>Desbloquea todos los beneficios UADY Spot</h3>
+
+            <p>
+                Eventos, descuentos, vacantes y convenios 
+                solo para estudiantes registrados
+            </p>
+
+            <a href="/registro" class="cta-button">
+                Únete ahora
+            </a>
+        </div>
+
+    @endguest
 @endsection

@@ -1,220 +1,319 @@
 @extends('layout.app')
+
 @section('titulo_pagina', 'Bolsa de Trabajo')
+
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @endsection
+
 @section('content')
 
-<div class="container bg-white rounded-4 shadow border p-4 my-5">
+<div class="container-fluid my-5">
 
-    {{-- 1. HEADER --}}
-    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+    <div class="row">
 
-        <h1 class="fw-bold fs-3 mb-0"
-            style="color: #002E5F;">
-            Encuentra tu próximo empleo
-        </h1>
-        
-        <div class="input-group"
-             style="max-width: 350px;">
+        {{-- ================= SIDEBAR ================= --}}
+        @auth
 
-            <input type="text"
-                   name="search"
-                   form="filterForm"
-                   class="form-control"
-                   placeholder="Buscar empleo..."
-                   value="{{ request('search') }}">
+        <div class="col-lg-3 mb-4">
 
-            <button type="submit"
-                    form="filterForm"
-                    class="btn text-white fw-bold"
-                    style="background-color: #0056b3;">
+            <div class="bg-white rounded-4 shadow border p-4 sticky-top">
 
-                <i class="bi bi-search"></i>
+                <h4 class="fw-bold mb-4"
+                    style="color:#002E5F;">
 
-            </button>
+                    Mi Espacio Laboral
 
-        </div>
+                </h4>
 
-    </div>
+                {{-- MI CV --}}
+                <a href="{{ route('jobs.cv') }}"
+                   class="btn w-100 mb-3 text-white fw-bold rounded-3"
+                   style="background:#002E5F;">
 
-    {{-- 2. FILTROS --}}
-    <form action="{{ route('jobs.index') }}"
-          method="GET"
-          id="filterForm">
-
-        <div class="d-flex flex-column gap-3 mb-5 pb-4 border-bottom">
-            
-            {{-- PÍLDORAS --}}
-            <div class="d-flex flex-wrap align-items-center gap-2">
-
-                @php
-                    $tipos = ['Tiempo Completo', 'Medio Tiempo', 'Prácticas', 'Freelance'];
-
-                    $currentType = request('type')
-                        ? request('type')[0]
-                        : null;
-                @endphp
-                
-                {{-- TODOS --}}
-                <a href="{{ route('jobs.index', request()->except('type')) }}"
-                   class="badge rounded-pill px-4 py-2 text-decoration-none {{ !$currentType ? 'bg-primary text-white' : 'bg-light text-dark border' }}"
-                   style="font-size: 0.9rem;">
-
-                    Todos
+                    <i class="bi bi-file-earmark-person"></i>
+                    Mi CV
 
                 </a>
 
-                {{-- TIPOS --}}
-                @foreach($tipos as $tipo)
+                {{-- POSTULACIONES --}}
+                <a href="{{ route('applications.index') }}"
+                   class="btn btn-outline-dark w-100 mb-3 rounded-3 fw-semibold">
 
-                    <a href="{{ route('jobs.index', array_merge(request()->query(), ['type' => [$tipo]])) }}" 
-                       class="badge rounded-pill px-4 py-2 text-decoration-none 
-                       {{ $currentType == $tipo ? 'bg-primary text-white fw-bold' : 'bg-light text-dark border fw-medium' }}"
-                       style="font-size: 0.9rem;">
+                    <i class="bi bi-send-check"></i>
+                    Mis postulaciones
 
-                        {{ $tipo }}
+                </a>
 
-                    </a>
+                {{-- FAVORITOS --}}
+                <a href="{{ route('jobs.favorites') }}"
+                   class="btn btn-outline-warning w-100 mb-4 rounded-3 fw-semibold">
 
-                @endforeach
+                    <i class="bi bi-bookmark-heart"></i>
+                    Vacantes guardadas
 
-            </div>
+                </a>
 
-            {{-- DROPDOWNS --}}
-            <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
-                
-                {{-- MODALIDAD --}}
-                @php
-                    $currentModality = request('modality')
-                        ? request('modality')[0]
-                        : '';
-                @endphp
+                <hr>
 
-                <select name="modality[]"
-                        class="form-select form-select-sm text-secondary border shadow-sm"
-                        style="max-width: 200px;"
-                        onchange="this.form.submit()">
+                {{-- RESUMEN --}}
+                <div class="small text-muted">
 
-                    <option value="">
-                        Cualquier modalidad
-                    </option>
+                    <div class="d-flex justify-content-between mb-2">
 
-                    <option value="Presencial"
-                        {{ $currentModality == 'Presencial' ? 'selected' : '' }}>
-                        Presencial
-                    </option>
+                        <span>Postulaciones</span>
+                        <strong>0</strong>
 
-                    <option value="Remoto"
-                        {{ $currentModality == 'Remoto' ? 'selected' : '' }}>
-                        Remoto
-                    </option>
+                    </div>
 
-                    <option value="Híbrido"
-                        {{ $currentModality == 'Híbrido' ? 'selected' : '' }}>
-                        Híbrido
-                    </option>
+                    <div class="d-flex justify-content-between mb-2">
 
-                </select>
+                        <span>Guardados</span>
+                        <strong>0</strong>
 
-                {{-- UBICACIÓN --}}
-                <select name="location"
-                        class="form-select form-select-sm text-secondary border shadow-sm"
-                        style="max-width: 200px;"
-                        onchange="this.form.submit()">
+                    </div>
 
-                    <option value="">
-                        Todas las ubicaciones
-                    </option>
+                    <div class="d-flex justify-content-between">
 
-                    <option value="Mérida"
-                        {{ request('location') == 'Mérida' ? 'selected' : '' }}>
-                        Mérida
-                    </option>
+                        <span>CV completado</span>
+                        <strong>70%</strong>
 
-                    <option value="Progreso"
-                        {{ request('location') == 'Progreso' ? 'selected' : '' }}>
-                        Progreso
-                    </option>
-
-                    <option value="Remoto"
-                        {{ request('location') == 'Remoto' ? 'selected' : '' }}>
-                        Remoto
-                    </option>
-
-                </select>
-
-                {{-- LIMPIAR --}}
-                @if(request()->anyFilled(['type', 'location', 'modality', 'search']))
-
-                    <a href="{{ route('jobs.index') }}"
-                       class="btn btn-sm btn-link text-danger text-decoration-none ms-2">
-
-                        Limpiar
-
-                    </a>
-
-                @endif
-
-            </div>
-
-        </div>
-
-    </form>
-
-    {{-- RESULTADOS --}}
-    <div class="row">
-
-        <div class="col-12">
-
-            @forelse($jobs as $job)
-
-                <x-job.card-job 
-                    :id="$job->id"
-                    :title="$job->title"
-                    :company="$job->company"
-                    :location="$job->location"
-                    :salary="$job->salary"
-                    :type="$job->type"
-                    :description="$job->description"
-                    :modality="$job->modality"
-                    :posted_at="$job->posted_at"
-                    :is_new="$job->is_new"
-                    :urgent="$job->urgent"
-                />
-
-            @empty
-
-                <div class="text-center py-5">
-
-                    <i class="bi bi-briefcase text-muted opacity-50"
-                       style="font-size: 4rem;">
-                    </i>
-
-                    <h4 class="mt-3 text-muted">
-                        Aún no hay vacantes con esos filtros.
-                    </h4>
-
-                    <a href="{{ route('jobs.index') }}"
-                       class="btn btn-outline-primary mt-3">
-
-                        Quitar filtros
-
-                    </a>
+                    </div>
 
                 </div>
 
-            @endforelse
+            </div>
+
+        </div>
+
+        {{-- CONTENIDO CON SIDEBAR --}}
+        <div class="col-lg-9">
+
+        @else
+
+        {{-- CONTENIDO COMPLETO SIN SIDEBAR --}}
+        <div class="col-12">
+
+        @endauth
+
+            <div class="bg-white rounded-4 shadow border p-4">
+
+                {{-- 1. HEADER --}}
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+
+                    <h1 class="fw-bold fs-3 mb-0"
+                        style="color: #002E5F;">
+
+                        Encuentra tu próximo empleo
+
+                    </h1>
+                    
+                    <div class="input-group"
+                         style="max-width: 350px;">
+
+                        <input type="text"
+                               name="search"
+                               form="filterForm"
+                               class="form-control"
+                               placeholder="Buscar empleo..."
+                               value="{{ request('search') }}">
+
+                        <button type="submit"
+                                form="filterForm"
+                                class="btn text-white fw-bold"
+                                style="background-color: #0056b3;">
+
+                            <i class="bi bi-search"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                {{-- 2. FILTROS --}}
+                <form action="{{ route('jobs.index') }}"
+                      method="GET"
+                      id="filterForm">
+
+                    <div class="d-flex flex-column gap-3 mb-5 pb-4 border-bottom">
+                        
+                        {{-- PÍLDORAS --}}
+                        <div class="d-flex flex-wrap align-items-center gap-2">
+
+                            @php
+                                $tipos = ['Tiempo Completo', 'Medio Tiempo', 'Prácticas', 'Freelance'];
+
+                                $currentType = request('type')
+                                    ? request('type')[0]
+                                    : null;
+                            @endphp
+                            
+                            {{-- TODOS --}}
+                            <a href="{{ route('jobs.index', request()->except('type')) }}"
+                               class="badge rounded-pill px-4 py-2 text-decoration-none {{ !$currentType ? 'bg-primary text-white' : 'bg-light text-dark border' }}"
+                               style="font-size: 0.9rem;">
+
+                                Todos
+
+                            </a>
+
+                            {{-- TIPOS --}}
+                            @foreach($tipos as $tipo)
+
+                                <a href="{{ route('jobs.index', array_merge(request()->query(), ['type' => [$tipo]])) }}" 
+                                   class="badge rounded-pill px-4 py-2 text-decoration-none 
+                                   {{ $currentType == $tipo ? 'bg-primary text-white fw-bold' : 'bg-light text-dark border fw-medium' }}"
+                                   style="font-size: 0.9rem;">
+
+                                    {{ $tipo }}
+
+                                </a>
+
+                            @endforeach
+
+                        </div>
+
+                        {{-- DROPDOWNS --}}
+                        <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
+                            
+                            {{-- MODALIDAD --}}
+                            @php
+                                $currentModality = request('modality')
+                                    ? request('modality')[0]
+                                    : '';
+                            @endphp
+
+                            <select name="modality[]"
+                                    class="form-select form-select-sm text-secondary border shadow-sm"
+                                    style="max-width: 200px;"
+                                    onchange="this.form.submit()">
+
+                                <option value="">
+                                    Cualquier modalidad
+                                </option>
+
+                                <option value="Presencial"
+                                    {{ $currentModality == 'Presencial' ? 'selected' : '' }}>
+                                    Presencial
+                                </option>
+
+                                <option value="Remoto"
+                                    {{ $currentModality == 'Remoto' ? 'selected' : '' }}>
+                                    Remoto
+                                </option>
+
+                                <option value="Híbrido"
+                                    {{ $currentModality == 'Híbrido' ? 'selected' : '' }}>
+                                    Híbrido
+                                </option>
+
+                            </select>
+
+                            {{-- UBICACIÓN --}}
+                            <select name="location"
+                                    class="form-select form-select-sm text-secondary border shadow-sm"
+                                    style="max-width: 200px;"
+                                    onchange="this.form.submit()">
+
+                                <option value="">
+                                    Todas las ubicaciones
+                                </option>
+
+                                <option value="Mérida"
+                                    {{ request('location') == 'Mérida' ? 'selected' : '' }}>
+                                    Mérida
+                                </option>
+
+                                <option value="Progreso"
+                                    {{ request('location') == 'Progreso' ? 'selected' : '' }}>
+                                    Progreso
+                                </option>
+
+                                <option value="Remoto"
+                                    {{ request('location') == 'Remoto' ? 'selected' : '' }}>
+                                    Remoto
+                                </option>
+
+                            </select>
+
+                            {{-- LIMPIAR --}}
+                            @if(request()->anyFilled(['type', 'location', 'modality', 'search']))
+
+                                <a href="{{ route('jobs.index') }}"
+                                   class="btn btn-sm btn-link text-danger text-decoration-none ms-2">
+
+                                    Limpiar
+
+                                </a>
+
+                            @endif
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+                {{-- RESULTADOS --}}
+                <div class="row">
+
+                    <div class="col-12">
+
+                        @forelse($jobs as $job)
+
+                            <x-job.card-job 
+                                :id="$job->id"
+                                :title="$job->title"
+                                :company="$job->company"
+                                :location="$job->location"
+                                :salary="$job->salary"
+                                :type="$job->type"
+                                :description="$job->description"
+                                :modality="$job->modality"
+                                :posted_at="$job->posted_at"
+                                :is_new="$job->is_new"
+                                :urgent="$job->urgent"
+                            />
+
+                        @empty
+
+                            <div class="text-center py-5">
+
+                                <i class="bi bi-briefcase text-muted opacity-50"
+                                   style="font-size: 4rem;">
+                                </i>
+
+                                <h4 class="mt-3 text-muted">
+                                    Aún no hay vacantes con esos filtros.
+                                </h4>
+
+                                <a href="{{ route('jobs.index') }}"
+                                   class="btn btn-outline-primary mt-3">
+
+                                    Quitar filtros
+
+                                </a>
+
+                            </div>
+
+                        @endforelse
+
+                    </div>
+
+                </div>
+
+                {{-- PAGINACIÓN --}}
+                <div class="d-flex justify-content-center mt-5">
+                    {{ $jobs->onEachSide(1)->links('pagination::bootstrap-5') }}
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
-    {{-- PAGINACIÓN --}}
-    <div class="d-flex justify-content-center mt-5">
-        {{ $jobs->onEachSide(1)->links('pagination::bootstrap-5') }}
-    </div>
-    
 </div>
 
 @endsection

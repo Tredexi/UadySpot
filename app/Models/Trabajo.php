@@ -20,4 +20,12 @@ class Trabajo extends Model
     'description'
 
     ];
+    public function applications()
+{
+    return $this->hasMany(JobApplication::class);
+}
+public function favoritedBy()
+{
+    return $this->hasMany(FavoriteJob::class);
+}
 }

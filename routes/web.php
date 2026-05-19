@@ -101,6 +101,50 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bolsa-de-trabajo/{id}',
         [JobController::class, 'detail'])
         ->name('jobs.detail');
+
+    Route::get('/mi-cv',
+    [JobController::class, 'cv']
+    )->name('jobs.cv');
+    
+     Route::get('/mi-cv/editar', [JobController::class, 'editCv'])
+        ->name('jobs.cv.edit');
+
+    Route::post('/mi-cv/editar', [JobController::class, 'updateCv'])
+        ->name('jobs.cv.update');
+  
+   Route::get(
+        '/mis-postulaciones',
+        [JobController::class, 'applications']
+    )->name('applications.index');
+
+    Route::delete(
+        '/mis-postulaciones/{id}',
+        [JobController::class, 'destroyApplication']
+    )->name('applications.destroy');
+
+
+
+
+
+        Route::post(
+        '/trabajos/{id}/favorito',
+        [JobController::class, 'toggleFavorite']
+    )->name('jobs.favorite');
+
+    Route::get(
+        '/trabajos-guardados',
+        [JobController::class, 'favorites']
+    )->name('jobs.favorites');
+
+    Route::delete(
+        '/trabajos-guardados/{id}',
+        [JobController::class, 'destroyFavorite']
+    )->name('jobs.favorites.destroy');
+
+
+
+
+
     // Carreras
     Route::get('/carreras',
         [CareerController::class, 'index'])

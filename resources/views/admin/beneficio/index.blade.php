@@ -43,8 +43,7 @@
     <div class="card shadow-sm">
         <div class="card-body table-responsive">
 
-            <table class="table table-hover align-middle">
-
+            <table id="tablaBeneficios" class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
                         <th>ID</th>
@@ -107,9 +106,20 @@
     {{ $beneficios->links('pagination::bootstrap-5') }}
 </div>
 
+
         </div>
     </div>
 
 </div>
+<script>
+$(document).ready(function () {
 
+    $('#tablaBeneficios').DataTable({
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.8/i18n/es-ES.json'
+        }
+    });
+
+});
+</script>
 @endsection

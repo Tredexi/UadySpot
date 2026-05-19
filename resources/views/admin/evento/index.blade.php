@@ -62,7 +62,7 @@
 
                         <td>{{ $evento->ubicacion }}</td>
 
-                        <td>{{ $evento->fecha_calendario }}</td>
+                        <td>{{ \Carbon\Carbon::parse($evento->fecha_calendario)->format('d-m-Y') }}</td>
 
                         <td>
 

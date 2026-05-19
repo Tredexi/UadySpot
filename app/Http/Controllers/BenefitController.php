@@ -32,20 +32,27 @@ class BenefitController extends Controller
             });
         }
 
+
+
+        $beneficiosDestacados = Benefit::where(
+            'es_destacado',
+            true
+        )->take(10)->get();
+
         // PAGINACIÓN
-        $beneficios = $query->paginate(10)->withQueryString();
+        $beneficios = $query->paginate(8)->withQueryString();
 
         // Traemos categorías ordenadas para tus botones del Navbar
         $categorias = BenefitCategory::orderBy('nombre')->get();
 
-        return view('benefit.index', compact('beneficios', 'categorias'));
+        return view('benefit.index', compact('beneficios', 'categorias', 'beneficiosDestacados'));
     }
 
 
     // ADMIN LISTA
     public function adminIndex()
     {
-        $beneficios = Benefit::latest()->paginate(10);
+        $beneficios = Benefit::latest()->paginate(8);
 
         return view(
             'admin.beneficio.index',

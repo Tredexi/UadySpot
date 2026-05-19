@@ -1,8 +1,15 @@
 @extends('layout.app')
 @section('titulo_pagina', 'Calendario')
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/calendario.css') }}">
+
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css' rel='stylesheet' />
+
+<link rel="stylesheet" href="{{ asset('css/calendario.css') }}">
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+
 @endsection
+
 @section('content')
 
 <div class="container py-5">
@@ -13,231 +20,54 @@ Calendario UADY
 
 <div class="card shadow-lg border-0 rounded-4 p-4">
 
-<div class="d-flex justify-content-between align-items-center mb-3">
 
-<button class="btn calendar-btn-uady" onclick="prevMonth()">
-<i class="bi bi-arrow-left"></i>
-</button>
 
-<h4 id="monthYear" class="fw-bold mb-0"></h4>
-
-<button class="btn calendar-btn-uady" onclick="nextMonth()">
-<i class="bi bi-arrow-right"></i>
-</button>
-
-</div>
-
-<table class="table calendar-table text-center">
-
-<thead>
-<tr>
-<th>Do</th>
-<th>Lu</th>
-<th>Ma</th>
-<th>Mi</th>
-<th>Ju</th>
-<th>Vi</th>
-<th>Sa</th>
-</tr>
-</thead>
-
-<tbody id="calendarBody"></tbody>
-
-</table>
-
-</div>
-
-<!-- LEYENDA -->
-
-<div class="row text-center mt-4">
-
-<div class="col-md-4">
-<span class="legend holiday"></span> Días inhábiles
-</div>
-
-<div class="col-md-4">
-<span class="legend vacation"></span> Vacaciones
-</div>
-
-<div class="col-md-4">
-<span class="legend platform"></span> Eventos UADY SPOT
-</div>
-
-</div>
-
-</div>
-
+<div id="calendar"></div>
 
 
 <script>
-const platformEvents = @json($eventos);
 
-const months=[
-"Enero","Febrero","Marzo","Abril","Mayo","Junio",
-"Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
-];
+document.addEventListener('DOMContentLoaded', function () {
 
-const today = new Date();
+    let calendarEl = document.getElementById('calendar');
 
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
+    let eventos = @json($eventos);
 
+    let formattedEvents = eventos.map(e => ({
+        title: e.titulo,
+        start: e.fecha_calendario,
+        url: `/eventos/${e.id}`,
+    }));
 
-const events={
+    let calendar = new FullCalendar.Calendar(calendarEl, {
 
-"2026-01-01":{name:"Inicio de año",type:"holiday"},
-"2026-01-02":{name:"Inicio de año",type:"holiday"},
-"2026-01-03":{name:"Fallecimiento Felipe Carrillo Puerto",type:"holiday"},
+        initialView: 'dayGridMonth',
 
-"2026-02-02":{name:"Promulgación Constitución",type:"holiday"},
-"2026-02-16":{name:"Carnaval",type:"holiday"},
-"2026-02-17":{name:"Carnaval",type:"holiday"},
-"2026-02-25":{name:"Fundación UADY",type:"holiday"},
+        locale: 'es',
 
-"2026-03-03":{name:"Fallecimiento Cepeda Peraza",type:"holiday"},
-"2026-03-16":{name:"Natalicio Benito Juárez",type:"holiday"},
+        height: 'auto',
+        eventDisplay: 'block',
 
-"2026-04-21":{name:"Día del estudiante",type:"holiday"},
-"2026-04-25":{name:"Día del empleado UADY",type:"holiday"},
+        events: formattedEvents,
 
-"2026-05-01":{name:"Día del trabajo",type:"holiday"},
-"2026-05-05":{name:"Batalla de Puebla",type:"holiday"},
-"2026-05-10":{name:"Día de la madre",type:"holiday"},
-"2026-05-15":{name:"Día del maestro",type:"holiday"},
+        eventClick: function(info) {
 
-"2026-09-15":{name:"Independencia México",type:"holiday"},
-"2026-09-16":{name:"Independencia México",type:"holiday"},
+            info.jsEvent.preventDefault();
 
-"2026-10-12":{name:"Día de los pueblos originarios",type:"holiday"},
+            window.location.href = info.event.url;
 
-"2026-11-01":{name:"Todos los santos",type:"holiday"},
-"2026-11-02":{name:"Fieles difuntos",type:"holiday"},
-"2026-11-16":{name:"Revolución Mexicana",type:"holiday"},
+        }
 
-};
+    });
 
+    calendar.render();
 
-const vacations=[
-{start:"2026-03-30",end:"2026-04-10",name:"Vacaciones de Primavera"},
-{start:"2026-07-16",end:"2026-08-05",name:"Vacaciones de Verano"},
-{start:"2026-12-26",end:"2026-12-31",name:"Vacaciones de Invierno"}
-];
-
-
-function getEvents(date){
-
-let dayEvents = [];
-
-// eventos del calendario oficial
-if(events[date]){
-dayEvents.push(events[date]);
-}
-
-// vacaciones
-for(let v of vacations){
-if(date>=v.start && date<=v.end){
-dayEvents.push({name:v.name,type:"vacation"});
-}
-}
-
-// eventos UADY SPOT
-for(let e of platformEvents){
-if(e.fecha_calendario === date){
-dayEvents.push({
-name: e.titulo,
-type: "platform"
 });
-}
-}
-
-return dayEvents;
-
-}
-
-
-function generateCalendar(){
-
-const firstDay=new Date(currentYear,currentMonth,1).getDay();
-const daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
-
-document.getElementById("monthYear").innerText=
-months[currentMonth]+" "+currentYear;
-
-let calendar="";
-let date=1;
-
-for(let i=0;i<6;i++){
-
-calendar+="<tr>";
-
-for(let j=0;j<7;j++){
-
-if(i===0 && j<firstDay){
-
-calendar+="<td></td>";
-
-}else if(date>daysInMonth){
-
-break;
-
-}else{
-
-let fullDate=currentYear+"-"+String(currentMonth+1).padStart(2,"0")+"-"+String(date).padStart(2,"0");
-
-let dayEvents = getEvents(fullDate);
-
-let isToday = date === today.getDate() &&
-currentMonth === today.getMonth() &&
-currentYear === today.getFullYear();
-
-if(dayEvents.length > 0){
-
-let tooltipText = dayEvents.map(e => e.name).join("<br>");
-
-let dots = dayEvents.map(e => `<span class="dot ${e.type}"></span>`).join("");
-
-calendar+=`
-<td class="${isToday ? 'today' : ''} event">
-${date}
-<div class="dots">${dots}</div>
-<div class="tooltip-event">${tooltipText}</div>
-</td>
-`;
-
-}else{
-
-calendar+=`<td class="${isToday ? 'today' : ''}">${date}</td>`;
-
-}
-
-date++;
-
-}
-
-}
-
-calendar+="</tr>";
-
-}
-
-document.getElementById("calendarBody").innerHTML=calendar;
-
-}
-
-function nextMonth(){
-currentMonth++;
-if(currentMonth>11){currentMonth=0;currentYear++;}
-generateCalendar();
-}
-
-function prevMonth(){
-currentMonth--;
-if(currentMonth<0){currentMonth=11;currentYear--;}
-generateCalendar();
-}
-
-generateCalendar();
 
 </script>
+
+</script>
+</div>
+</div>
 
 @endsection
