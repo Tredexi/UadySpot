@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container py-5">
+<div class="container py-5" style="min-height: 50vh;">
 
     {{-- HEADER --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
