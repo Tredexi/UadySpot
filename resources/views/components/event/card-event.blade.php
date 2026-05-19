@@ -25,23 +25,60 @@
         </h5>
 
                 {{-- 4. Etiquetas (Categoría y Disponibilidad) --}}
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    @if(isset($category))
-                        <span class="badge bg-light text-secondary border fw-normal px-2 py-1">{{ $category }}</span>
-                    @endif
-                    
-                    @if(isset($availability))
-                        <div class="d-flex align-items-center" style="font-size: 0.85rem;">
-                            <span class="px-2 rounded-pill text-dark d-inline-flex align-items-center gap-1"
-                                style="background-color: #cfe9d8;">
+<div class="d-flex align-items-center mb-4" style="gap: 14px;">
 
-                                <i class="bi bi-circle-fill text-success" style="font-size: 0.45rem;"></i>
+    {{-- Categoría --}}
+    @if(isset($category))
+        <span class="badge bg-light text-secondary border fw-normal px-2 py-1">
+            {{ $category }}
+        </span>
+    @endif
 
-                                {{ $availability }}
-                            </span>
-                        </div>
-                    @endif
-                </div>
+    {{-- Disponibilidad --}}
+    @if(isset($availability))
+        <div 
+            style="
+                background-color: #cfe9d8;
+                border-radius: 999px;
+
+                width: 165px;
+                min-height: 45px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                padding: 8px 14px;
+
+                text-align: center;
+                gap: 8px;
+            "
+        >
+
+            <i 
+                class="bi bi-circle-fill text-success"
+                style="
+                    font-size: 0.45rem;
+                    flex-shrink: 0;
+                    margin-top: -2px;
+                "
+            ></i>
+
+            <span 
+                style="
+                    font-size: 0.85rem;
+                    line-height: 1.1;
+                    white-space: normal;
+                    word-break: keep-all;
+                "
+            >
+                {{ $availability }}
+            </span>
+
+        </div>
+    @endif
+
+</div>
 
         {{-- 3. Info de Fecha, Ubicación y Hora --}}
         <div class="d-flex mb-4">
