@@ -17,7 +17,11 @@ use App\Http\Controllers\BenefitRatingController;
 // ============================
 // RUTAS PUBLICAS
 // ============================
+Route::get('/suscripcion', function () {
 
+    return view('suscripcion');
+
+})->name('suscripcion');
 // Página principal
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
 

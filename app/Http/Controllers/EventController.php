@@ -7,53 +7,98 @@ use App\Models\Evento;
 
 class EventController extends Controller
 {
+
     public function index(Request $request)
     {
+
         $query = Evento::query();
 
-        // Filtros dinámicos
+        // FILTROS
         if ($request->filled('category')) {
-            $query->where('categoria', $request->category);
+
+            $query->where(
+                'categoria',
+                $request->category
+            );
+
         }
 
         if ($request->filled('location')) {
-            $query->where('ubicacion', 'like', '%' . $request->location . '%');
+
+            $query->where(
+                'ubicacion',
+                'like',
+                '%' . $request->location . '%'
+            );
+
         }
 
         if ($request->filled('status')) {
-            $query->where('disponibilidad_status', $request->status);
+
+            $query->where(
+                'disponibilidad_status',
+                $request->status
+            );
+
         }
 
         if ($request->filled('search')) {
-            $query->where('titulo', 'like', '%' . $request->search . '%');
+
+            $query->where(
+                'titulo',
+                'like',
+                '%' . $request->search . '%'
+            );
+
         }
 
-        // Filtro de fecha (Este mes)
+        // ESTE MES
         if ($request->date_range == 'this_month') {
-            $query->whereMonth('fecha_calendario', now()->month)
-                ->whereYear('fecha_calendario', now()->year);
+
+            $query->whereMonth(
+                'fecha_calendario',
+                now()->month
+            )->whereYear(
+                'fecha_calendario',
+                now()->year
+            );
+
         }
 
         // PAGINACIÓN
-        $events = $query->paginate(8)->withQueryString();
+        $events = $query
+            ->paginate(8)
+            ->withQueryString();
 
-        return view('event.index', compact('events'));
+        return view(
+            'event.index',
+            compact('events')
+        );
+
     }
+
 
     public function show($id)
     {
-        // Busca el evento o lanza un error 404 si no existe
+
         $event = Evento::findOrFail($id);
 
-        return view('event.detail', compact('event'));
+        return view(
+            'event.detail',
+            compact('event')
+        );
+
     }
 
-    // Métodos para la vistas de administación
+
+    // =========================
+    // ADMIN INDEX
+    // =========================
     public function adminIndex()
     {
 
-        $eventos = \App\Models\Evento::latest()
-                        ->paginate(8);
+        $eventos = Evento::latest()
+            ->paginate(8);
 
         return view(
             'admin.evento.index',
@@ -62,17 +107,99 @@ class EventController extends Controller
 
     }
 
+
+    // =========================
+    // ADMIN CREATE
+    // =========================
     public function adminCreate()
     {
 
-        return view('admin.evento.create');
+        return view(
+            'admin.evento.create'
+        );
 
     }
-    
+
+
+    // =========================
+    // ADMIN STORE
+    // =========================
+    public function adminStore(Request $request)
+    {
+
+        $request->validate([
+
+            'titulo' => 'required',
+            'imagen' => 'required|image'
+
+        ]);
+
+        $imagenPath = null;
+
+        // SUBIR IMAGEN
+        if($request->hasFile('imagen')){
+
+            $file = $request->file('imagen');
+
+            $filename =
+                time() . '_' .
+                $file->getClientOriginalName();
+
+            $destination =
+                public_path('uploads/eventos');
+
+            if(!file_exists($destination)){
+
+                mkdir($destination, 0777, true);
+
+            }
+
+            $file->move(
+                $destination,
+                $filename
+            );
+
+            $imagenPath =
+                'uploads/eventos/' . $filename;
+
+        }
+
+        // CREAR EVENTO
+            Evento::create([
+
+            'titulo' => $request->titulo,
+
+            'categoria' => $request->categoria,
+
+            'ubicacion' => $request->ubicacion,
+
+            'fecha_calendario' => $request->fecha_calendario,
+
+            'hora' => $request->hora,
+
+            'descripcion' => $request->descripcion,
+
+            'imagen' => $imagenPath
+
+        ]);
+
+        return redirect()
+            ->route('admin.evento.index')
+            ->with(
+                'success',
+                'Evento creado correctamente'
+            );
+
+    }
+
+
+    // =========================
+    // ADMIN EDIT
+    // =========================
     public function adminEdit($id)
     {
 
-        $evento = \App\Models\Evento::findOrFail($id);
+        $evento = Evento::findOrFail($id);
 
         return view(
             'admin.evento.edit',
@@ -81,64 +208,111 @@ class EventController extends Controller
 
     }
 
-    public function adminUpdate(Request $request, $id)
+
+    // =========================
+    // ADMIN UPDATE
+    // =========================
+    public function adminUpdate(
+        Request $request,
+        $id
+    )
     {
 
-        $evento = \App\Models\Evento::findOrFail($id);
+        $evento = Evento::findOrFail($id);
+
+        $imagenPath = $evento->imagen;
+
+        // NUEVA IMAGEN
+        if($request->hasFile('imagen')){
+
+            $file = $request->file('imagen');
+
+            $filename =
+                time() . '_' .
+                $file->getClientOriginalName();
+
+            $destination =
+                public_path('uploads/eventos');
+
+            if(!file_exists($destination)){
+
+                mkdir($destination, 0777, true);
+
+            }
+
+            $file->move(
+                $destination,
+                $filename
+            );
+
+            $imagenPath =
+                'uploads/eventos/' . $filename;
+
+        }
 
         $evento->update([
 
             'titulo' => $request->titulo,
+
             'categoria' => $request->categoria,
+
             'ubicacion' => $request->ubicacion,
-            'fecha_calendario' => $request->fecha_calendario,
-            'descripcion' => $request->descripcion,
+                'hora' => $request->hora,
+
+
+            'fecha_calendario' =>
+                $request->fecha_calendario,
+
+            'descripcion' =>
+                $request->descripcion,
+
+            'imagen' => $imagenPath
 
         ]);
 
         return redirect()
             ->route('admin.evento.index')
-            ->with('success','Evento actualizado correctamente');
+            ->with(
+                'success',
+                'Evento actualizado correctamente'
+            );
 
     }
 
+
+    // =========================
+    // ADMIN DELETE
+    // =========================
     public function adminDestroy($id)
     {
 
-        $evento = \App\Models\Evento::findOrFail($id);
+        $evento = Evento::findOrFail($id);
 
         $evento->delete();
 
         return redirect()
             ->route('admin.evento.index')
-            ->with('success','Evento eliminado');
+            ->with(
+                'success',
+                'Evento eliminado'
+            );
 
     }
 
-    public function adminStore(Request $request)
-    {
 
-        \App\Models\Evento::create([
-
-            'titulo' => $request->titulo,
-            'categoria' => $request->categoria,
-            'ubicacion' => $request->ubicacion,
-            'fecha_calendario' => $request->fecha_calendario,
-            'descripcion' => $request->descripcion,
-
-        ]);
-
-        return redirect()
-            ->route('admin.evento.index')
-            ->with('success','Evento creado');
-
-    }
-
+    // =========================
+    // CALENDARIO
+    // =========================
     public function calendario()
     {
-        $eventos = Evento::all(); // traer eventos reales
 
-        return view('calendario', compact('eventos'));
+        $eventos = Evento::all();
+
+        return view(
+            'calendario',
+            compact('eventos')
+        );
+
     }
 
 }

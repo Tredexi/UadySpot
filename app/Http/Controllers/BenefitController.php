@@ -75,26 +75,79 @@ class BenefitController extends Controller
     }
 
 
-    // ADMIN GUARDAR
-    public function adminStore(Request $request)
-    {
+   // ADMIN GUARDAR
+public function adminStore(Request $request)
+{
 
-        $request->validate([
+    $request->validate([
 
-            'titulo' => 'required',
-            'descripcion' => 'required',
+        'titulo' => 'required',
+        'imagen' => 'nullable|image'
 
-        ]);
+    ]);
 
-        Benefit::create($request->all());
+    $imagenPath = null;
 
-        return redirect()
-            ->route('admin.beneficio.index')
-            ->with('success',
-            'Beneficio creado correctamente');
+    // SUBIR IMAGEN
+    if($request->hasFile('imagen')){
+
+        $file = $request->file('imagen');
+
+        $filename =
+            time() . '_' . $file->getClientOriginalName();
+
+        $destination =
+            public_path('uploads/beneficios');
+
+        if(!file_exists($destination)){
+
+            mkdir($destination, 0777, true);
+
+        }
+
+        $file->move($destination, $filename);
+
+        $imagenPath =
+            'uploads/beneficios/' . $filename;
 
     }
 
+    Benefit::create([
+
+        'titulo' => $request->titulo,
+
+        'subtitulo' => $request->subtitulo,
+
+        'valor' => $request->valor,
+
+        'proveedor' => $request->proveedor,
+
+        'ubicacion' => $request->ubicacion,
+
+        'fecha_expiracion' =>
+            $request->fecha_expiracion,
+
+        'category_id' =>
+            $request->category_id,
+
+        'type_id' =>
+            $request->type_id,
+
+        'es_destacado' =>
+            $request->has('es_destacado'),
+
+        'imagen' => $imagenPath
+
+    ]);
+
+    return redirect()
+        ->route('admin.beneficio.index')
+        ->with(
+            'success',
+            'Beneficio creado correctamente'
+        );
+
+}
 
     // ADMIN EDITAR
     public function adminEdit($id)

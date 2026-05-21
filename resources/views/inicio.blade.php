@@ -1,5 +1,5 @@
 @extends('layout.app')
-
+<link rel="stylesheet" href="/css/categories.css">
 @section('titulo_pagina', 'Inicio')
 
 @section('styles') 
@@ -89,7 +89,7 @@
 
         <div class="categories-container">
 
-            <a href="{{ route('benefits.index') }}" class="category-btn">
+            <a href="{{ route('benefits.index') }}" class="category-btn" style="">
                 <span class="icon">✨</span>
                 <span>Beneficios</span>
             </a>
@@ -233,7 +233,7 @@
                 solo para estudiantes registrados
             </p>
 
-            <a href="/registro" class="cta-button">
+            <a href="/suscripcion" class="cta-button">
                 Únete ahora
             </a>
         </div>

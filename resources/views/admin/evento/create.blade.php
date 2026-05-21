@@ -1,80 +1,169 @@
 @extends('layout.admin')
+
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 @endsection
 
 @section('content')
-    <div class="container py-4">
 
-        <h2 class="mb-4">
-            Crear Evento
-        </h2>
+<div class="container py-4">
 
-        <div class="card shadow-sm">
+    <h2 class="mb-4 fw-bold">
+        Crear Evento
+    </h2>
 
-            <div class="card-body">
+    <div class="card shadow-sm border-0 rounded-4">
 
-                <form action="{{ route('admin.evento.store') }}" method="POST" enctype="multipart/form-data">
+        <div class="card-body p-4">
 
-                    @csrf
+            <form 
+                action="{{ route('admin.evento.store') }}"
+                method="POST"
+                enctype="multipart/form-data"
+            >
 
-                    <div class="mb-3">
+                @csrf
 
-                        <label>Título</label>
+                {{-- TÍTULO --}}
+                <div class="mb-3">
 
-                        <input type="text" name="titulo" class="form-control" required>
+                    <label class="form-label fw-semibold">
+                        Título
+                    </label>
 
-                    </div>
+                    <input 
+                        type="text"
+                        name="titulo"
+                        class="form-control"
+                        required
+                    >
 
-                    <div class="mb-3">
+                </div>
 
-                        <label>Categoría</label>
+                {{-- CATEGORÍA --}}
+                <div class="mb-3">
 
-                        <input type="text" name="categoria" class="form-control">
+                    <label class="form-label fw-semibold">
+                        Categoría
+                    </label>
 
-                    </div>
+                    <input 
+                        type="text"
+                        name="categoria"
+                        class="form-control"
+                    >
 
-                    <div class="mb-3">
+                </div>
 
-                        <label>Ubicación</label>
+                {{-- UBICACIÓN --}}
+                <div class="mb-3">
 
-                        <input type="text" name="ubicacion" class="form-control">
+                    <label class="form-label fw-semibold">
+                        Ubicación
+                    </label>
 
-                    </div>
+                    <input 
+                        type="text"
+                        name="ubicacion"
+                        class="form-control"
+                    >
 
-                    <div class="mb-3">
+                </div>
 
-                        <label>Fecha</label>
+                {{-- FECHA --}}
+                <div class="mb-3">
 
-                        <input type="date" name="fecha_calendario" class="form-control">
+                    <label class="form-label fw-semibold">
+                        Fecha del evento
+                    </label>
 
-                    </div>
+                    <input 
+                        type="date"
+                        name="fecha_calendario"
+                        class="form-control"
+                    >
 
-                    <div class="mb-3">
+                </div>
+                                {{-- FECHA --}}
 
-                        <label>Descripción</label>
+                <div class="mb-3">
 
-                        <textarea name="descripcion" class="form-control"></textarea>
+                    <label class="form-label fw-semibold">
+                        Hora
+                    </label>
 
-                    </div>
+                    <input
+                        type="time"
+                        name="hora"
+                        class="form-control"
+                        required
+                    >
 
-                    <button class="btn btn-success">
+                </div>
 
+                {{-- IMAGEN --}}
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Imagen del evento
+                    </label>
+
+                    <input 
+                        type="file"
+                        name="imagen"
+                        class="form-control"
+                        accept="image/*"
+                        required
+                    >
+
+                    <small class="text-muted">
+                        Formatos permitidos: JPG, PNG, WEBP
+                    </small>
+
+                </div>
+
+                {{-- DESCRIPCIÓN --}}
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Descripción
+                    </label>
+
+                    <textarea 
+                        name="descripcion"
+                        class="form-control"
+                        rows="5"
+                    ></textarea>
+
+                </div>
+
+                {{-- BOTONES --}}
+                <div class="d-flex gap-2">
+
+                    <button class="btn btn-success px-4">
+
+                        <i class="bi bi-check-circle me-1"></i>
                         Guardar Evento
 
                     </button>
 
-                    <a href="{{ route('admin.evento.index') }}" class="btn btn-secondary">
+                    <a 
+                        href="{{ route('admin.evento.index') }}"
+                        class="btn btn-secondary px-4"
+                    >
 
                         Cancelar
 
                     </a>
 
-                </form>
+                </div>
 
-            </div>
+            </form>
 
         </div>
 
     </div>
+
+</div>
+
 @endsection
